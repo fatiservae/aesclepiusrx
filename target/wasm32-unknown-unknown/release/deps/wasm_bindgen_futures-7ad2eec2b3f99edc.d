@@ -1,9 +1,0 @@
-/mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-7ad2eec2b3f99edc.rmeta: /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/lib.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/queue.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
-
-/mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-7ad2eec2b3f99edc.rlib: /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/lib.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/queue.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
-
-/mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/target/wasm32-unknown-unknown/release/deps/wasm_bindgen_futures-7ad2eec2b3f99edc.d: /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/lib.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/queue.rs /home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs
-
-/home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/lib.rs:
-/home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/queue.rs:
-/home/jefferson/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.50/src/task/singlethread.rs:

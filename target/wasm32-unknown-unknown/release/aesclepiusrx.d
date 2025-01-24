@@ -1,1 +1,0 @@
-/mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/target/wasm32-unknown-unknown/release/aesclepiusrx.wasm: /mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/src/app.rs /mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/src/lib.rs /mnt/armazenamento/sandbox/aesclepius/static/aesclepiusrx/src/main.rs
