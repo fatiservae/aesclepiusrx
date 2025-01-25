@@ -1,0 +1,6 @@
+[build]
+target = "index.html"
+# dist = "dist"
+public_url = "/aesclepiusrx"
+filehash = false
+injection_script = true
