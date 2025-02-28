@@ -65,6 +65,16 @@ impl eframe::App for TemplateApp {
                 });
             });
 
+        egui::Window::new("Medicamento")
+            .default_pos((100.5, 100.5))
+            .default_width(88)
+            .default_height(88)
+            .resizable(true)
+            .show(ctx, |ui| {
+                ui.label("Nome");
+                ui.menu_button("Butao", "Contexto")
+            });
+
         if self.visible {
             let _ = egui::Area::new("popup".into())
                 .movable(true)
