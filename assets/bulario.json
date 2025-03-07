@@ -1,0 +1,5190 @@
+[
+	{
+		"nome": [
+			"sulfametoxazol e trimetoprima",
+			"Bactrim"
+		],
+		"class": [
+			"antibióticos",
+			"inibidores de síntese fólica"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					"40+8",
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual pediátrica para tratamento de infecção de trato urinário como segunda opção."
+			}
+		]
+	},
+	{
+		"nome": [
+			"penicilina G cristalina",
+			"Aricilina"
+		],
+		"class": [
+			"penicilinas",
+			"antibióticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"UI",
+					"Kg",
+					"dia"
+				],
+				"dosagem": [
+					200,
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose pediátrica para tratamento de pneumonia complicada, dividida quatro ou seis vezes ao dia."
+			}
+		],
+		"obs": [
+			"Na pneumonia complicada de pacientes menores de três meses, associar gentamicina 7.5mg/Kg/dia uma vez ao dia."
+		]
+	},
+	{
+		"nome": [
+			"ácido nalidíxico",
+			"Wintomylon"
+		],
+		"class": [
+			"antibióticos",
+			"quinolonas"
+		]
+	},
+	{
+		"nome": [
+			"omeprazol magnésico",
+			"Losec Mups"
+		],
+		"class": [
+			"inibidores de bomba de próton"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica. O comprimido pode ser diluído para facilitar posologia."
+			}
+		]
+	},
+	{
+		"nome": [
+			"predinisolona"
+		],
+		"class": [
+			"corticoides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"via": "oral",
+				"instrucao": "dose para quadros de exacerbação de asma leve, após falha de broncodilatadores por mais de 48h.",
+				"dosagem": [
+					"1 a 2",
+					1
+				]
+			}
+		]
+	},
+	{
+		"nome": [
+			"doxiciclina"
+		],
+		"class": [
+			"antibióticos",
+			"antiprotozoários"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					200,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose do primeiro dia. A partir de 24h, reduzir pela metade. A dose diária pode ser feita <i>bis in die</i> ou única."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					4.4,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose do primeiro dia. A partir de 24h, reduzir pela metade. A dose diária pode ser feita <i>bis in die</i> ou única."
+			}
+		]
+	},
+	{
+		"nome": [
+			"polietilenoglicol",
+			"PEG 4000"
+		],
+		"class": [
+			"laxantes osmóticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					4,
+					1
+				],
+				"via": "oral",
+				"instrucao": "usado na desimpactação concomitante a investigação de causa, inclusive em pediatria."
+			}
+		]
+	},
+	{
+		"nome": [
+			"deltrametrina"
+		],
+		"class": [
+			"inseticida",
+			"antiparasitário"
+		]
+	},
+	{
+		"nome": [
+			"ciclobenzaprina com clonixinato de lisina",
+			"Dolamin Flex"
+		],
+		"class": [
+			"relaxantes musculares",
+			"analgésicos não esteroidais",
+			"aminoácidos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					"125+5",
+					"8"
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"clonixinato de lisina",
+			"Dolamin"
+		],
+		"class": [
+			"analgésicos não esteroidais",
+			"aminoácidos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					"125 a 250",
+					"6 a 8"
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"citrato de potássio",
+			"Litocit"
+		],
+		"class": [
+			"alcalinizadores de urina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"1080 a 1620",
+					1
+				],
+				"via": "oral",
+				"instrucao": "a dose diária pode ser administrada <i>bis in die</i> ou <i>ter in die</i>."
+			}
+		],
+		"obs": [
+			"Apesar de não ser propriamente uma terapia expulsiva, é linha auxiliar na litíase de sistema urinário.",
+			"O bicarbonato de potássio é uma alternativa com opções comerciais."
+		]
+	},
+	{
+		"nome": [
+			"Metoclopramida",
+			"plasil"
+		],
+		"class": [
+			"antagonistas de dopamina",
+			"antagonistas de serotonina",
+			"antieméticos",
+			"procinéticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					10,
+					8
+				],
+				"via": "oral",
+				"instrucao": "dose coadjuvante em cefaleias."
+			}
+		],
+		"obs": [
+			"Com frequentes sintomas colaterais, notadamente parkinsonismo e extrapiramidais, deve ser evitado nas condições que seus efeitos diversos podem atrapalhar a condição de base."
+		]
+	},
+	{
+		"nome": [
+			"Sumatriptano com naproxeno",
+			"Sumaxpro"
+		],
+		"class": [
+			"antimigrâneos",
+			"triptanos",
+			"analgésicos",
+			"antiinflamatórios não esteroides ou hormonais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					"85+500",
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose única que pode ser repetida na primeira hora de sintomas e 12h após, se dor persistente."
+			}
+		],
+		"obs": [
+			"Não deve ser usado em casos de suspeita de acidente vascular ecenfálico."
+		]
+	},
+	{
+		"nome": [
+			"Sumatriptano"
+		],
+		"class": [
+			"triptanos",
+			"analgésicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					50,
+					12
+				],
+				"via": "oral",
+				"instrucao": "pode ser repetida a primeira dose na primeira hora de sintomas."
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					6
+				],
+				"via": "subcutânea",
+				"instrucao": "ataque em crises de cefaleia. Pode ser repetido na primeira ou segunda hora."
+			}
+		]
+	},
+	{
+		"nome": [
+			"Cetoprofeno"
+		],
+		"class": [
+			"antiinflamantórios não esteroidais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					100,
+					8
+				],
+				"via": "endovenosa"
+			}
+		]
+	},
+	{
+		"nome": [
+			"meropenem"
+		],
+		"class": [
+			"antibióticos",
+			"carbapenêmicos",
+			"beta-lactâmico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"h"
+				],
+				"dosagem": [
+					60,
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose habitual <i>ter in die</i>."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"h"
+				],
+				"dosagem": [
+					120,
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose habitual <i>ter in die</i> para meningite."
+			}
+		],
+		"obs": [
+			"O clearence deve ser ajustado de acordo com a taxa de filtração glomerular. Para clearence entre 25-50% passar a <i>duo in die</i>, entre 10-25% meia dose em <i>bis in die</i> e caso inferior a isso, metade da dose uma vez ao dia."
+		]
+	},
+	{
+		"nome": [
+			"pidolato de magnésio",
+			"Pidomag"
+		],
+		"class": [
+			"antiarrítmicos",
+			"suplemento vitamínico",
+			"eletrólitos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"g"
+				],
+				"dosagem": [
+					"1.5 a 3"
+				],
+				"via": "oral",
+				"instrucao": "ideal para contexto de contraindicação de betabloqueadores"
+			}
+		]
+	},
+	{
+		"nome": [
+			"hidratante a base de ureia"
+		],
+		"class": [
+			"hidratantes",
+			"desodorantes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"%"
+				],
+				"dosagem": [
+					10
+				],
+				"via": "tópica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"hidratante a base de glicerina",
+			"Neutrogena Norwegian"
+		],
+		"class": [
+			"hidratantes",
+			"desodorantes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"aplicações",
+					"dia"
+				],
+				"dosagem": [
+					"várias ",
+					1
+				],
+				"via": "tópica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"hidratante restaurador de barreira",
+			"Cetaphil Pro AD Restoraderm"
+		],
+		"class": [
+			"hidratantes",
+			"desodorantes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"aplicações",
+					"dia"
+				],
+				"dosagem": [
+					"várias ",
+					1
+				],
+				"via": "tópica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"griseofulvina"
+		],
+		"class": [
+			"antifúngicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"500-1000",
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose adulta média."
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"dia"
+				],
+				"dosagem": [
+					"10",
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica."
+			},
+			{
+				"unidades": [
+					"%"
+				],
+				"dosagem": [
+					"1-2"
+				],
+				"via": "tópica",
+				"instrucao": "formulação tópica padrão."
+			}
+		],
+		"obs": [
+			"Administrar as doses diárias de forma única ou fracionada após refeições.",
+			"O tratamento pode perdurar por até doze meses."
+		]
+	},
+	{
+		"nome": [
+			"tiabendazol",
+			"Foldan"
+		],
+		"class": [
+			"antifúngicos",
+			"antiparasitários"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"x",
+					"dia"
+				],
+				"dosagem": [
+					3,
+					1
+				],
+				"via": "tópica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"sacubitril com valsartana",
+			"Entresto"
+		],
+		"class": [
+			"inibidores de neprilisina",
+			"bloqueadores de receptores de angiotensina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"100 a 400",
+					1
+				],
+				"via": "oral",
+				"instrucao": "dividir a dose <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"dexpantenol",
+			"Bepantol"
+		],
+		"class": [
+			"hidratantes",
+			"vitaminas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"aplicações",
+					"dia"
+				],
+				"dosagem": [
+					"várias ",
+					1
+				],
+				"via": "tópica",
+				"instrucao": "bepantol pode ser encontrado na forma de pomada, de creme e de bastão labial."
+			}
+		]
+	},
+	{
+		"nome": [
+			"isometpteno",
+			"Doralgina"
+		],
+		"class": [
+			"simpatomiméticos",
+			"vasoconstrictores",
+			"analgésicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					30,
+					6
+				],
+				"via": "oral",
+				"instrucao": "geralmente associada a dipirona e cafeína."
+			}
+		],
+		"obs": [
+			"Para pessoas acima de 12 anos."
+		]
+	},
+	{
+		"nome": [
+			"potássio",
+			"Slow-K"
+		],
+		"class": [
+			"eletrólitos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"drágeas",
+					"dia"
+				],
+				"dosagem": [
+					"2 a 3 ",
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose preventiva de hipopotassemia."
+			}
+		],
+		"obs": [
+			"A dose pode ser aumentada para até 5 drágeas por dia para correção de hipopotassemia."
+		]
+	},
+	{
+		"nome": [
+			"ácido acetilsalicílico",
+			"Aspirin"
+		],
+		"class": [
+			"antiagregantes plaquetários",
+			"antiinflamatórios"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"cp"
+				],
+				"dosagem": [
+					1
+				],
+				"via": "tópica",
+				"instrucao": "dissolver comprimidos em clorofórmio e aplicar sobre a área afetada pelo zóster."
+			}
+		],
+		"obs": [
+			"Na verdade, formulações em creme são mais indicadas, o clorofórmio é considerado cancerígeno.",
+			"Os estudos apontam alívio de até 100% dos pacientes e há atividade antiinflamatória e antiviral reconhecidas.",
+			"Pode ser usada irrestritamente intercalada com hidratação da pele."
+		]
+	},
+	{
+		"nome": [
+			"permetrina",
+			"Kaodine",
+			"Kwell",
+			"Clean Hair"
+		],
+		"class": [
+			"pediculicidas",
+			"antiparasitário"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"g"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "tópica",
+				"instrucao": "aplicar sobre todo o corpo, evitando apenas as mucosas, com especial atenção para alcançar todas áreas de dobras."
+			}
+		],
+		"obs": [
+			"O uso de compostos de enxofre é autorizado por estudos em menores de 2 meses, da permetrina não. Porém seu uso <i>offlabel</i> é comumente aceito.",
+			"Em crianças, evitar aplicar acima de 7.5ml até os 5 anos e de 15ml até os 12 anos.",
+			"O uso em gestantes é seguro."
+		]
+	},
+	{
+		"nome": [
+			"salicilato de dietilamônio com escina",
+			"Reparil"
+		],
+		"class": [
+			"antiinflamatórios tópicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"g",
+					"bisnaga"
+				],
+				"dosagem": [
+					300,
+					1
+				],
+				"via": "tópica",
+				"instrucao": "aplicar <i>ter in die</i> sobre áreas de flebite, edema local, contusões, luxações e artroartries diversas."
+			}
+		]
+	},
+	{
+		"nome": [
+			"pomada de barreira",
+			"Lassar"
+		],
+		"class": [
+			"antifúngicos",
+			"pomadas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"%"
+				],
+				"dosagem": [
+					"25"
+				],
+				"via": "tópica"
+			}
+		],
+		"obs": [
+			"Composta de lanolina, vaselina, talco e oxido de zinco todos a 25%.",
+			"Aplicação tópico no tratamento de frieiras ou fungos, com ou sem tratamento sistêmico concomitante."
+		]
+	},
+	{
+		"nome": [
+			"alopurinol"
+		],
+		"class": [
+			"antimetabólicos",
+			"agentes antianginosos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					100,
+					1
+				],
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					300,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose antiaginosa."
+			}
+		]
+	},
+	{
+		"nome": [
+			"clomifeno"
+		],
+		"class": [
+			"indutores de ovulação",
+			"bloqueadores hipotalâmicos de estrogênio"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "também é possível iniciar clomifeno em dias alternados."
+			}
+		],
+		"obs": [
+			"Clomifeno é capaz de bloquear a ação do estrogênio no hipotálamo, preservando e estimulando a produção de hormônios leutinizantes e foliculares, estimulando as gônadas."
+		]
+	},
+	{
+		"nome": [
+			"ampicilina"
+		],
+		"class": [
+			"penicilinas",
+			"antibióticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					6
+				],
+				"instrucao": "dose habitual antibiótica.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"g",
+					"dia"
+				],
+				"dosagem": [
+					"8 a 14",
+					1
+				],
+				"instrucao": "dose habitual antibiótica adulta para meningite.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"dia"
+				],
+				"dosagem": [
+					100,
+					1,
+					1
+				],
+				"instrucao": "dose habitual antibiótica para crianças que não alcançam dose adulta, inclusive em meningite.",
+				"via": "intravenosa"
+			}
+		]
+	},
+	{
+		"nome": [
+			"biperideno",
+			"Akineton"
+		],
+		"class": [
+			"anticolinérgicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"1 a 4",
+					1
+				],
+				"instrucao": "dose habitual para combate de efeitos extrapiramidais medicamentosos ou parkinsonianos. Pode chegar a 16mg/dia.",
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"etomidato"
+		],
+		"class": [
+			"hipnóticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.3,
+					1
+				],
+				"instrucao": "dose de indução para intubação orotraqueal",
+				"via": "intravenosa"
+			}
+		]
+	},
+	{
+		"nome": [
+			"lidocaína"
+		],
+		"class": [
+			"anestésicos locais",
+			"sedativos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					1.5,
+					1
+				],
+				"instrucao": "dose para indução em intubação orotraqueal. A lidocaína tem especial aplicação em sedação nos pacientes com risco de aumento da pressão intracraniana.",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"Evitar exceder 3mg/Kg, principalmente em crianças."
+		]
+	},
+	{
+		"nome": [
+			"hipromelose"
+		],
+		"class": [
+			"colírios lubrificantes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"gotas",
+					"aplicação"
+				],
+				"dosagem": [
+					1,
+					1
+				],
+				"instrucao": "instilar uma gota em cada olho sempre que necessário.",
+				"via": "oftálmica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"noradrenalina"
+		],
+		"class": [
+			"drogas vasoativas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"kg",
+					"min"
+				],
+				"dosagem": [
+					"0.03 a 3.3",
+					1,
+					1
+				],
+				"instrucao": "intervalo de dose habitual no choque.",
+				"via": "intravenosa em infusão contínua"
+			},
+			{
+				"unidades": [
+					"mcg",
+					"kg",
+					"min"
+				],
+				"dosagem": [
+					0.3,
+					1,
+					1
+				],
+				"instrucao": "dose inicial para associar vasopressina.",
+				"via": "intravenosa em infusão contínua"
+			}
+		]
+	},
+	{
+		"nome": [
+			"epinefrina",
+			"Hyfren"
+		],
+		"class": [
+			"drogas vasoativas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					0.01,
+					1
+				],
+				"instrucao": "para anafilaxia em pediatria, máximo de até 0.5mg/dose.",
+				"via": "intramuscular"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					0.5
+				],
+				"instrucao": "dose de meia ampola para anafilaxia em adulto, repetida a cada cinco minutos se necessário.",
+				"via": "intramuscular"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					1
+				],
+				"instrucao": "dose de manejo da parada cardiovascular, vide Advanced Cardiac Life Support",
+				"via": "intravenosa lenta para evitar vasoespasmo, em equipo fotoprotetor"
+			}
+		]
+	},
+	{
+		"nome": [
+			"naltrexona"
+		],
+		"class": [
+			"antialcoólicos",
+			"antagonistas opioides",
+			"antídotos de narcóticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "posologia única para tratamento de alcoolismo na vigência de programa de reabilitação."
+			}
+		],
+		"obs": [
+			"Naltrexona é hepatotóxica. Não exceder a dose indicada. Avaliar o uso em hepatopatas."
+		]
+	},
+	{
+		"nome": [
+			"finasterida"
+		],
+		"class": [
+			"inibidores de 5-alfa-redutase"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "posologia recomendada para uso contínuo no tratamento de hiperplasia prostática benigna ou hipertrofia prostática."
+			}
+		]
+	},
+	{
+		"nome": [
+			"liraglutida"
+		],
+		"class": [
+			"análogos de GLP-1"
+		],
+		"obs": [
+			"Perda de peso"
+		]
+	},
+	{
+		"nome": [
+			"sibutramina"
+		],
+		"class": [
+			"inibidores de recaptação de serotonina e dopamina",
+			"antidepressivos duais",
+			"redutores de peso"
+		],
+		"obs": [
+			"Perda de peso"
+		]
+	},
+	{
+		"nome": [
+			"orlistate, orlistatina, orlistato ou orlistat",
+			"Xenical"
+		],
+		"class": [
+			"inibidores de lipases pancreáticas"
+		],
+		"obs": [
+			"Perda de peso"
+		]
+	},
+	{
+		"nome": [
+			"bupropiona"
+		],
+		"class": [
+			"inibidores de recaptacã́o de serotonina e dopamina",
+			"antitabágicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					150,
+					1
+				],
+				"instrucao": "dobrar a dose diária para <i>bis in die</i> após o terceiro dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"Atua no sistema de recompensa e é usado na cessação do tabagismo, na perda de peso e na depressão.",
+			"É o antidepressivo indicado para pacintes com queda da libido ou disfunção erétil e/ou sexual."
+		]
+	},
+	{
+		"nome": [
+			"tansulosina"
+		],
+		"class": [
+			"alfabloqueadores",
+			"antagonistas de receptor adrenérgico alfa-1 pós-sináptico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"manhã"
+				],
+				"dosagem": [
+					0.4,
+					1
+				],
+				"via": "oral",
+				"instrucao": "Tomado por trinta dias na terapia expulsiva ou pode ser prescrito de uso contínuo em hiperlasia prostática benigna, vide bula."
+			}
+		]
+	},
+	{
+		"nome": [
+			"trometamol cetorolaco",
+			"Toragesic"
+		],
+		"class": [
+			"analgésicos",
+			"antiinflamatórios não esteroidais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					10,
+					6
+				],
+				"via": "sublingual",
+				"instrucao": "dose usualmente prescrita para dores relacionadas a patologias obstrutivas do trato urinário."
+			}
+		]
+	},
+	{
+		"nome": [
+			"doxazosina"
+		],
+		"class": [
+			"alfabloqueadores",
+			"anti-hipertensivos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					2,
+					1
+				],
+				"instrucao": "para manejo de crise de migração de cálculo em terço inferior.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"No manejo de hiperplasia prostática, é possível usar a dose dobrada à noite, associada ou não a finasterida.",
+			"Cuidado ao prescrever para pacientes hipo ou normotensos, tendo em vista efeito hipotensor."
+		]
+	},
+	{
+		"nome": [
+			"diosmina e hesperidina",
+			"Diosmin"
+		],
+		"class": [
+			"venotensores",
+			"venoprotetores"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"450+50",
+					1
+				],
+				"via": "oral",
+				"instrucao": "para uso contínuo em venopatologias de membros inferiores e do plexo venoso hemorroidário."
+			}
+		]
+	},
+	{
+		"nome": [
+			"alprazolam",
+			"Frontal"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					0.25,
+					1
+				],
+				"instrucao": "dose inicial recomendada para ansiólise, podendo chegar a 3mg/dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"A meia vida de alprazolam é de 6h."
+		]
+	},
+	{
+		"nome": [
+			"lorazepam"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					0.5,
+					1
+				],
+				"instrucao": "dose inicial recomendada para ansiólise, podendo chegar a 6mg/dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"A meia vida de lorazepam é de 10h a 20h."
+		]
+	},
+	{
+		"nome": [
+			"flunitrazepam",
+			"Rohypinol"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					0.5,
+					1
+				],
+				"instrucao": "dose inicial recomendada para ansiólise, podendo chegar a 2mg/dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"A meia vida de flunitrazepam é de 20h."
+		]
+	},
+	{
+		"nome": [
+			"zolpidem"
+		],
+		"class": [
+			"hipnóticos classe Z"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"O tempo de meia vida de zolpidem é de 6h."
+		]
+	},
+	{
+		"nome": [
+			"ezopiclona"
+		],
+		"class": [
+			"modulador gabaérgico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual inicial podendo chegar a 3mg/dia"
+			}
+		]
+	},
+	{
+		"nome": [
+			"hidrocortisona e ciprofloxacino",
+			"otociriax",
+			"otosporin"
+		],
+		"class": [
+			"gotas otológicas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"gotas",
+					"h"
+				],
+				"dosagem": [
+					5,
+					12
+				],
+				"via": "otológica",
+				"instrucao": "tratamento padrão para otite externa aguda e otite média crônica por até 15 dias."
+			}
+		]
+	},
+	{
+		"nome": [
+			"betametasona com clorfenesina e tetracaína",
+			"oto-betnovate"
+		],
+		"class": [
+			"gotas otológicas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"gotas",
+					"h"
+				],
+				"dosagem": [
+					5,
+					8
+				],
+				"via": "otológica",
+				"instrucao": "tratamento padrão para otite externa aguda e otite média crônica, na suspeita de etiologia fúngica associada por até 15 dias."
+			}
+		]
+	},
+	{
+		"nome": [
+			"sertralina"
+		],
+		"class": [
+			"inibidores de recaptação da serotonina",
+			"antidepressivos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual antidepressiva, podendo chegar a 200mg/dia."
+			}
+		],
+		"obs": [
+			"Indicada para o tratamento de transtorno depressivo pré-menstrual.",
+			"pode ser usada na gestação e lactação, evitando-se no primeiro trimestre.",
+			"Na primeira semana pode provocar amolecimento transitório das fezes."
+		]
+	},
+	{
+		"nome": [
+			"trazodona"
+		],
+		"class": [
+			"antidepressivo atípico de segunda geração"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual para tratamento de insônia primária, podendo chegar a 150mg/dia."
+			}
+		]
+	},
+	{
+		"nome": [
+			"venlafaxina"
+		],
+		"class": [
+			"antidepressivos duais",
+			"inibidores de recaptação de serotonina e dopamina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					75,
+					1
+				],
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"Retirar de 37,5 em 37,5mg para evitar sintomas de retirada."
+		]
+	},
+	{
+		"nome": [
+			"desvenlafaxina"
+		],
+		"class": [
+			"antidepressivos duais",
+			"inibidores de recaptação de serotonina e dopamina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial habitual podendo ser progredida até 200mg/dia."
+			}
+		],
+		"obs": [
+			"Retirar de 50 em 50mg para evitar sintomas de retirada."
+		]
+	},
+	{
+		"nome": [
+			"duloxetina"
+		],
+		"class": [
+			"antidepressivos duais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					30,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial habitual podendo ser dobrada."
+			}
+		],
+		"obs": [
+			"a duloxetina é mais associada e mais benéfica no manejo de fibromialgia."
+		]
+	},
+	{
+		"nome": [
+			"fenobarbital"
+		],
+		"class": [
+			"anticonvulsivantes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					3,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual inicial para uso contínuo de crianças abaixo de cinco anos."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose máxima para uso contínuo de crianças abaixo de cinco anos."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					3,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual inicial para uso contínuo de crianças e adolescentes."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					100
+				],
+				"via": "oral",
+				"instrucao": "dose diária de uso contínuo adulta."
+			}
+		],
+		"obs": [
+			"Atenção! Para o fenobarbital, cada 1ml são 40 gotas."
+		]
+	},
+	{
+		"nome": [
+			"carbamazepina"
+		],
+		"class": [
+			"anticonvulsivantes"
+		],
+		"obs": [
+			"A carbamazepina aumenta a atividade enzimática de um grande número de outros fármacos, inclusive dela própria, levando a necessidade de monitorização e reajuste de dose."
+		]
+	},
+	{
+		"nome": [
+			"pregabalina"
+		],
+		"class": [
+			"gabaérgicos",
+			"analgésicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					50
+				],
+				"via": "oral",
+				"instrucao": "dose inicial, deve ser progredida semanalmente até 150mg/dia conforme resposta da dor."
+			}
+		]
+	},
+	{
+		"nome": [
+			"nortriptilina"
+		],
+		"class": [
+			"antidepressivos tricíclicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial, podendo progredir até 150mg/dia."
+			}
+		],
+		"obs": [
+			"nortriptilina é o mais bem tolerado dos antidepressivos tricíclicos, sendo boa indicação para idosos."
+		]
+	},
+	{
+		"nome": [
+			"clomipramina"
+		],
+		"class": [
+			"antidepressivos tricíclicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial, podendo progredir até 150mg/dia."
+			}
+		],
+		"obs": [
+			"Clomipramina está indicada como padrão ouro para tratamento de transtorno obcessivo compulsivo.",
+			"Também é usada em pediatria no tratamento de enuresee noturna."
+		]
+	},
+	{
+		"nome": [
+			"imipramina"
+		],
+		"class": [
+			"antidepressivos tricíclicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial, podendo progredir até 150mg/dia."
+			}
+		],
+		"obs": [
+			"Imipramina é considerada a medicação <i>off label</i> para tratamento de enurese e encoprese."
+		]
+	},
+	{
+		"nome": [
+			"amitriptilina"
+		],
+		"class": [
+			"antidepressivos tricíclicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial, podendo progredir até 150mg/dia."
+			}
+		]
+	},
+	{
+		"nome": [
+			"gabapentina"
+		]
+	},
+	{
+		"nome": [
+			"clonazepam",
+			"Rivotril"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					0.25
+				],
+				"via": "sublingual",
+				"instrucao": "dose S.O.S. sublingual habitual."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					8,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dosagem máxima diária recomendada."
+			},
+			{
+				"unidades": [
+					"gotas",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"instrucao": "apresentação comercial em gotas de 25mg/ml. Progredir de cinco em cinco gotas.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"Clonazepam tem meia vida de 24h.",
+			"É cerca de cinco vezes mais forte que diazepam",
+			"Os benzodiazepínicos desenvolvem dependência com uso regular, normalmente após a oitava semana."
+		]
+	},
+	{
+		"nome": [
+			"clopidogrel"
+		],
+		"class": [
+			"antiagregantes plaquetários"
+		]
+	},
+	{
+		"nome": [
+			"alteplase"
+		],
+		"class": [
+			"trombolíticos"
+		]
+	},
+	{
+		"nome": [
+			"tenecteplase"
+		],
+		"class": [
+			"trombolíticos"
+		]
+	},
+	{
+		"nome": [
+			"loratadina",
+			"Histadin"
+		],
+		"class": [
+			"antialérgicos",
+			"antihistamínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"instrucao": "posologia usual para tratamento de rinite alérgica sem obstrução nasal por quatro semanas.",
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"ciclobenzaprina",
+			"Miosan"
+		],
+		"class": [
+			"relaxantes musculares"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose usual para diagnósticos de rigidez ou espasmos musculares, bem como coadjuvantes em mioanalgesia por até dez dias."
+			}
+		]
+	},
+	{
+		"class": [
+			"anti-histamínicos"
+		],
+		"nome": [
+			"dexclorfeniramina",
+			"Histamin"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					4,
+					6
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"levocetirizina"
+		],
+		"class": [
+			"anti-histamínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "por até sete dias."
+			}
+		]
+	},
+	{
+		"nome": [
+			"prometazina",
+			"Fenergan"
+		],
+		"class": [
+			"anti-histamínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					4,
+					12
+				],
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"min"
+				],
+				"dosagem": [
+					25,
+					30
+				],
+				"via": "intramuscular ou intravenosa",
+				"instrucao": "dose coadjuvante no controle de ansiedade e agitação psicótica ou não, podendo ser repetida uma vez."
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					50
+				],
+				"via": "intramuscular ou intravenosa",
+				"instrucao": "dose única coadjuvante no controle de ansiedade e agitação psicótica ou não para paciente já em uso de outro ansioítico."
+			}
+		]
+	},
+	{
+		"nome": [
+			"loperamida"
+		],
+		"class": [
+			"antidiarreico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					4
+				],
+				"instrucao": "dose usual de dois comprimidos após primeira diarreia. Suspender se houver remissão.",
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					2
+				],
+				"instrucao": "dose usual de um comprimido após episódios seguidos de diarreia. Suspender se houver remissão.",
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"bromoprida"
+		],
+		"class": [
+			"antieméticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					10,
+					8
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"meclizina"
+		],
+		"class": [
+			"antieméticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					12.5,
+					6
+				],
+				"via": "oral",
+				"instrucao": "dose habitual em cinetose, podendo ser dobrada ou espaçada para oito horas de intervalo, caso a caso."
+			}
+		],
+		"obs": [
+			"dose máxima diária de 100mg."
+		]
+	},
+	{
+		"nome": [
+			"ondansetrona",
+			"Vonau"
+		],
+		"class": [
+			"antieméticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"via": "intravenosa",
+				"dosagem": [
+					1,
+					1
+				],
+				"instrucao": "dose usual de infusão contínua."
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					8
+				],
+				"via": "oral",
+				"instrucao": "dose adulta antiemética que pode ser repetida."
+			},
+			{
+				"unidades": [
+					"mg",
+					"fita"
+				],
+				"dosagem": [
+					4,
+					1
+				],
+				"via": "oral",
+				"instrucao": "a fita de ondansetrona pode ser cortada para fracionar dose em pediatria."
+			}
+		]
+	},
+	{
+		"nome": [
+			"hidroclorotiazida"
+		],
+		"class": [
+			"tiazídicos"
+		]
+	},
+	{
+		"nome": [
+			"clortalidona"
+		],
+		"class": [
+			"tiazídicos"
+		]
+	},
+	{
+		"class": [
+			"betabloqueadores"
+		],
+		"nome": [
+			"metropolol"
+		]
+	},
+	{
+		"class": [
+			"betabloqueadores"
+		],
+		"nome": [
+			"carvedilol"
+		]
+	},
+	{
+		"class": [
+			"betabloqueadores"
+		],
+		"nome": [
+			"atenolol"
+		]
+	},
+	{
+		"class": [
+			"betabloqueadores"
+		],
+		"nome": [
+			"propanolol"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					10,
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose inicial antipsicótica indicada para refratariedade ou contraindicação de outras drogas. Dose máxima de 60mg a cada 12h."
+			}
+		]
+	},
+	{
+		"nome": [
+			"dexametasona"
+		],
+		"class": [
+			"corticoides",
+			"corticoesteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					"4 a 10",
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual de corticoterapia antiinflamatória."
+			}
+		],
+		"obs": [
+			"A dose habitual também é a dose coadjuvante no tratamento de cefaleias."
+		]
+	},
+	{
+		"nome": [
+			"metilpredinisolona"
+		],
+		"class": [
+			"corticoides",
+			"corticoesteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					30,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose de pulsoterapia para dias alternados por até 6 semanas."
+			}
+		]
+	},
+	{
+		"nome": [
+			"prednisolona"
+		],
+		"class": [
+			"corticoides",
+			"corticoesteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					40,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual matinal de corticoterapia. Desmamar com meia dose por cinco dias antes de interromper."
+			}
+		]
+	},
+	{
+		"nome": [
+			"espironolactona"
+		],
+		"class": [
+			"antihipertensivos",
+			"diuréticos poupadores de potássio",
+			"antagonistas de aldosterona"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					25,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual inicial antihipertensiva."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose progressiva antihipertensiva."
+			}
+		]
+	},
+	{
+		"nome": [
+			"levofloxacino"
+		],
+		"class": [
+			"antibióticos",
+			"fluoroquinolonas de terceira geração"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					500,
+					1
+				],
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					750,
+					1
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"moxifloxacino"
+		],
+		"class": [
+			"antibióticos",
+			"fluoroquinolonas",
+			"antipseudomonas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					400,
+					1
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"ciprofloxacino"
+		],
+		"class": [
+			"antibióticos",
+			"quinolonas"
+		]
+	},
+	{
+		"nome": [
+			"clindamicina"
+		],
+		"class": [
+			"antibióticos",
+			"lincosamidas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					400,
+					8
+				],
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1600,
+					8
+				],
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"tomar com pelo menos 200ml de água para evitar lesão esofágica."
+		]
+	},
+	{
+		"nome": "fosfomicina"
+	},
+	{
+		"nome": [
+			"diclofenaco"
+		],
+		"class": [
+			"antiinflamatórios não esteroides ou hormonais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					50,
+					8
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"nimesulida"
+		],
+		"class": [
+			"antiinflamatórios não esteroides ou hormonais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					100,
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose habitual analgésica."
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					200,
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose habitual antiinflamatória."
+			},
+			{
+				"unidades": [
+					"gota",
+					"kg",
+					"h"
+				],
+				"dosagem": [
+					1,
+					1,
+					12
+				],
+				"via": "oral",
+				"instrucao": "apresentação em gotas com 50mg/ml."
+			}
+		]
+	},
+	{
+		"nome": [
+			"naproxeno"
+		],
+		"class": [
+			"antiinflamatórios não esteroides ou hormonais"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					12
+				],
+				"via": "via oral",
+				"instrucao": "dose habitual para terapia de cinco dias."
+			}
+		]
+	},
+	{
+		"nome": [
+			"celecoxibe"
+		],
+		"class": [
+			"antiinflamatórios não esteroides ou hormonais",
+			"coxibes"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					200,
+					1
+				],
+				"via": "via oral",
+				"instrucao": "dose habitual para terapia de até dez dias."
+			}
+		]
+	},
+	{
+		"nome": [
+			"tramadol"
+		],
+		"class": [
+			"analgésicos",
+			"opioides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					50,
+					8
+				],
+				"via": "oral"
+			}
+		]
+	},
+	{
+		"nome": [
+			"tenoxicam",
+			"Tilatil"
+		],
+		"class": [
+			"analgésicos",
+			"oxicans"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					40
+				],
+				"via": "intravenosa",
+				"instrucao": "posologia analgésica de emergência, normalmente combinada com dipirona intravenosa de 1g."
+			}
+		]
+	},
+	{
+		"nome": [
+			"azitromicina",
+			"Astro"
+		],
+		"class": [
+			"antibióticos",
+			"macrolídeos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					500,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose adulta usual para três dias de terapia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					12,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica para cinco dias de terapêutica habitual em pneumonia por germe atípico."
+			}
+		],
+		"obs": [
+			"Adolescentes com mais de 50kg é possível aplicar dose adulta diária."
+		]
+	},
+	{
+		"nome": [
+			"claritromicina",
+			"Klaricid"
+		],
+		"class": [
+			"antibióticos",
+			"macrolídeos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose usual diária para sete a catorze dias de terapia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					15,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica diária habitual em pneumonia por germe atípico."
+			}
+		],
+		"obs": [
+			"contraindicada em caso de uso concomitante com estatinas."
+		]
+	},
+	{
+		"nome": [
+			"amicacina",
+			"Amicilon"
+		],
+		"class": [
+			"antibióticos",
+			"aminoglicosídeos",
+			"antipseudomonas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					15,
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "para administração em duas ou três vezes ao dia."
+			}
+		]
+	},
+	{
+		"nome": [
+			"cefalexina",
+			"Keflex"
+		],
+		"class": [
+			"antibióticos",
+			"betalactâmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					6
+				],
+				"via": "oral",
+				"instrucao": "dose usual para sete a dez dias de terapia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					"50-70",
+					1,
+					1
+				],
+				"via": "",
+				"instrucao": "dose pediátrica habitual terapêutica da infecção de trato urinário e parotidites."
+			}
+		]
+	},
+	{
+		"nome": [
+			"amoxicilina"
+		],
+		"class": [
+			"antibióticos",
+			"betalactâmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					8
+				],
+				"via": "oral",
+				"instrucao": "dose usual para sete a dez dias de terapia para pacientes com dez anos ou mais."
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					875,
+					12
+				],
+				"via": "oral",
+				"instrucao": "dose alternativa para sete a dez dias de terapia para pacientes com dez anos ou mais."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose padrão pediátrica para maioria das condições de trato respiratório e dose de erradicação do <i>H. pylori</i>."
+			}
+		],
+		"obs": [
+			"Em pediatria, sempre preferir a dose por quilograma de massa corporal."
+		]
+	},
+	{
+		"nome": [
+			"amoxicilina com clavulanato",
+			"Clavulin"
+		],
+		"class": [
+			"antibióticos",
+			"betalactâmicos",
+			"inibidor de betalactamases"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					"500+125",
+					8
+				],
+				"via": "oral",
+				"instrucao": "dose usual para sete a quinze dias de terapia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					"50+12.5",
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual para pneumonia com microorganismo resistente à amoxicilina em pediatria."
+			}
+		]
+	},
+	{
+		"nome": [
+			"losartana"
+		],
+		"class": [
+			"antihipertensivos",
+			"bloqueadores do receptor de angiotensina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose para controle pressórico crônico, podendo ser dobrada <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"captopril"
+		],
+		"class": [
+			"antihipertensivos",
+			"inibidores de conversão da enzima conversora de angiotensina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial de controle pressórico contínuo."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose de controle pressórico contínuo, preferencialmente <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"enalapril"
+		],
+		"class": [
+			"antihipertensivos",
+			"inibidores de conversão da enzima conversora de angiotensina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial de controle pressórico contínuo."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					40,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose de controle pressórico contínuo, preferencialmente <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"budesonida"
+		],
+		"class": [
+			"corticoesteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"dia"
+				],
+				"dosagem": [
+					60,
+					1
+				],
+				"via": "intranasal",
+				"instrucao": "para a apresentação de 30mcg/jato, aplicar dois jatos a noite em cada narina."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"dia"
+				],
+				"dosagem": [
+					"200-400",
+					1
+				],
+				"via": "inalatória",
+				"instrucao": "dose habitual pediátrica e adulta de prescrição de alta na exacerbação de asma, com aplicação <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"dipropionato de beclometasona",
+			"Clenil"
+		],
+		"class": [
+			"corticoesteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"dia"
+				],
+				"dosagem": [
+					60,
+					1
+				],
+				"via": "intranasal",
+				"instrucao": "se não possível budesonida. Aplicar dois jatos de 30mcg a noite em cada narina."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"dia"
+				],
+				"dosagem": [
+					"200-400",
+					1
+				],
+				"via": "inalatória",
+				"instrucao": "dose habitual pediátrica e adulta de prescrição de alta na exacerbação de asma, com aplicação <i>bis in die</i>."
+			}
+		]
+	},
+	{
+		"nome": [
+			"clozapina"
+		],
+		"class": [
+			"antipsicóticos atípicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					25,
+					1
+				],
+				"via": "oral",
+				"instrucao": "progredir a dose a cada três dias em 25mg até 250-300mg/dia, tornando o ajuste semanal ou mensal, se necessário."
+			}
+		],
+		"obs": [
+			"Trata-se da droga de escolha para casos refratários.",
+			"Ganho de peso e sialorreia são colaterais comuns.",
+			"Doses de clozapina acima de 500mg/dia diminuem significativamente o limiar convulsivo, associar anticonvulsivante diferente de carbamazepina, preferencialmente ácido valproico se não contraindicado.",
+			"pode causar agranulocitose, pedir leucograma semanal até atingir dose terapêutica.",
+			"Jamais associar a carbamazepina por risco aumentado de agranulocitose."
+		]
+	},
+	{
+		"nome": [
+			"quetiapina"
+		],
+		"class": [
+			"antipsicóticos atípicos",
+			"hipnóticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					100,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose antipsicótica diária, progredir a cada 24h até, pelo menos, 400mg/dia. A dose máxima antipsicótica é de 800mg/dia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					25,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose hipnótica, progredir a cada 24h até alcançar indução de sono desejada."
+			}
+		],
+		"obs": [
+			"A combinação com levomepromazina provoca hipnose acentuada, evitar.",
+			"Quetiapina tem o melhor perfil para evitar ganho de peso entre os antipsicóticos."
+		]
+	},
+	{
+		"nome": [
+			"paroxetina"
+		],
+		"class": [
+			"antidepressivos",
+			"inibidores seletivos de recaptação de serotonina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial antidepressiva por sete dias, progredindo até 60mg/dia."
+			}
+		],
+		"obs": [
+			"Causa sonolência e pode ser usada <i>off label</i> para insônia.",
+			"Principais colaterais são ganho de peso, diminuição de libido e disfunção erétil."
+		]
+	},
+	{
+		"nome": [
+			"fluoxetina",
+			"Prozac"
+		],
+		"class": [
+			"antidepressivos",
+			"inibidores seletivos de recaptação de serotonina"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial antidepressiva por sete dias."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					40,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose alvo antidepressiva após sete dias de dose inicial. Pode se chegar a 80mg/dia."
+			}
+		],
+		"obs": [
+			"antidepressivo com menor ganho de peso associado."
+		]
+	},
+	{
+		"nome": [
+			"fenitoína",
+			"Hidantal"
+		],
+		"class": [
+			"anticonvulsivantes",
+			"antiepiléticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					300,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose adulta tradicional para convulsões pós-operatório ou no diagnóstico de epilepsia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					"4 a 8",
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica. Crianças acima de 6 anos podem requerer a dose adulta habitual após falha terapêutica."
+			}
+		],
+		"obs": [
+			"o uso em gestantes leva ao quadro da síndrome hidantoína fetal."
+		]
+	},
+	{
+		"nome": [
+			"haloperidol",
+			"Haldol"
+		],
+		"class": [
+			"antipsicóticos clássicos ou típicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					5
+				],
+				"via": "oral, intravenosa ou intramuscular",
+				"instrucao": "dose para controle da psicose aguda ou paroxística com aplicações repetidas em até três vezes com intervalo de 30min entre administrações."
+			},
+			{
+				"unidades": [
+					"ampola decanoato",
+					"mg"
+				],
+				"dosagem": [
+					1,
+					25
+				],
+				"via": "intramuscular preferencialmente no glúteo em aplicação `Z`.",
+				"instrucao": "relação comercial mais comum da equivalência de depósito do sal decanoato."
+			}
+		],
+		"obs": [
+			"Pode ser usado em gestantes.",
+			"Na combinação com prometazina, evitar repetir a prometazina em todas repetições de haloperidol.",
+			"Para pacientes em uso contínuo de haloperidol ou impregnados, sempre associar prometazina se não houver contraindicação.",
+			"Pode causar síndrome neuroléptica maligna."
+		]
+	},
+	{
+		"nome": [
+			"aripripazol"
+		],
+		"class": [
+			"antipsicótico atípico e moderno",
+			"antipsicótico seletivo"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial diária para uso contínuo, podendo chegar a 30mg/dia."
+			}
+		]
+	},
+	{
+		"nome": [
+			"olanzapina"
+		],
+		"class": [
+			"antipsicóticos atípicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "oral ou intramuscular",
+				"instrucao": "dose inicial antipsicótica, podendo chegar a 30mg/dia."
+			}
+		],
+		"obs": [
+			"Olanzapina apresenta efeito estabilizador de humor.",
+			"Pode ser usada em concomitância de prometazina para controle de agitação psicótica.",
+			"Olanzapina causa ganho de peso considerável e resistência insulínica."
+		]
+	},
+	{
+		"nome": [
+			"gemfibrozil"
+		],
+		"class": [
+			"fibratos"
+		],
+		"obs": [
+			"Evitar uso concomitante com estatinas."
+		]
+	},
+	{
+		"nome": [
+			"adenosina"
+		],
+		"class": [
+			"antiarritmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					6
+				],
+				"via": "intravenosa",
+				"instrucao": "no contexto de taquicardias supraventriculares feita em bolo intravenosa que pode ser repetido em 2min."
+			}
+		]
+	},
+	{
+		"nome": [
+			"diltiazem"
+		],
+		"class": [
+			"antiarritmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					0.25,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "para controle de frequência ventricular em flutter, correr o bolo em 2min."
+			}
+		]
+	},
+	{
+		"nome": [
+			"verapamil"
+		],
+		"class": [
+			"antiarritmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					5
+				],
+				"via": "intravenosa",
+				"instrucao": "no contexto de controle da frequência ventricular em flutter, correr o bolo em 2min."
+			}
+		]
+	},
+	{
+		"nome": [
+			"metoprolol"
+		],
+		"class": [
+			"antiarritmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					5
+				],
+				"via": "intravenosa",
+				"instrucao": "no contexto de controle da frequência ventricular em flutter, correr o bolo em 5min."
+			}
+		]
+	},
+	{
+		"nome": [
+			"carbamazepina",
+			"Tegreto",
+			"Tegretard"
+		]
+	},
+	{
+		"nome": [
+			"oxcarbazepina",
+			"Trileptal",
+			"Oleptal"
+		]
+	},
+	{
+		"nome": [
+			"carbonato de lítio",
+			"Carbolitium",
+			"Litiocar",
+			"Neurolitium"
+		],
+		"class": [
+			"estabilizadores de humor"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					900,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial <i>ter in die</i>, fazer litemia trimestral e ter alvo entre 0.6-1.2mEq/L."
+			}
+		],
+		"obs": [
+			"carbonato de lítio comprovadamente reduz o risco de suicídio mesmo em doses abaixo da estabilizadora de humor.",
+			"pode causar rebaixamento grave com litemias acima de 2mEq/L."
+		]
+	},
+	{
+		"nome": [
+			"ácido valpróico",
+			"Depakene",
+			"Valpakine"
+		],
+		"class": [
+			"anticonvulsionantes",
+			"estabilizadores de humor"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					500,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial estabilizadora de humor, podendo alcançar 2000mg/dia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual anticonvulsivante para pacientes com diagnóstico de epilepsia."
+			}
+		],
+		"obs": [
+			"Nos usos como estabilizador do humor, realizar valproatemia trimestral buscando 50-125mcg/mL."
+		]
+	},
+	{
+		"nome": [
+			"divalproato de sódio",
+			"Depakote"
+		],
+		"class": [
+			"anticonvulsionantes",
+			"estabilizadores de humor"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					500,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial estabilizadora de humor, podendo alcançar 2000mg/dia."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose habitual anticonvulsivante para pacientes com diagnóstico de epilepsia."
+			}
+		],
+		"obs": [
+			"Divalproato é uma combinação direta do ácido valproico e valproato sódico em proporção molar visando melhor farmacodinâmica.",
+			"Nos usos como estabilizador do humor, realizar valproatemia trimestral buscando 50-125mcg/mL."
+		]
+	},
+	{
+		"nome": [
+			"lamotrigina",
+			"Lamictal",
+			"Neurim"
+		],
+		"obs": [
+			"aumentar lentamente a dose para evitar síndrome de Stevens-Jonhson."
+		]
+	},
+	{
+		"nome": [
+			"memantina"
+		]
+	},
+	{
+		"nome": [
+			"rifampicina"
+		]
+	},
+	{
+		"nome": [
+			"donepezila"
+		]
+	},
+	{
+		"nome": [
+			"escitalopram"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"instrucao": "dose inicial antidepressiva diária podendo chegar a 20mg/dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"Citalopram e escitalopram possuem menos interação medicamentosa.",
+			"Escitalopram tem início de ação mais rápido entre os antidepressivos seletivos de serotonina."
+		]
+	},
+	{
+		"nome": [
+			"citalopram"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"instrucao": "dose inicial antidepressiva diária podendo chegar a 40mg/dia.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"Citalopram e escitalopram possuem menos interação medicamentosa."
+		]
+	},
+	{
+		"nome": [
+			"talidomida"
+		]
+	},
+	{
+		"nome": [
+			"prednisona"
+		]
+	},
+	{
+		"nome": [
+			"valaciclovir"
+		]
+	},
+	{
+		"nome": [
+			"aciclovir"
+		]
+	},
+	{
+		"nome": [
+			"dapsona"
+		]
+	},
+	{
+		"nome": [
+			"clofazidima"
+		]
+	},
+	{
+		"nome": [
+			"naloxona"
+		]
+	},
+	{
+		"nome": [
+			"fluticasona"
+		],
+		"class": [
+			"antiinflamatórios esteroidais",
+			"corticosteroides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"jato"
+				],
+				"dosagem": [
+					50,
+					1
+				],
+				"via": "intranasal",
+				"instrucao": "aplicar dois jatos pela manhã ou um jato para menores de 11 anos."
+			}
+		]
+	},
+	{
+		"nome": [
+			"clobazam",
+			"Frisium"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"instrucao": "dose habitual no manejo de ansiedade crônica ou aguda.",
+				"via": "oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"instrucao": "dose máxima diária no manejo de ansiedade crônica ou aguda.",
+				"via": "oral"
+			}
+		],
+		"obs": [
+			"cautela com desenvolvimento de dependência.",
+			"não deve ser usada concomitante a ingesta de alcoól sob risco de sedação grave."
+		]
+	},
+	{
+		"nome": [
+			"risperidona",
+			"Risperidon"
+		],
+		"class": [
+			"antipsicóticos atípicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose inicial antipsicótica para uso contínuo."
+			}
+		],
+		"mecanismo": "antagonismo seletivo de monoaminas, com predominância dopaminérgica e serotoninérgico.",
+		"obs": [
+			"Risperidona a partir de 6mg/dia se comporta como antipsicótico típico, podendo causar sintomas extrapiramidais.",
+			"Principais colaterais são galactorreia, amenorreia e hiperprolactinemia com ginecomastia em homens.",
+			"Pode causar síndrome neuroléptica maligna."
+		]
+	},
+	{
+		"nome": [
+			"oxacilina",
+			"Oxanon",
+			"Staficilin-N"
+		],
+		"class": [
+			"antibióticos",
+			"penicilinas",
+			"penicilinas resistentes a penicilinases",
+			"betalactâmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"g",
+					"h"
+				],
+				"dosagem": [
+					1,
+					6
+				],
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"g",
+					"h"
+				],
+				"dosagem": [
+					2,
+					6
+				],
+				"instrucao": "ou com tempo interdoses de 4h.",
+				"via": "intravenosa"
+			}
+		],
+		"mecanismo": "inibe síntese de parede celular da bactéria."
+	},
+	{
+		"nome": [
+			"ferrocarbonila",
+			"Novofer"
+		],
+		"class": [
+			"suplementos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					120,
+					1
+				],
+				"via": "oral",
+				"instrucao": "cada comprimido possui 126mg de ferro disponíveis para via sérica, o que corresponde aos 120mg efetivos."
+			}
+		]
+	},
+	{
+		"nome": [
+			"sulfato ferroso"
+		],
+		"class": [
+			"suplementos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					2,
+					1,
+					1
+				],
+				"via": "VO",
+				"instrucao": "usar de acordo com défict de hemoglobina e ferritina."
+			}
+		]
+	},
+	{
+		"nome": [
+			"cloridrato de oxicodona e cloridrato de naloxona",
+			"Targin"
+		],
+		"class": [
+			"analgésicos",
+			"opidoides",
+			"narcóticos"
+		],
+		"posologias": [
+			{
+				"via": "oral",
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					"5+2.5",
+					12
+				]
+			}
+		],
+		"obs": [
+			"Receita branca, comum.",
+			"A naloxona por via oral impede constipação."
+		]
+	},
+	{
+		"nome": [
+			"succinilcolina"
+		],
+		"class": [
+			"bloqueadores neuromusculares"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "bloqueio muscular pediátrico para intubação de emergência."
+			}
+		]
+	},
+	{
+		"nome": [
+			"flumazenil",
+			"Lanexat"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"kg"
+				],
+				"dosagem": [
+					8,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose inicial no auxílio ao despertar pós anestésico."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"kg"
+				],
+				"dosagem": [
+					15,
+					1
+				],
+				"instrucao": "dose máxima literária no auxílio ao despertar pós anestésico.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					0.2
+				],
+				"instrucao": "dose habitual de antídoto para adultos, podendo ser repetido até o máximo de 3mg.",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"Pode ocorrer ressedação em curto prazo, e.g. 20min.",
+			"Não administrar em pacientes com convulsão, dependência de benzodiazepínico ou superdosagem de tricíclicos.",
+			"O flumazenil bloqueia muitas das ações dos benzodiazepínicos, do zolpidem, da zaleplona e da eszopiclona, po- rém não antagoniza os efeitos de outros sedativos e hipnóticos, do etanol, dos opioides ou dos anestésicos gerais.",
+			"O antagonismo da depressão respiratória induzida pelos benzodiazepínicos é menos previsível.",
+			"Existe um risco de precipitar sintomas de abstinência em usuários crônicos de benzodiazepínicos."
+		]
+	},
+	{
+		"nome": [
+			"ferripolimaltose",
+			"Noripurum"
+		],
+		"class": [
+			"suplementos",
+			"minerais",
+			"ferro"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					20
+				],
+				"via": "intravenosa",
+				"instrucao": "ajustado de acordo com o nível de hemoglobina."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					1,
+					1,
+					1
+				],
+				"via": "oral",
+				"instrucao": "dose pediátrica a partir dos seis meses se não há comorbidades."
+			}
+		]
+	},
+	{
+		"nome": [
+			"carboximaltose férrica",
+			"Ferinject"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"g"
+				],
+				"dosagem": [
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "nunca excedendo 1g ou 20mg/Kg"
+			}
+		],
+		"obs": [
+			"A grande vantagem de Ferrinject é sua administração em dose única e estabilidade química.",
+			"O composto é similar a ferritina fisiológica e bem tolerado."
+		]
+	},
+	{
+		"nome": [
+			"desogestrel e etinilestradiol",
+			"Mercilon"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"dia"
+				],
+				"dosagem": [
+					"150+20",
+					1
+				],
+				"via": "VO",
+				"instrucao": "conforme ordem de cartela ou critério médico."
+			}
+		]
+	},
+	{
+		"nome": [
+			"etinilestradiol"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"h"
+				],
+				"dosagem": [
+					30,
+					6
+				],
+				"via": "VO",
+				"instrucao": "até parar o sangramento uterino agudo."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"h"
+				],
+				"dosagem": [
+					30,
+					8
+				],
+				"via": "VO",
+				"instrucao": "até parar o sangramento uterino agudo, por no máximo 7 dias."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"h"
+				],
+				"dosagem": [
+					30,
+					12
+				],
+				"via": "VO",
+				"instrucao": "por até 7 dias em caso de sangramento uterino agudo."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"h"
+				],
+				"dosagem": [
+					30,
+					24
+				],
+				"via": "VO",
+				"instrucao": "seguimento pós sagramento uterino agudo, a critério médico."
+			}
+		]
+	},
+	{
+		"nome": [
+			"medroxiprogesterona",
+			"Provera"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					10,
+					1
+				],
+				"via": "VO",
+				"instrucao": "habitualmente usado como contraceptivo. A posologia pode ser individualizada."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					60,
+					1
+				],
+				"via": "VO",
+				"instrucao": "por 2 dias na vigência de sangramento uterino agudo."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					120,
+					1
+				],
+				"via": "VO",
+				"instrucao": "é a dose máxima por 2 dias na vigência de sangramento uterino agudo."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					30,
+					1
+				],
+				"via": "VO",
+				"instrucao": "por 3 a 6 semanas após cessar o sangramento uterino agudo."
+			}
+		]
+	},
+	{
+		"nome": [
+			"levomepromazina",
+			"Neozine"
+		],
+		"class": [
+			"antipsicóticos típicos",
+			"fenotiazinas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					150,
+					1
+				],
+				"via": [
+					"VO"
+				]
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					250,
+					1
+				],
+				"via": [
+					"VO"
+				],
+				"instrucao": "é a dose diária máxima útil literária."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"via": [
+					"VO"
+				],
+				"instrucao": "inicialmente para progressão diária até dose ideal."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					200,
+					1
+				],
+				"via": [
+					"VO"
+				],
+				"instrucao": "para manejo da dor em pacientes terminais."
+			},
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					500,
+					1
+				],
+				"via": [
+					"VO"
+				],
+				"instrucao": "máximo para manejo da dor em pacientes terminais."
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"dia"
+				],
+				"dosagem": [
+					0.1,
+					1,
+					1
+				],
+				"via": "VO",
+				"instrucao": "dose inicial em pacientes de 2 a 15 anos"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"dia"
+				],
+				"dosagem": [
+					0.2,
+					1,
+					1
+				],
+				"via": "VO",
+				"instrucao": "dose máxima em pacientes de 2 a 15 anos"
+			}
+		],
+		"obs": [
+			"No caso de gotas, diluir em solução de açúcar ou equivalente, nunca instilar diretamente nas mucosas."
+		]
+	},
+	{
+		"nome": [
+			"axetilcefuroxima",
+			"Zinnat"
+		],
+		"class": [
+			"antibióticos",
+			"cefalosporinas de segunda geração",
+			"betalactâmicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					250,
+					12
+				],
+				"via": "VO",
+				"instrucao": "em forma de comprimido, sachê ou suspensão."
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					500,
+					12
+				],
+				"via": "VO",
+				"instrucao": "em forma de comprimido, sachê ou suspensão."
+			}
+		]
+	},
+	{
+		"nome": [
+			"cefuroxima",
+			"Keroxime"
+		],
+		"class": [
+			"betalactâmicos",
+			"antibióticos",
+			"cefalosporinas"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"kg",
+					"dia"
+				],
+				"dosagem": [
+					30,
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose comumente aplicada na pediatria em pneumonia complicada ou com perfil de resistência a penicilinases."
+			}
+		]
+	},
+	{
+		"nome": [
+			"ácido tranexâmico",
+			"Transamin"
+		],
+		"class": [
+			"antifibrinolítico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"g"
+				],
+				"dosagem": [
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "no trauma deve ser administrado nas 3 primeiras horas em infusão por 10min no melhor acesso adquirido."
+			},
+			{
+				"unidades": [
+					"g",
+					"h"
+				],
+				"dosagem": [
+					1,
+					8
+				],
+				"via": "intravenosa",
+				"instrucao": "manutenção no pós-trauma, <i>ter in die</i>."
+			},
+			{
+				"unidades": [
+					"g"
+				],
+				"dosagem": [
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "em obstetrícia, nos sangramentos uterogênicos nas 3 primeiras horas em infusão por 10min."
+			},
+			{
+				"unidades": [
+					"mg",
+					"ml",
+					"h"
+				],
+				"dosagem": [
+					500,
+					5,
+					8
+				],
+				"via": "via nebulização",
+				"instrucao": "em soro fisiológico para hemoptise em diversas etiologias, conforme o <i>trial</i> publicado na CHEST em 2018."
+			}
+		]
+	},
+	{
+		"nome": [
+			"sulfato de magnésio"
+		],
+		"class": [
+			"eletrólitos",
+			"anticonvulsivantes",
+			"depressores do sistema nervoso",
+			"broncodilatadores"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"h"
+				],
+				"dosagem": [
+					"40-50",
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose habitual em crise grave de asma no contexto pediátrico, diluir em 100ml no máximo de 2g/paciente."
+			},
+			{
+				"unidades": [
+					"g",
+					"min"
+				],
+				"dosagem": [
+					4,
+					10
+				],
+				"via": "intravenosa",
+				"instrucao": "acompanhado de 5g IM em cada nádega - ataque por esquemas Zuspan e Pritchard."
+			},
+			{
+				"unidades": [
+					"g",
+					"min"
+				],
+				"dosagem": [
+					6,
+					10
+				],
+				"via": "intravenosa",
+				"instrucao": "esquema Zuspan ataque modificado (Sibai)."
+			},
+			{
+				"unidades": [
+					"g",
+					"min"
+				],
+				"dosagem": [
+					5,
+					4
+				],
+				"via": "IM",
+				"instrucao": "manutenção - esquema Pritchard."
+			},
+			{
+				"unidades": [
+					"g",
+					"min"
+				],
+				"dosagem": [
+					1,
+					10
+				],
+				"via": "intravenosa",
+				"instrucao": "manutenção - esquema Zuspan."
+			},
+			{
+				"unidades": [
+					"g",
+					"min"
+				],
+				"dosagem": [
+					2,
+					60
+				],
+				"via": "intravenosa",
+				"instrucao": "manutenção - esquema Sibai."
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					30,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose analgésica em bolo de 5min diluído em soros."
+			}
+		],
+		"obs": [
+			"Monitorize o magnésio sérico e o estado neurológico!",
+			"Mantenha o gloconato de cálcio preparado antes a 15mg/Kg intravenosa diluída.",
+			"Sempre diluir quando usada na via intravenosa.",
+			"Para transportes, melhor usar Pritchard.",
+			"A dose analgésica é indicada na intubação orotraqueal e na certeza de dores neuropáticas ou ainda como coadjuvante em outras dores."
+		]
+	},
+	{
+		"nome": [
+			"acetozolamida"
+		],
+		"obs": [
+			"reduz líquor."
+		]
+	},
+	{
+		"nome": [
+			"ácido valproico",
+			"Valproato"
+		],
+		"obs": [
+			"teratogenico"
+		]
+	},
+	{
+		"nome": [
+			"clorpromazina",
+			"Amplictil"
+		],
+		"class": [
+			"antipsicóticos atípicos",
+			"vagolíticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					300,
+					1
+				],
+				"via": [
+					"oral"
+				],
+				"instrucao": [
+					"dose antipsicótica de uso contínuo, podendo chegar a 400mg/dia."
+				]
+			},
+			{
+				"instrucao": "dose única analgésica para cefaleia ou para cessação de soluço persistente.",
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					25
+				],
+				"via": "intravenosa ou oral"
+			},
+			{
+				"unidades": [
+					"mg",
+					"ampola"
+				],
+				"dosagem": [
+					125,
+					1
+				],
+				"via": "intramuscular ou intravenosa",
+				"instrucao": "administrar uma ampola se agitação não controlada por haloperidol, podendo chegar a 800mg/dia na repetição a cada 30min. Para controle de agitação grave, considerar sedação."
+			}
+		]
+	},
+	{
+		"nome": [
+			"tansulosina com dutasterida",
+			"Combodart",
+			"Dutam"
+		],
+		"class": [
+			"alfabloqueadores",
+			"inibidores de 5-alfa-redutase"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg+mg",
+					"dia"
+				],
+				"dosagem": [
+					"0.5+0.4",
+					1
+				],
+				"via": "oral",
+				"instrucao": "tomar sempre 30min antes da mesma refeição."
+			}
+		],
+		"obs": [
+			"As medicações alcançam sinergismo no mesmo efeito alfabloqueador por mecanismos distintos."
+		]
+	},
+	{
+		"nome": [
+			"dopamina"
+		]
+	},
+	{
+		"nome": [
+			"cetamina",
+			"Ketalar",
+			"Cetamin"
+		],
+		"class": [
+			"hipnóticos",
+			"sedativos",
+			"bloqueadores de NMDA"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					1,
+					1
+				],
+				"instrucao": "dose inicial para sedação.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					3,
+					1
+				],
+				"instrucao": "dose máxima literária para sedação.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.3,
+					1
+				],
+				"instrucao": "dose máxima para analgesia moderada.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					"0.5 a 2",
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "sedação pediátrica para intubação de emergência."
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					0.02,
+					1
+				],
+				"via": "intramuscular",
+				"instrucao": "para sedação pediátrica sem acesso venoso."
+			}
+		],
+		"obs": [
+			"Causa hipertensão por liberação de adrenalina endógena.",
+			"Nas situações de adrenalina endógena esgotada, causa hipotensão.",
+			"Provoca moderada sialorreia, alucinação parasitária e outras."
+		]
+	},
+	{
+		"nome": [
+			"fluconazol"
+		],
+		"class": [
+			"antifúngicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					150
+				],
+				"via": "VO",
+				"instrucao": "dose única ou semanal para sítios difíceis, como ungueal."
+			}
+		]
+	},
+	{
+		"nome": [
+			"terbinafina"
+		],
+		"class": [
+			"antifúngicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					250,
+					"VO"
+				],
+				"instrucao": "sendo a terapia muito variável, de 3 a 12 semanas, a depender do sítio infectado."
+			}
+		]
+	},
+	{
+		"nome": [
+			"dexmedetomidina",
+			"Precedex"
+		],
+		"class": [
+			"pré-anestésicos",
+			"ansiolíticos",
+			"simpaticolíticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"Kg",
+					"min"
+				],
+				"dosagem": [
+					1,
+					1,
+					10
+				],
+				"via": "intravenosa",
+				"instrucao": "ataque por 10min."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"Kg",
+					"min"
+				],
+				"dosagem": [
+					0.5,
+					1,
+					60
+				],
+				"via": "intravenosa",
+				"instrucao": "para manutenção, por hora. Também pode ser usada como droga de auxílio à VNI e para ansiólise."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"Kg",
+					"min"
+				],
+				"dosagem": [
+					0.2,
+					1,
+					60
+				],
+				"via": "intravenosa",
+				"instrucao": "é o mínimo conhecido para manutenção de hora."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"Kg",
+					"min"
+				],
+				"dosagem": [
+					0.7,
+					1,
+					60
+				],
+				"via": "intravenosa",
+				"instrucao": "é o máximo indicado por bula comercial para manutenção de hora."
+			}
+		]
+	},
+	{
+		"nome": [
+			"citrato de fentanila",
+			"Fentanil"
+		],
+		"class": [
+			"analgésicos",
+			"opioides"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mcg",
+					"Kg"
+				],
+				"dosagem": [
+					3,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose de indução na intubação orotraqueal adulta."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"Kg"
+				],
+				"dosagem": [
+					"1 a 2",
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose de indução na intubação orotraqueal pediátrica."
+			},
+			{
+				"unidades": [
+					"mcg",
+					"Kg",
+					"min"
+				],
+				"dosagem": [
+					"0.03-0.05",
+					1,
+					1
+				],
+				"via": "intravenosa",
+				"instrucao": "dose de manutenção da sedação adulta."
+			},
+			{
+				"unidades": [
+					"mcg"
+				],
+				"dosagem": [
+					200
+				],
+				"via": "intravenosa",
+				"instrucao": "dose individual máxima adulta permitida pela literatura."
+			}
+		],
+		"obs": [
+			"A literatura oferece dosagem de até 8mcg/Kg em pacientes graves.",
+			"No passado, doses muito maiores eram utilizadas isoladamente na antestesia.",
+			"Muitas características do paciente influenciam a dose que deve ser individualizada para cada pessoa.",
+			"Tem ação potencializadora dos sedativos, inclusive dos colaterais destes, como hipotensão.",
+			"A apresentação padrão é de 50mcg/mL."
+		]
+	},
+	{
+		"nome": [
+			"dissulfiram",
+			"Antietanol",
+			"(US) Antabuse"
+		],
+		"class": [
+			"antialcoólicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					250,
+					1
+				],
+				"via": "VO",
+				"instrucao": "de preferência pela manhã, desde que esteja há 12h sem consumo de alcoól."
+			}
+		],
+		"obs": [
+			"Se usado na vigência do consumo de alcoól, causa depressão neurológica, colapso cardíaco e diversos outros efeitos graves."
+		]
+	},
+	{
+		"nome": [
+			"tobramicina"
+		],
+		"class": [
+			"aminoglicosídeos",
+			"antibióticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					8
+				],
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					5.1,
+					24
+				],
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					8
+				],
+				"instrucao": "se clearence de Cr abaixo de 90ml/min.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					24
+				],
+				"instrucao": "se clearence de Cr abaixo de 50ml/min.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					48
+				],
+				"instrucao": "se clearence de Cr abaixo de 10ml/min.",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"Há apresentações IM/intravenosa/SUBCAPS/ITRQ etc",
+			"Repetir 1/2 dose no pós-diálise.",
+			"Todo aminoglicosídeo é capaz de provocar bloqueio da atividade neuromuscular.",
+			"Os aminoglicosídeos não agem em ambiente de anaerobiose, pois o oxigênio é fundamental para o transporte dessas drogas para o interior da célula bacteriana."
+		]
+	},
+	{
+		"nome": [
+			"gentamicina",
+			"Gentamisan"
+		],
+		"class": [
+			"aminoglicosídeos",
+			"antibióticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					8
+				],
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					5.1,
+					24
+				],
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					8
+				],
+				"instrucao": "se clearence de Cr abaixo de 90ml/min.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					24
+				],
+				"instrucao": "se clearence de Cr abaixo de 50ml/min.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"h"
+				],
+				"dosagem": [
+					1.7,
+					48
+				],
+				"instrucao": "se clearence de Cr abaixo de 10ml/min.",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"Há apresentações intramuscular, intravenosa, intratraqueal etc.",
+			"Repetir 1/2 dose no pós-diálise.",
+			"Todo aminoglicosídeo é capaz de provocar bloqueio da atividade neuromuscular.",
+			"Os aminoglicosídeos não agem em ambiente de anaerobiose, pois o oxigênio é fundamental para o transporte dessas drogas para o interior da célula bacteriana."
+		]
+	},
+	{
+		"nome": [
+			"tetracaína e hexamidina",
+			"Hexomedine"
+		],
+		"class": [
+			"anestésico tópico",
+			"antisséptico"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					" nebulizações",
+					"h"
+				],
+				"dosagem": [
+					3,
+					4
+				],
+				"via": "VO",
+				"instrucao": "aplicando diretamente na mucosa oral e perioral."
+			}
+		],
+		"obs": [
+			"Apresentação comercial normal de 1+0.5mg/ml em colutório."
+		]
+	},
+	{
+		"nome": [
+			"propafenona"
+		],
+		"class": [
+			"antiarritmícos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					2,
+					1
+				],
+				"instrucao": "dose para fibrilação atrial.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					600
+				],
+				"instrucao": "dose ataque para fibrilação atrial.",
+				"via": "intravenosa"
+			}
+		]
+	},
+	{
+		"nome": [
+			"amiodarona"
+		],
+		"class": [
+			"antiarritmícos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"instrucao": "dose inicial para fibrilação atrial, bolo em 2 minutos",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					7,
+					1
+				],
+				"instrucao": "dose máxima para fibrilação atrial, bolo em 2 minutos",
+				"via": "intravenosa"
+			}
+		]
+	},
+	{
+		"nome": [
+			"midazolam",
+			"Dormonid"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.1,
+					1
+				],
+				"instrucao": "dose habitual para intubação orotraqueal com bloqueador neuromuscular.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.3,
+					1
+				],
+				"instrucao": "dose máxima habitual para intubação orotraqueal com bloqueador neuromuscular.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg",
+					"h"
+				],
+				"dosagem": [
+					0.03,
+					1,
+					1
+				],
+				"instrucao": "manutenção.",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.2,
+					1
+				],
+				"instrucao": "dose para interrupção de crise convulsiva em pediatria.",
+				"via": "intravenosa ou intramuscular"
+			},
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					0.5,
+					1
+				],
+				"instrucao": "dose máxima para interrupção de crise convulsiva em pediatria.",
+				"via": "intravenosa ou intramuscular"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					7.5
+				],
+				"instrucao": "dose habitual intramuscular para agitação psicomotora e ansiólise. Até 30mg.",
+				"via": "intramuscular"
+			},
+			{
+				"unidades": [
+					"mg",
+					"kg"
+				],
+				"dosagem": [
+					0.5,
+					1
+				],
+				"instrucao": "para controle de agitação ou ansiólise de procedimentos em pediatria de emergência, administrar em aplicador nasal.",
+				"via": "intranasal"
+			}
+		],
+		"obs": [
+			"Midazolam tem meia vida de 3h.",
+			"Solução de manutenção a 0.03-0.2mg/Kg/h. Considerar menores doses na pediatria e idosos.",
+			"Para sedação, em cardioversão e.g., considere usar uma diluição de 1mg/ml e progrida de 2 em 2mg até alcançar rebaixamento do paciente."
+		]
+	},
+	{
+		"nome": [
+			"diazepam"
+		],
+		"class": [
+			"benzodiazepínicos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"Kg"
+				],
+				"dosagem": [
+					"0.5",
+					1
+				],
+				"instrucao": "dose para interrupção de crise convulsiva em pediatria até o máximo de 10mg",
+				"via": "intranasal ou intravenosa"
+			},
+			{
+				"unidades": [
+					"mg"
+				],
+				"dosagem": [
+					5
+				],
+				"instrucao": "dose de bolo intravenosa em agitação, ansiólise, abstinência. Na abstinência, repetir a dose de forma espaçada até encontrar sedação desejada.",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"A meia vida de diazepam é de 30h.",
+			"Dose máxima de 40mg/dia.",
+			"Diazepam adere ao material do equipo e dos frascos plásticos. Administrar flush no bolo.",
+			"Evitar em extremos de idade por efeito paradoxal, bem como em usuários de opióides e compulsivos."
+		]
+	},
+	{
+		"nome": [
+			"mupirocina",
+			"Bactroban"
+		],
+		"class": [
+			"antibióticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"g"
+				],
+				"dosagem": [
+					20,
+					1
+				],
+				"instrucao": "Aplicar fina camada três vezes ao dia",
+				"via": "tópica"
+			}
+		]
+	},
+	{
+		"nome": [
+			"polisulfato de mucopolissacarídeo",
+			"Hirudoid"
+		],
+		"class": [
+			"mucopolissacarídeos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"g"
+				],
+				"dosagem": [
+					3,
+					""
+				],
+				"instrucao": "uso tópico",
+				"via": "intravenosa"
+			},
+			{
+				"unidades": [
+					"mg",
+					"g"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"instrucao": "uso tópico",
+				"via": "intravenosa"
+			}
+		],
+		"obs": [
+			"Aplicar fina camada sobre todo o hematoma."
+		]
+	},
+	{
+		"nome": [
+			"valproato de sódio",
+			"Depakote",
+			"Depakene"
+		]
+	},
+	{
+		"nome": [
+			"glibenclamida",
+			"Daonil"
+		],
+		"class": [
+			"sulfonilureias",
+			"antidiabéticos"
+		],
+		"posologias": [
+			{
+				"unidades": [
+					"mg",
+					"dia"
+				],
+				"dosagem": [
+					5,
+					1
+				],
+				"via": "oral",
+				"instrucao": "O comprimido pode ser partido."
+			}
+		],
+		"obs": [
+			"Se a glicemia de jejum cai na vigência de sulfonilureias, verificar função renal."
+		]
+	}
+]

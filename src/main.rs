@@ -1,4 +1,5 @@
-use aesclepiusrx::TemplateApp;
+use aesclepiusrx::Instancia;
+
 #[warn(clippy::all, rust_2018_idioms)]
 #[cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
 
@@ -16,7 +17,7 @@ fn main() -> eframe::Result {
     eframe::run_native(
         "eframe template",
         native_options,
-        Box::new(|cc| Ok(Box::new(TemplateApp::new(cc)))),
+        Box::new(|cc| Ok(Box::new(Instancia::default()))),
     )
 }
 
@@ -46,7 +47,7 @@ fn main() {
             .start(
                 canvas,
                 web_options,
-                Box::new(|cc| Ok(Box::new(TemplateApp::new(cc)))),
+                Box::new(|cc| Ok(Box::new(Instancia::default()))),
             )
             .await;
 
@@ -66,4 +67,3 @@ fn main() {
         }
     });
 }
-//use eframe::egui;
