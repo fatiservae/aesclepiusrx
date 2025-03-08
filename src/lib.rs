@@ -8,7 +8,36 @@ pub use data::BULARIO;
 
 const TOLERANCE: f32 = 1e-6;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Idade {
+    tipo: IdadeTipo,
+    valor: i32,
+}
+
+impl Idade {
+    fn valor(&self) -> i32 {
+        match self {
+            Self::Meses(valor) => *valor,
+            Self::Anos(valor) => *valor,
+        }
+    }
+    fn tipo(&self) -> &'static str {
+        match self {
+            Self::Meses(_) => "meses",
+            Self::Anos(_) => "anos",
+        }
+    }
+}
+impl std::fmt::Display for Idade {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Idade::Meses(valor) => write!(f, "{} meses", valor),
+            Idade::Anos(valor) => write!(f, "{} anos", valor),
+        }
+    }
+}
+
+#[derive(Debug, Clone, Copy)]
 pub struct Float(pub f32);
 
 impl std::fmt::Display for Float {
@@ -54,84 +83,190 @@ impl std::fmt::Display for Medicamento {
 //#[derive(Serialize, Deserialize)]
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Apresentacao {
-    DoseVolume(Float, Float, Massa, Volume), // (dose, volume, unidade)
-    DoseAplicacao(Float, Aplicacao, &'static str),
+    DoseVolume(Massa, Volume), // (dose, volume, unidade)
+    DoseAplicacao(Aplicacao),
 }
 
 impl std::fmt::Display for Apresentacao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Apresentacao::DoseVolume(dose, volume, massa, unidade_volume) => {
-                write!(f, "{}{} a cada {}{}", dose, massa, volume, unidade_volume)
+            Apresentacao::DoseVolume(massa, volume) => {
+                write!(f, "{} a cada {}", massa, volume)
             }
-            Apresentacao::DoseAplicacao(dose, aplicacao, unidade) => {
-                write!(f, "{}{} a cada {}", dose, unidade, aplicacao)
-            }
+            Apresentacao::DoseAplicacao(aplicacao) => match aplicacao {
+                Aplicacao::Comprimido(valor) => write!(f, "{} a cada comprimido", valor),
+                Aplicacao::Jato(valor) => write!(f, "{} a cada jato", valor),
+                Aplicacao::Gota(valor) => write!(f, "{} a cada gota", valor),
+                Aplicacao::Microgota(valor) => write!(f, "{} a cada microgota", valor),
+            },
         }
     }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Volume {
-    Ml,
-    L,
-    Dl,
+    Ml(Float),
+    L(Float),
+    Dl(Float),
 }
 
 impl std::fmt::Display for Volume {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Volume::Ml => write!(f, "mL"),
-            Volume::L => write!(f, "L"),
-            Volume::Dl => write!(f, "dL"),
+            Volume::Ml(valor) => write!(f, "{}mL", valor),
+            Volume::L(valor) => write!(f, "{}L", valor),
+            Volume::Dl(valor) => write!(f, "{}dL", valor),
         }
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Copy)]
 pub enum Massa {
-    Mg,
-    Kg,
-    G,
+    Mcg(Float),
+    Mg(Float),
+    Kg(Float),
+    G(Float),
+}
+
+impl Massa {
+    pub fn update(self, valor_novo: f32) -> Self {
+        match self {
+            Self::Mcg(_) => Self::Mcg(Float(valor_novo)),
+            Self::Mg(_) => Self::Mg(Float(valor_novo)),
+            Self::Kg(_) => Self::Kg(Float(valor_novo)),
+            Self::G(_) => Self::G(Float(valor_novo)),
+        }
+    }
+    pub fn incrementar(&self, incremento: f32) -> Self {
+        match self {
+            Self::Mcg(valor) => Self::Mcg(Float(valor.0 + incremento)),
+            Self::Mg(valor) => Self::Mg(Float(valor.0 + incremento)),
+            Self::Kg(valor) => Self::Kg(Float(valor.0 + incremento)),
+            Self::G(valor) => Self::G(Float(valor.0 + incremento)),
+        }
+    }
+
+    pub fn valor(&self) -> f32 {
+        match self {
+            Massa::Mcg(v) | Massa::Mg(v) | Massa::Kg(v) | Massa::G(v) => v.0.clone(),
+        }
+    }
 }
 
 impl std::fmt::Display for Massa {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Massa::Mg => write!(f, "mg"),
-            Massa::Kg => write!(f, "Kg"),
-            Massa::G => write!(f, "g"),
+            Massa::Mcg(valor) => write!(f, "{}mcg", valor),
+            Massa::Mg(valor) => write!(f, "{}mg", valor),
+            Massa::Kg(valor) => write!(f, "{}Kg", valor),
+            Massa::G(valor) => write!(f, "{}g", valor),
+        }
+    }
+}
+
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub enum Intervalo {
+    Minuto,
+    Hora,
+    Dia,
+    // Semanas,
+}
+impl std::fmt::Display for Intervalo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Minuto => write!(f, "min"),
+            Self::Hora => write!(f, "h"),
+            Self::Dia => write!(f, "dia"),
         }
     }
 }
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Aplicacao {
-    Comprimido,
-    Jato,
-    Gota,
+    Comprimido(Massa),
+    Jato(Massa),
+    Gota(Massa),
+    Microgota(Massa),
 }
-
 impl std::fmt::Display for Aplicacao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Comprimido => write!(f, "comprimido"),
-            Self::Jato => write!(f, "jato"),
-            Self::Gota => write!(f, "gota"),
+            // TODO: implementar matches em valor para plurais
+            // evitando espaço quando for unitário.
+            // Ex.: por jato vs. por cada 3 jatos.
+            Self::Comprimido(valor) => write!(f, "{} por comprimido", valor),
+            Self::Jato(valor) => write!(f, "{} a cada jato", valor),
+            Self::Gota(valor) => write!(f, "{} por gota", valor),
+            Self::Microgota(valor) => write!(f, "{} por microgota", valor),
         }
     }
 }
 
-#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq)]
-pub enum Posologia {
-    DoseKgDuracaoDias(Float, &'static str, usize, Via),
-    DoseUnica(Float, &'static str), // TODO: InfusaoContinua,
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub enum Duracao {
+    Minuto(i32),
+    Hora(i32),
+    Dia(i32),
+}
+impl Duracao {
+    fn valor(&self) -> i32 {
+        match self {
+            Duracao::Minuto(valor) => *valor,
+            Duracao::Hora(valor) => *valor,
+            Duracao::Dia(valor) => *valor,
+        }
+    }
+}
+impl std::fmt::Display for Duracao {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            // TODO: plurais...
+            Self::Minuto(valor) => write!(f, "por {} minutos(s)", valor),
+            Self::Hora(valor) => write!(f, "por {} hora(s)", valor),
+            Self::Dia(valor) => write!(f, "por {} dia(s)", valor),
+        }
+    }
 }
 
-#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq)]
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub enum Posologia {
+    DoseKgIntervaloDuracao(Massa, Intervalo, Duracao, Via), // ex. 25mg/kg*dia por 5 dias via oral
+    GotaKg(i32),
+    DoseUnica(Massa), // TODO: InfusaoContinua,
+}
+impl std::fmt::Display for Posologia {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Posologia::DoseKgIntervaloDuracao(massa, intervalo, duracao, via) => {
+                write!(
+                    f,
+                    "{}/Kg{} por {} {}", // Via:: já completa "via"
+                    massa, intervalo, duracao, via
+                )
+            }
+            Posologia::DoseUnica(dose) => write!(f, "{}", dose),
+            Posologia::GotaKg(gotas) => {
+                let gota_gotas = if *gotas > 1 { "gotas" } else { "gota" };
+                write!(f, "{} {} por Kg", gotas, gota_gotas)
+            }
+        }
+    }
+}
+
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Via {
     Intravenosa,
     Oral,
     Retal,
     Topica,
+}
+impl std::fmt::Display for Via {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Via::Intravenosa => write!(f, "via intravenosa"),
+            Via::Oral => write!(f, "via oral"),
+            Via::Retal => write!(f, "via retal"),
+            Via::Topica => write!(f, "via tópica"),
+        }
+    }
 }

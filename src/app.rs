@@ -1,7 +1,8 @@
 //use serde::{Deserialize, Serialize};
 
 use crate::{
-    data::BULARIO, Aplicacao, Apresentacao, Float, Massa, Medicamento, Posologia, Via, Volume,
+    data::BULARIO, Aplicacao, Apresentacao, Float, Idade, Massa, Medicamento, Posologia, Via,
+    Volume,
 };
 
 //#[derive(Serialize, Deserialize)]
@@ -9,10 +10,11 @@ pub struct Instancia {
     // Example stuff:
     visible: bool,
     nome: String,
-    massa: f32,
-    idade: i32,
+    massa: Massa,
+    idade: Idade,
     medicamento_selecionado: Medicamento,
     apresentacao_selecionada: Apresentacao, //#[serde(skip)] // This how you opt-out of serialization of a field
+    posologia_selecionada: Posologia,
 }
 
 impl Default for Instancia {
@@ -21,26 +23,23 @@ impl Default for Instancia {
             // Example stuff:
             visible: true,
             nome: "Algum medicamento".to_owned(),
-            massa: 2.5,
-            idade: 2,
+            massa: Massa::G(Float(0.0)),
+            idade: Idade::Anos(2),
             apresentacao_selecionada: Apresentacao::DoseVolume(
-                Float(0.0),
-                Float(0.0),
-                Massa::Mg,
-                Volume::Ml,
+                Massa::Mg(Float(0.0)),
+                Volume::Ml(Float(0.0)),
             ),
             medicamento_selecionado: Medicamento {
                 nome: "medicamento",
                 nome_comercial: None,
                 apresentacoes: &[Apresentacao::DoseVolume(
-                    Float(0.0),
-                    Float(0.0),
-                    Massa::Mg,
-                    Volume::Ml,
+                    Massa::Mg(Float(0.0)),
+                    Volume::Ml(Float(0.0)),
                 )],
-                posologias: &[Posologia::DoseUnica(Float(0.0), "unidade")],
+                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)))],
                 advertencias: None,
             },
+            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0))),
         }
     }
 }
@@ -77,19 +76,48 @@ impl eframe::App for Instancia {
             .resizable(true) // Permite redimensionar
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
-                    ui.label("Nome");
-                    ui.text_edit_singleline(&mut self.nome);
-                });
-                ui.horizontal(|ui| {
+                    // let mut valor_massa: f32 = self.massa.clone().valor();
+
+                    if ui.button("Incrementar 100g").clicked() {
+                        self.massa.incrementar(0.1);
+                    };
+                    if ui.button("Incrementar 1kg").clicked() {
+                        self.massa.incrementar(1.0);
+                    };
+
+                    if ui.button("Decrementar 100g").clicked() {
+                        self.massa.incrementar(-0.1);
+                    };
+                    if ui.button("Decrementar 1kg").clicked() {
+                        self.massa.incrementar(-1.0);
+                    };
                     ui.label("Massa (Kg)");
-                    ui.text_edit_singleline(&mut format!("{:.2}", self.massa));
+                    ui.text_edit_singleline(&mut format!("{}", self.massa.valor()));
+                    // self.massa.update(valor_massa);
                 });
-                if ui.button("Incrementar 100g").clicked() {
-                    self.massa += 0.100;
-                };
-                if ui.button("Incrementar 1kg").clicked() {
-                    self.massa += 1.000;
-                };
+
+                ui.horizontal(|ui| {
+                    ui.label("Idade");
+                    // ui.add(egui::DragValue::new(&mut self.idade.valor()));
+
+                    egui::DragValue::new(self.massa.)
+                        .range(0..=120)
+                        .suffix(" Kg");
+                    egui::ComboBox::from_id_salt("Idade")
+                        .selected_text(&format!("{}", self.idade))
+                        .show_ui(ui, |ui: &mut egui::Ui| {
+                            ui.selectable_value(
+                                &mut self.idade,
+                                Idade::Anos(2),
+                                Idade::Anos(0).tipo(),
+                            );
+                            ui.selectable_value(
+                                &mut self.idade,
+                                Idade::Meses(2),
+                                Idade::Meses(0).tipo(),
+                            );
+                        });
+                });
             });
 
         egui::Window::new("Medicamento")
@@ -98,7 +126,6 @@ impl eframe::App for Instancia {
             // .default_height(88.0)
             .resizable(true)
             .show(ctx, |ui| {
-                let mut apresentacoes: Vec<&Apresentacao> = vec![];
                 egui::ComboBox::from_label("Nome")
                     .selected_text(&format!("{}", self.medicamento_selecionado.nome))
                     .show_ui(ui, |ui: &mut egui::Ui| {
@@ -113,8 +140,13 @@ impl eframe::App for Instancia {
                         }
                     });
 
+                let mut apresentacoes: Vec<&Apresentacao> = vec![];
+                let mut posologias: Vec<&Posologia> = vec![];
                 for apresentacao in self.medicamento_selecionado.apresentacoes {
-                    apresentacoes.push(apresentacao)
+                    apresentacoes.push(apresentacao);
+                }
+                for posologia in self.medicamento_selecionado.posologias {
+                    posologias.push(posologia);
                 }
 
                 egui::ComboBox::from_label("Apresentações")
@@ -128,7 +160,23 @@ impl eframe::App for Instancia {
                                 format!("{}", apresentacao),
                             );
                         }
-                    })
+                    });
+                egui::ComboBox::from_label("Posologias")
+                    .selected_text(&format!("{}", self.posologia_selecionada))
+                    .show_ui(ui, |ui: &mut egui::Ui| {
+                        for posologia in posologias {
+                            ui.selectable_value(
+                                &mut self.posologia_selecionada,
+                                posologia.clone(), //ok?
+                                //format!("{:?}", apresentacao),
+                                format!("{}", posologia),
+                            );
+                        }
+                    });
+
+                // if egui::Button::new("Prescreva!")).clicked() {
+                //     match
+                // }
             });
 
         // let apresentacao_text: String = match apresentacao {

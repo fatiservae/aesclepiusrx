@@ -1,19 +1,37 @@
-use crate::{Aplicacao, Apresentacao, Float, Massa, Medicamento, Posologia, Via, Volume};
+use crate::{
+    Aplicacao, Apresentacao, Duracao, Float, Intervalo, Massa, Medicamento, Posologia, Via, Volume,
+};
 
 pub const BULARIO: &'static [Medicamento] = &[
+    Medicamento {
+        nome: "Dipirona",
+        nome_comercial: Some("Novalgina"),
+        apresentacoes: &[Apresentacao::DoseVolume(
+            Massa::Mg(Float(500.0)),
+            Volume::Ml(Float(1.0)),
+        )],
+        posologias: &[
+            Posologia::DoseKgIntervaloDuracao(
+                Massa::Mg(Float(25.0)),
+                Intervalo::Hora,
+                Duracao::Dia(6),
+                Via::Oral,
+            ),
+            Posologia::GotaKg(1),
+        ],
+        advertencias: None,
+    },
     Medicamento {
         nome: "Amoxicilina",
         nome_comercial: Some("AMCLAVU BD"),
         apresentacoes: &[Apresentacao::DoseVolume(
-            Float(5.0),
-            Float(1.0),
-            Massa::Mg,
-            Volume::Ml,
+            Massa::Mg(Float(5.0)),
+            Volume::Ml(Float(1.0)),
         )],
-        posologias: &[Posologia::DoseKgDuracaoDias(
-            Float(50.0),
-            "mg",
-            7,
+        posologias: &[Posologia::DoseKgIntervaloDuracao(
+            Massa::Mg(Float(50.0)),
+            Intervalo::Dia,
+            Duracao::Dia(7),
             Via::Oral,
         )],
         advertencias: None,
@@ -22,15 +40,13 @@ pub const BULARIO: &'static [Medicamento] = &[
         nome: "Penicilina",
         nome_comercial: Some("Benzetacil"),
         apresentacoes: &[Apresentacao::DoseVolume(
-            Float(100.0),
-            Float(1.0),
-            Massa::Mg,
-            Volume::Ml,
+            Massa::Mg(Float(100.0)),
+            Volume::Ml(Float(1.0)),
         )],
-        posologias: &[Posologia::DoseKgDuracaoDias(
-            Float(32.0),
-            "mg",
-            5,
+        posologias: &[Posologia::DoseKgIntervaloDuracao(
+            Massa::Mg(Float(32.0)),
+            Intervalo::Dia,
+            Duracao::Dia(5),
             Via::Oral,
         )],
         advertencias: None,
@@ -38,12 +54,10 @@ pub const BULARIO: &'static [Medicamento] = &[
     Medicamento {
         nome: "Salbutamol",
         nome_comercial: Some("Aerolin"),
-        apresentacoes: &[Apresentacao::DoseAplicacao(
+        apresentacoes: &[Apresentacao::DoseAplicacao(Aplicacao::Jato(Massa::Mcg(
             Float(100.0),
-            Aplicacao::Jato,
-            "mcg",
-        )],
-        posologias: &[Posologia::DoseUnica(Float(800.0), "dia")],
+        )))],
+        posologias: &[Posologia::DoseUnica(Massa::Mg(Float(800.0)))],
         advertencias: None,
     },
 ];
