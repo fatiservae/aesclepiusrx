@@ -1,48 +1,24 @@
 //use serde::{Deserialize, Serialize};
 
 use crate::{
-    data::BULARIO, Aplicacao, Apresentacao, Float, Idade, Massa, Medicamento, Posologia, Via,
-    Volume,
+    calc::calcular_dose, data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
+    Instancia, Massa, Medicamento, Posologia, Via, Volume,
 };
+use egui::{Slider, TextBuffer, TextEdit, Ui};
 
-//#[derive(Serialize, Deserialize)]
-pub struct Instancia {
-    // Example stuff:
-    visible: bool,
-    nome: String,
-    massa: Massa,
-    idade: Idade,
-    medicamento_selecionado: Medicamento,
-    apresentacao_selecionada: Apresentacao, //#[serde(skip)] // This how you opt-out of serialization of a field
-    posologia_selecionada: Posologia,
-}
+// fn ui_search_box(ui: &mut Ui, search: &mut impl TextBuffer, options: Vec<&str>, posologias: vec<Posologia>, apresentacoes: Vec<Apresentacoes>) {
+//     ui.add(TextEdit::singleline(search).hint_text("Buscar..."));
+//     let filtered: Vec<&str> = options
+//         .iter()
+//         .filter(|&&opt| opt.to_lowercase().contains(&search.as_str().to_lowercase()))
+//         .copied()
+//         .collect();
+//     for option in filtered {
+//         if ui.button(option).clicked() {
 
-impl Default for Instancia {
-    fn default() -> Self {
-        Self {
-            // Example stuff:
-            visible: true,
-            nome: "Algum medicamento".to_owned(),
-            massa: Massa::G(Float(0.0)),
-            idade: Idade::Anos(2),
-            apresentacao_selecionada: Apresentacao::DoseVolume(
-                Massa::Mg(Float(0.0)),
-                Volume::Ml(Float(0.0)),
-            ),
-            medicamento_selecionado: Medicamento {
-                nome: "medicamento",
-                nome_comercial: None,
-                apresentacoes: &[Apresentacao::DoseVolume(
-                    Massa::Mg(Float(0.0)),
-                    Volume::Ml(Float(0.0)),
-                )],
-                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)))],
-                advertencias: None,
-            },
-            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0))),
-        }
-    }
-}
+//         };
+//     }
+// }
 
 ///// Called once before the first frame.
 //pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
@@ -75,47 +51,38 @@ impl eframe::App for Instancia {
             // .default_height(80.0)
             .resizable(true) // Permite redimensionar
             .show(ctx, |ui| {
+                let mut valor_massa: f32 = self.massa.valor();
                 ui.horizontal(|ui| {
-                    // let mut valor_massa: f32 = self.massa.clone().valor();
-
-                    if ui.button("Incrementar 100g").clicked() {
-                        self.massa.incrementar(0.1);
-                    };
-                    if ui.button("Incrementar 1kg").clicked() {
-                        self.massa.incrementar(1.0);
-                    };
-
-                    if ui.button("Decrementar 100g").clicked() {
-                        self.massa.incrementar(-0.1);
-                    };
-                    if ui.button("Decrementar 1kg").clicked() {
-                        self.massa.incrementar(-1.0);
-                    };
                     ui.label("Massa (Kg)");
-                    ui.text_edit_singleline(&mut format!("{}", self.massa.valor()));
+                    ui.add(
+                        egui::DragValue::new(&mut valor_massa)
+                            .speed(0.1)
+                            .fixed_decimals(1),
+                    );
+
+                    // ui.text_edit_singleline(&mut valor_massa);
                     // self.massa.update(valor_massa);
+                    self.massa = Massa::Kg(Float(valor_massa));
+                    // ui.label(format!("{}", self.massa));
                 });
 
                 ui.horizontal(|ui| {
                     ui.label("Idade");
-                    // ui.add(egui::DragValue::new(&mut self.idade.valor()));
+                    ui.add(egui::DragValue::new(&mut self.idade.valor));
 
-                    egui::DragValue::new(self.massa.)
-                        .range(0..=120)
-                        .suffix(" Kg");
-                    egui::ComboBox::from_id_salt("Idade")
-                        .selected_text(&format!("{}", self.idade))
+                    egui::ComboBox::from_id_salt("idade_tipo")
+                        .selected_text(&format!("{}", self.idade.tipo))
                         .show_ui(ui, |ui: &mut egui::Ui| {
                             ui.selectable_value(
-                                &mut self.idade,
-                                Idade::Anos(2),
-                                Idade::Anos(0).tipo(),
+                                &mut self.idade.tipo,
+                                IdadeTipo::Meses,
+                                format!("{}", IdadeTipo::Meses),
                             );
                             ui.selectable_value(
-                                &mut self.idade,
-                                Idade::Meses(2),
-                                Idade::Meses(0).tipo(),
-                            );
+                                &mut self.idade.tipo,
+                                IdadeTipo::Anos,
+                                format!("{}", IdadeTipo::Anos),
+                            )
                         });
                 });
             });
@@ -126,7 +93,16 @@ impl eframe::App for Instancia {
             // .default_height(88.0)
             .resizable(true)
             .show(ctx, |ui| {
-                egui::ComboBox::from_label("Nome")
+                // ui_search_box(
+                //     ui,
+                //     &mut self.search,
+                //     BULARIO
+                //         .iter()
+                //         .map(|medicamento| medicamento.nome)
+                //         .collect::<Vec<&str>>(),
+                // );
+                ui.label("Nome");
+                egui::ComboBox::from_id_salt("nome")
                     .selected_text(&format!("{}", self.medicamento_selecionado.nome))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         //for (i, medicamento) in BULARIO {
@@ -149,7 +125,8 @@ impl eframe::App for Instancia {
                     posologias.push(posologia);
                 }
 
-                egui::ComboBox::from_label("Apresentações")
+                ui.label("Apresentação");
+                egui::ComboBox::from_id_salt("apresnts")
                     .selected_text(&format!("{}", self.apresentacao_selecionada))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         for apresentacao in apresentacoes {
@@ -161,7 +138,8 @@ impl eframe::App for Instancia {
                             );
                         }
                     });
-                egui::ComboBox::from_label("Posologias")
+                ui.label("Posologia");
+                egui::ComboBox::from_id_salt("posols")
                     .selected_text(&format!("{}", self.posologia_selecionada))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         for posologia in posologias {
@@ -173,7 +151,6 @@ impl eframe::App for Instancia {
                             );
                         }
                     });
-
                 // if egui::Button::new("Prescreva!")).clicked() {
                 //     match
                 // }
@@ -223,13 +200,18 @@ impl eframe::App for Instancia {
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.heading("Prescrição detalhada");
             ui.horizontal(|ui| {
-                ui.label(&self.nome);
-                let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
-                let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
-                ui.label(format!(
-                    "\n\nVia oral\n{}{}{}",
-                    self.medicamento_selecionado.nome, fill, "1 frasco"
+                // ui.label(&self.nome);
+                ui.label(calcular_dose(
+                    self.massa,
+                    &self.posologia_selecionada,
+                    &self.apresentacao_selecionada,
                 ));
+                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
+                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
+                // ui.label(format!(
+                //     "\n\nVia oral\n{}{}{}",
+                //     self.medicamento_selecionado.nome, fill, "1 frasco"
+                // ));
             });
         });
         // egui::CentralPanel::default().show(ctx, |ui| {

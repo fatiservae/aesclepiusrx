@@ -2,9 +2,57 @@
 #![warn(clippy::all, rust_2018_idioms)]
 
 mod app;
+mod calc;
 mod data;
-pub use app::Instancia;
 pub use data::BULARIO;
+
+//#[derive(Serialize, Deserialize)]
+pub struct Instancia {
+    // Example stuff:
+    search: String,
+    options: Vec<&'static str>,
+    visible: bool,
+    nome: String,
+    massa: Massa,
+    idade: Idade,
+    medicamento_selecionado: Medicamento,
+    apresentacao_selecionada: Apresentacao, //#[serde(skip)] // This how you opt-out of serialization of a field
+    posologia_selecionada: Posologia,
+    prescricao: String,
+}
+
+impl Default for Instancia {
+    fn default() -> Self {
+        Self {
+            // Example stuff:
+            search: String::new(),
+            options: vec!["Pequi", "maça", "outra"],
+            visible: true,
+            nome: "Algum medicamento".to_owned(),
+            massa: Massa::Kg(Float(0.0)),
+            idade: Idade {
+                tipo: IdadeTipo::Meses,
+                valor: 2,
+            },
+            apresentacao_selecionada: Apresentacao::DoseVolume(
+                Massa::Mg(Float(0.0)),
+                Volume::Ml(Float(0.0)),
+            ),
+            medicamento_selecionado: Medicamento {
+                nome: "medicamento",
+                nome_comercial: None,
+                apresentacoes: &[Apresentacao::DoseVolume(
+                    Massa::Mg(Float(0.0)),
+                    Volume::Ml(Float(0.0)),
+                )],
+                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)))],
+                advertencias: None,
+            },
+            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0))),
+            prescricao: "Medicamento 0g/ml ..... 0ml".to_string(),
+        }
+    }
+}
 
 const TOLERANCE: f32 = 1e-6;
 
@@ -14,26 +62,35 @@ pub struct Idade {
     valor: i32,
 }
 
-impl Idade {
-    fn valor(&self) -> i32 {
+#[derive(Debug, Clone, PartialEq, Eq)]
+enum IdadeTipo {
+    Meses,
+    Anos,
+}
+
+impl std::fmt::Display for IdadeTipo {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Meses(valor) => *valor,
-            Self::Anos(valor) => *valor,
+            IdadeTipo::Meses => write!(f, "meses"),
+            IdadeTipo::Anos => write!(f, "anos"),
         }
     }
+}
+
+impl Idade {
+    // fn valor(&self) -> i32 {
+    //     format!("{}", self.idade.valor)
+    // }
     fn tipo(&self) -> &'static str {
-        match self {
-            Self::Meses(_) => "meses",
-            Self::Anos(_) => "anos",
+        match self.tipo {
+            IdadeTipo::Meses => "meses",
+            IdadeTipo::Anos => "anos",
         }
     }
 }
 impl std::fmt::Display for Idade {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Idade::Meses(valor) => write!(f, "{} meses", valor),
-            Idade::Anos(valor) => write!(f, "{} anos", valor),
-        }
+        write!(f, "{} {}", self.valor, self.tipo())
     }
 }
 
@@ -234,6 +291,7 @@ pub enum Posologia {
     GotaKg(i32),
     DoseUnica(Massa), // TODO: InfusaoContinua,
 }
+
 impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
