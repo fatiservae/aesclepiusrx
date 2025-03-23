@@ -197,11 +197,19 @@ impl eframe::App for Instancia {
             });
         });
 
+        egui::SidePanel::left("my_left_panel").default_width(200.0).show(ctx, |ui| {
+            ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
+        });
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Prescrição detalhada");
+            ui.heading("Prescrição\n\n");
+            ui.label(format!(
+                "{}\n{}",
+                self.medicamento_selecionado, self.apresentacao_selecionada
+            ));
             ui.horizontal(|ui| {
                 // ui.label(&self.nome);
                 ui.label(calcular_dose(
+                    self.idade.clone(),
                     self.massa,
                     &self.posologia_selecionada,
                     &self.apresentacao_selecionada,

@@ -45,10 +45,10 @@ impl Default for Instancia {
                     Massa::Mg(Float(0.0)),
                     Volume::Ml(Float(0.0)),
                 )],
-                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)))],
+                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral)],
                 advertencias: None,
             },
-            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0))),
+            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral),
             prescricao: "Medicamento 0g/ml ..... 0ml".to_string(),
         }
     }
@@ -160,11 +160,33 @@ impl std::fmt::Display for Apresentacao {
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Copy)]
 pub enum Volume {
     Ml(Float),
     L(Float),
     Dl(Float),
+}
+
+impl Volume {
+    fn valor(self) -> f32 {
+        match self {
+            Volume::Ml(valor) | Volume::L(valor) | Volume::Dl(valor) => valor.0,
+        }
+    }
+    fn tipo(self) -> &'static str {
+        match self {
+            Volume::Ml(_) => "mL",
+            Volume::L(_) => "L",
+            Volume::Dl(_) => "dL",
+        }
+    }
+    pub fn normalizar(&self) -> Self {
+        match self {
+            Volume::Ml(valor) => Volume::Ml(Float(valor.0)),
+            Volume::L(valor) => Volume::Ml(Float(valor.0 * 1000.0)),
+            Volume::Dl(valor) => Volume::Ml(Float(valor.0 / 100.0)),
+        }
+    }
 }
 
 impl std::fmt::Display for Volume {
@@ -208,6 +230,15 @@ impl Massa {
             Massa::Mcg(v) | Massa::Mg(v) | Massa::Kg(v) | Massa::G(v) => v.0.clone(),
         }
     }
+
+    pub fn normalizar(&self) -> Self {
+        match self {
+            Massa::Mg(valor) => Massa::Mg(Float(valor.0)),
+            Massa::Mcg(valor) => Massa::Mg(Float(valor.0 / 1000.0)),
+            Massa::Kg(valor) => Massa::Mg(Float(valor.0 * 1000000.0)),
+            Massa::G(valor) => Massa::Mg(Float(valor.0 * 1000.0)),
+        }
+    }
 }
 
 impl std::fmt::Display for Massa {
@@ -224,7 +255,7 @@ impl std::fmt::Display for Massa {
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Intervalo {
     Minuto,
-    Hora,
+    Hora(i32),
     Dia,
     // Semanas,
 }
@@ -232,7 +263,7 @@ impl std::fmt::Display for Intervalo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Minuto => write!(f, "min"),
-            Self::Hora => write!(f, "h"),
+            Self::Hora(tempo) => write!(f, "{}h", tempo),
             Self::Dia => write!(f, "dia"),
         }
     }
@@ -278,31 +309,58 @@ impl std::fmt::Display for Duracao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             // TODO: plurais...
-            Self::Minuto(valor) => write!(f, "por {} minutos(s)", valor),
-            Self::Hora(valor) => write!(f, "por {} hora(s)", valor),
-            Self::Dia(valor) => write!(f, "por {} dia(s)", valor),
+            Self::Minuto(valor) => write!(f, "{} minutos(s)", valor),
+            Self::Hora(valor) => write!(f, "{} hora(s)", valor),
+            Self::Dia(valor) => write!(f, "{} dia(s)", valor),
+        }
+    }
+}
+
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
+pub enum Frequencia {
+    Horas(i32),
+    Min(i32),
+}
+
+impl Frequencia {
+    fn valor(self) -> i32 {
+        match self {
+            Frequencia::Horas(valor) | Frequencia::Min(valor) => valor,
+        }
+    }
+}
+impl std::fmt::Display for Frequencia {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Frequencia::Horas(hrs) => write!(f, "a cada {}h", hrs), //TODO: plurais
+            Frequencia::Min(min) => write!(f, "a cada {}min", min), //TODO: plurais
         }
     }
 }
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Posologia {
-    DoseKgIntervaloDuracao(Massa, Intervalo, Duracao, Via), // ex. 25mg/kg*dia por 5 dias via oral
-    GotaKg(i32),
-    DoseUnica(Massa), // TODO: InfusaoContinua,
+    DoseKg(Via, Massa),
+    DoseKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
+    GotaKg(i32),                                                        // não existe
+    DoseUnica(Massa, Via),
+    // TODO: InfusaoContinua,
 }
 
 impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Posologia::DoseKgIntervaloDuracao(massa, intervalo, duracao, via) => {
+            Posologia::DoseKg(via, massa) => {
+                write!(f, "{}/Kg {}", via, massa)
+            }
+            Posologia::DoseKgIntervaloDuracao(via, massa, intervalo, duracao, frequencia) => {
                 write!(
                     f,
-                    "{}/Kg{} por {} {}", // Via:: já completa "via"
-                    massa, intervalo, duracao, via
+                    "{}/Kg{} por {} {} {}", // Via:: já completa "via"
+                    massa, intervalo, duracao, frequencia, via
                 )
             }
-            Posologia::DoseUnica(dose) => write!(f, "{}", dose),
+            Posologia::DoseUnica(dose, via) => write!(f, "{} {} uma única vez.", dose, via),
             Posologia::GotaKg(gotas) => {
                 let gota_gotas = if *gotas > 1 { "gotas" } else { "gota" };
                 write!(f, "{} {} por Kg", gotas, gota_gotas)
@@ -311,12 +369,27 @@ impl std::fmt::Display for Posologia {
     }
 }
 
-#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Via {
     Intravenosa,
     Oral,
     Retal,
     Topica,
+    Inalatoria,
+}
+impl Capitalizar for Via {
+    fn capitalizar(self, tipo: TipoCapitalizacao) -> String {
+        match tipo {
+            TipoCapitalizacao::Primeira => {
+                let mut chars = format!("{}", self);
+                match chars.chars().next() {
+                    None => String::new(),
+                    Some(first) => first.to_uppercase().collect::<String>() + &chars.as_str()[1..],
+                }
+            }
+            TipoCapitalizacao::Todas => todo!(),
+        }
+    }
 }
 impl std::fmt::Display for Via {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -325,6 +398,16 @@ impl std::fmt::Display for Via {
             Via::Oral => write!(f, "via oral"),
             Via::Retal => write!(f, "via retal"),
             Via::Topica => write!(f, "via tópica"),
+            Via::Inalatoria => write!(f, "via inalatória"),
         }
     }
+}
+
+pub enum TipoCapitalizacao {
+    Primeira,
+    Todas,
+}
+
+pub trait Capitalizar {
+    fn capitalizar(self, tipo: TipoCapitalizacao) -> String;
 }
