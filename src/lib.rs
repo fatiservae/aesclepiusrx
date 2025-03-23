@@ -252,6 +252,7 @@ impl std::fmt::Display for Massa {
     }
 }
 
+/// Tempo normalmente descrito entre doses da apresentação padrão. Ex.: Amoxicilina 50mg/Kgdia significa que o intervalo da medicação é `dia` e a dose de 50mg/Kg. Porém, este remédio pode ser administrado de 8/8h, tornando a frequência de administrações muito maior que o intervalo.
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Intervalo {
     Minuto,
@@ -316,6 +317,7 @@ impl std::fmt::Display for Duracao {
     }
 }
 
+/// A frequência descreve o tempo, número ou fração de administração da medicação dentro do `Intervalo`.
 #[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Frequencia {
     Horas(i32),
@@ -342,7 +344,6 @@ impl std::fmt::Display for Frequencia {
 pub enum Posologia {
     DoseKg(Via, Massa),
     DoseKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
-    GotaKg(i32),                                                        // não existe
     DoseUnica(Massa, Via),
     // TODO: InfusaoContinua,
 }
@@ -351,7 +352,7 @@ impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Posologia::DoseKg(via, massa) => {
-                write!(f, "{}/Kg {}", via, massa)
+                write!(f, "{}/Kg {}", massa, via)
             }
             Posologia::DoseKgIntervaloDuracao(via, massa, intervalo, duracao, frequencia) => {
                 write!(
@@ -361,10 +362,6 @@ impl std::fmt::Display for Posologia {
                 )
             }
             Posologia::DoseUnica(dose, via) => write!(f, "{} {} uma única vez.", dose, via),
-            Posologia::GotaKg(gotas) => {
-                let gota_gotas = if *gotas > 1 { "gotas" } else { "gota" };
-                write!(f, "{} {} por Kg", gotas, gota_gotas)
-            }
         }
     }
 }
@@ -372,6 +369,7 @@ impl std::fmt::Display for Posologia {
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone, Copy)]
 pub enum Via {
     Intravenosa,
+    Intramuscular,
     Oral,
     Retal,
     Topica,
@@ -399,6 +397,7 @@ impl std::fmt::Display for Via {
             Via::Retal => write!(f, "via retal"),
             Via::Topica => write!(f, "via tópica"),
             Via::Inalatoria => write!(f, "via inalatória"),
+            Via::Intramuscular => write!(f, "via intramuscular"),
         }
     }
 }

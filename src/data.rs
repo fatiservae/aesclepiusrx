@@ -14,11 +14,10 @@ pub const BULARIO: &'static [Medicamento] = &[
             Posologia::DoseKgIntervaloDuracao(
                 Via::Oral,
                 Massa::Mg(Float(25.0)),
-                Intervalo::Hora(6),
+                Intervalo::Dia,
                 Duracao::Dia(7),
-                Frequencia::Horas(8),
+                Frequencia::Horas(6),
             ),
-            Posologia::GotaKg(1), // existe?
             Posologia::DoseKg(Via::Oral, Massa::Mg(Float(25.0))),
         ],
         advertencias: None,
@@ -74,13 +73,52 @@ pub const BULARIO: &'static [Medicamento] = &[
             Massa::Mg(Float(200.0)),
             Volume::Ml(Float(5.0)),
         )],
-        posologias: &[Posologia::DoseKgIntervaloDuracao(
-            Via::Oral,
-            Massa::Mg(Float(20.0)),
-            Intervalo::Dia,
-            Duracao::Dia(5),
-            Frequencia::Horas(24),
-        )],
+        posologias: &[
+            Posologia::DoseKgIntervaloDuracao(
+                Via::Oral,
+                Massa::Mg(Float(10.0)),
+                Intervalo::Dia,
+                Duracao::Dia(5),
+                Frequencia::Horas(24),
+            ),
+            Posologia::DoseKgIntervaloDuracao(
+                Via::Oral,
+                Massa::Mg(Float(20.0)),
+                Intervalo::Dia,
+                Duracao::Dia(3),
+                Frequencia::Horas(24),
+            ),
+        ],
         advertencias: Some(&["Dose diária máxima de 500mg em crianças."]),
+    },
+    Medicamento {
+        nome: "Midazolam",
+        nome_comercial: Some("Dormonid"),
+        apresentacoes: &[
+            Apresentacao::DoseVolume(Massa::Mg(Float(15.0)), Volume::Ml(Float(5.0))),
+            Apresentacao::DoseVolume(Massa::Mg(Float(5.0)), Volume::Ml(Float(1.0))),
+            Apresentacao::DoseVolume(Massa::Mg(Float(1.0)), Volume::Ml(Float(1.0))),
+        ],
+        posologias: &[Posologia::DoseKg(Via::Intramuscular, Massa::Mg(Float(0.2)))],
+        advertencias: None,
+    },
+    Medicamento {
+        nome: "Diazepam",
+        nome_comercial: None,
+        apresentacoes: &[Apresentacao::DoseVolume(
+            Massa::Mg(Float(10.0)),
+            Volume::Ml(Float(2.0)),
+        )],
+        posologias: &[Posologia::DoseKg(Via::Intramuscular, Massa::Mg(Float(0.5)))],
+        advertencias: None,
+    },
+    Medicamento {
+        nome_comercial: Some("Alivium"),
+        nome: "Ibuprofeno",
+        apresentacoes: &[Apresentacao::DoseAplicacao(Aplicacao::Gota(Massa::Mg(
+            Float(2.5),
+        )))],
+        posologias: &[Posologia::DoseKg(Via::Oral, Massa::Mg(Float(5.0)))],
+        advertencias: None,
     },
 ];

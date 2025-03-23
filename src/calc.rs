@@ -28,7 +28,7 @@ pub fn calcular_dose(
                     * dose_por_kg.valor()
                     * massa_paciente.valor();
                 format!(
-                    "{}: {:.}ml agora.",
+                    "{}: {:.1}ml agora.",
                     via.capitalizar(TipoCapitalizacao::Primeira),
                     dose // correto devolver ml? Tentar devolver na unidade de vol_med
                 )
@@ -38,11 +38,11 @@ pub fn calcular_dose(
                     Massa::Mg(valor) => Massa::Mg(Float(&massa_paciente.valor() * valor.0)),
                     _ => todo!(),
                 };
-                let dosagem = match dose {
-                    Massa::Mg(mass) => mass.0,
-                    _ => todo!(),
-                };
-                let gotas = valor.valor() / dosagem;
+                // let dosagem = match dose {
+                //     Massa::Mg(mass) => mass.0,
+                //     _ => todo!(),
+                // };
+                let gotas = dose.valor() / valor.valor();
                 format!("Tomar {} gotas diluídas", gotas)
             }
             Apresentacao::DoseAplicacao(Aplicacao::Jato(Massa::Mcg(massa_medicamento))) => {
@@ -71,6 +71,15 @@ pub fn calcular_dose(
                     )
                     // TODO: checkar tipos e unidades
                 }
+                Apresentacao::DoseAplicacao(Aplicacao::Gota(massa_por_gota)) => {
+                    let gotas = match massa_por_gota {
+                        Massa::Mcg(m_gota) => qtde.valor() / (m_gota.0) / 1000.0,
+                        Massa::Kg(m_gota) => 0.0,
+                        Massa::Mg(m_gota) => qtde.valor() / m_gota.0,
+                        Massa::G(m_gota) => qtde.valor() / 1000.0 * m_gota.0,
+                    };
+                    format!("{:.0} gota(s)", gotas)
+                }
                 _ => todo!(),
             };
             format!(
@@ -81,19 +90,20 @@ pub fn calcular_dose(
                 duracao
             )
         }
-        Posologia::GotaKg(gotas) => {
-            let dose = *gotas as f32 * massa_paciente.valor();
-            let mut plural = "";
-            if dose > 1.0 {
-                plural = "s"
-            }
-            format!("Tomar {} gota{}", dose, plural) // errado...
-        }
+        // Posologia::GotaKg(gotas) => {
+        //     let dose = *gotas as f32 * massa_paciente.valor();
+        //     let mut plural = "";
+        //     if dose > 1.0 {
+        //         plural = "s"
+        //     }
+        //     format!("Tomar {} gota{}", dose, plural) // errado...
+        // }
         Posologia::DoseUnica(dose, via) => match via {
             Via::Oral => match apresentacao {
                 _ => format!("Tomar {} uma única vez.", dose),
             },
             Via::Intravenosa => format!("Fazer {} uma única vez.", dose),
+            Via::Intramuscular => format!("Injetar {} em músculo vascularizado uma vez.", dose),
             Via::Inalatoria => match apresentacao {
                 Apresentacao::DoseVolume(massa, volume) => {
                     let vol = match volume {
