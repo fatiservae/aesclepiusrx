@@ -1,4 +1,6 @@
-//use serde::{Deserialize, Serialize};
+// Licence at the end.
+
+// use serde::{Deserialize, Serialize};
 #![warn(clippy::all, rust_2018_idioms)]
 
 mod app;
@@ -537,3 +539,11 @@ pub enum TipoCapitalizacao {
 pub trait Capitalizar {
     fn capitalizar(&self, tipo: TipoCapitalizacao) -> String;
 }
+
+// AesclepiusRx  Copyright (C) 2025  Jefferson T.
+// Under Gnu General Licence 3.0 for ever.
+// Any part of this program is and always have to be under the conditions of the LICENCE.txt
+// file under the same repository.
+// This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+// This is free software, and you are welcome to redistribute it
+// under certain conditions; type `show c' for details.
