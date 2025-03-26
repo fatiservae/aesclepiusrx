@@ -4,7 +4,10 @@
 mod app;
 mod calc;
 mod data;
-pub use data::BULARIO;
+pub use {
+    data::BULARIO,
+    std::ops::{Add, Div, Mul, Sub},
+};
 
 //#[derive(Serialize, Deserialize)]
 pub struct Instancia {
@@ -37,37 +40,36 @@ impl Default for Instancia {
             apresentacao_selecionada: Apresentacao::DoseVolume(
                 Massa::Mg(Float(0.0)),
                 Volume::Ml(Float(0.0)),
+                TipoApresentacao::Ampola,
+                NomesComerciais(&["Marca do medicamento"]),
             ),
             medicamento_selecionado: Medicamento {
                 nome: "medicamento",
-                nome_comercial: None,
                 apresentacoes: &[Apresentacao::DoseVolume(
                     Massa::Mg(Float(0.0)),
                     Volume::Ml(Float(0.0)),
+                    TipoApresentacao::Ampola,
+                    NomesComerciais(&["Marca do medicamento"]),
                 )],
                 posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral)],
                 advertencias: None,
             },
             posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral),
-            prescricao: "Medicamento 0g/ml ..... 0ml".to_string(),
+            prescricao: "Medicamento X a 0g/ml ..... 0ml".to_string(),
         }
     }
 }
-
-const TOLERANCE: f32 = 1e-6;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Idade {
     tipo: IdadeTipo,
     valor: i32,
 }
-
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Copy)]
 enum IdadeTipo {
     Meses,
     Anos,
 }
-
 impl std::fmt::Display for IdadeTipo {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -76,33 +78,47 @@ impl std::fmt::Display for IdadeTipo {
         }
     }
 }
-
 impl Idade {
-    // fn valor(&self) -> i32 {
-    //     format!("{}", self.idade.valor)
-    // }
-    fn tipo(&self) -> &'static str {
+    fn normalizar(&self) -> Self {
         match self.tipo {
-            IdadeTipo::Meses => "meses",
-            IdadeTipo::Anos => "anos",
+            IdadeTipo::Meses => Idade {
+                tipo: IdadeTipo::Meses,
+                valor: self.valor,
+            },
+            IdadeTipo::Anos => Idade {
+                tipo: IdadeTipo::Meses,
+                valor: self.valor * 12,
+            },
+        }
+    }
+    fn meses(&self) -> i32 {
+        self.normalizar().valor
+    }
+    fn anos(&self) -> i32 {
+        match self.tipo {
+            IdadeTipo::Meses => self.valor / 12,
+            IdadeTipo::Anos => self.valor,
         }
     }
 }
 impl std::fmt::Display for Idade {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{} {}", self.valor, self.tipo())
+        write!(f, "{} {}", self.valor, self.tipo)
     }
 }
 
 #[derive(Debug, Clone, Copy)]
 pub struct Float(pub f32);
-
 impl std::fmt::Display for Float {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.0)
     }
 }
-
+const TOLERANCE: f32 = 1e-6;
+/// O tipo fundamental `f32` foi insuficiente para lidar com as diferentes
+/// formas de cálculo. Por isso, `PartialEq` e `Eq` precisaram ser derivados
+/// para Float(), uma vez que `egui` necessita fazer comparações quando
+/// chama `update()`.
 impl std::cmp::PartialEq for Float {
     fn eq(&self, other: &Self) -> bool {
         (self.0 - other.0).abs() < TOLERANCE
@@ -111,51 +127,147 @@ impl std::cmp::PartialEq for Float {
         (self.0 - other.0).abs() >= TOLERANCE
     }
 }
-
 // Implementação de Eq (vazia, pois depende de PartialEq)
 impl std::cmp::Eq for Float {}
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub struct Medicamento {
     pub nome: &'static str,
-    pub nome_comercial: Option<&'static str>,
     pub apresentacoes: &'static [Apresentacao],
     pub posologias: &'static [Posologia],
     pub advertencias: Option<&'static [&'static str]>,
 }
-
 impl std::fmt::Display for Medicamento {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self.nome_comercial {
-            Some(nome_comercial) => write!(
-                f,
-                "{}: {}",
-                nome_comercial.to_string(),
-                self.nome.to_string()
-            ),
-            None => write!(f, "{}", self.nome.to_string()),
-        }
+        write!(f, "{}", self.nome.to_string())
     }
 }
-//#[derive(Serialize, Deserialize)]
+
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Apresentacao {
-    DoseVolume(Massa, Volume), // (dose, volume, unidade)
-    DoseAplicacao(Aplicacao),
+    DoseVolume(Massa, Volume, TipoApresentacao, NomesComerciais), // (dose, volume, unidade)
+    DoseCompostaVolume(&'static [Massa], Volume, TipoApresentacao, NomesComerciais),
+    DoseAplicacao(Aplicacao, TipoApresentacao, NomesComerciais),
 }
-
 impl std::fmt::Display for Apresentacao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Apresentacao::DoseVolume(massa, volume) => {
-                write!(f, "{} a cada {}", massa, volume)
+            Apresentacao::DoseVolume(massa, volume, tipo, nomes_comerciais) => {
+                write!(
+                    f,
+                    "{} com {} a cada {}",
+                    tipo.capitalizar(TipoCapitalizacao::Primeira),
+                    massa,
+                    volume
+                )
             }
-            Apresentacao::DoseAplicacao(aplicacao) => match aplicacao {
-                Aplicacao::Comprimido(valor) => write!(f, "{} a cada comprimido", valor),
-                Aplicacao::Jato(valor) => write!(f, "{} a cada jato", valor),
-                Aplicacao::Gota(valor) => write!(f, "{} a cada gota", valor),
-                Aplicacao::Microgota(valor) => write!(f, "{} a cada microgota", valor),
+            Apresentacao::DoseCompostaVolume(quantidades, volume, tipo, nomes_comerciais) => {
+                let mut dose_apres: String = String::new();
+                for (index, quantidade) in quantidades.into_iter().enumerate() {
+                    if index > 0 {
+                        dose_apres.push_str(&format!("+{}", quantidade));
+                    } else {
+                        dose_apres = format!("{}", quantidade)
+                    }
+                }
+                write!(
+                    f,
+                    "{} com {} a cada {}",
+                    tipo.capitalizar(TipoCapitalizacao::Primeira),
+                    dose_apres,
+                    volume
+                )
+            }
+            Apresentacao::DoseAplicacao(aplicacao, tipo, nomes_comerciais) => match aplicacao {
+                Aplicacao::Comprimido(valor) => {
+                    write!(
+                        f,
+                        "{} com {} a cada comprimido",
+                        tipo.capitalizar(TipoCapitalizacao::Primeira),
+                        valor
+                    )
+                }
+                Aplicacao::Jato(valor) => write!(
+                    f,
+                    "{} com {} a cada jato",
+                    tipo.capitalizar(TipoCapitalizacao::Primeira),
+                    valor
+                ),
+                Aplicacao::Gota(valor) => write!(
+                    f,
+                    "{} com {} a cada gota",
+                    tipo.capitalizar(TipoCapitalizacao::Primeira),
+                    valor
+                ),
+                Aplicacao::Microgota(valor) => write!(
+                    f,
+                    "{} com {} a cada microgota",
+                    tipo.capitalizar(TipoCapitalizacao::Primeira),
+                    valor
+                ),
             },
+        }
+    }
+}
+
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub struct NomesComerciais(&'static [&'static str]);
+
+impl std::fmt::Display for NomesComerciais {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}",
+            self.0.iter().fold(String::new(), |acc, &s| acc + s)
+        )
+    }
+}
+
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub enum TipoApresentacao {
+    Ampola,
+    Frasco,
+    Comprimido,
+    Spray,
+    Capsula,
+    Draguea,
+    Bisnaga,
+    Gel,
+    PoReconstituivel,
+    Pastilha,
+    ComprimidoMastigavel,
+    ComprimidoSublingual,
+    Patch,
+    Shampoo,
+    Pomada,
+    Gas,
+    Solucao,
+}
+
+impl Capitalizar for TipoApresentacao {
+    fn capitalizar(&self, tipo: TipoCapitalizacao) -> String {
+        match tipo {
+            TipoCapitalizacao::Primeira => {
+                let mut chars = format!("{}", self);
+                match chars.chars().next() {
+                    None => String::new(),
+                    Some(first) => first.to_uppercase().collect::<String>() + &chars.as_str()[1..],
+                }
+            }
+            TipoCapitalizacao::Todas => todo!(),
+        }
+    }
+}
+
+impl std::fmt::Display for TipoApresentacao {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            TipoApresentacao::Ampola => write!(f, "ampolas"),
+            TipoApresentacao::Frasco => write!(f, "frascos"),
+            TipoApresentacao::Comprimido => write!(f, "comprimidos"),
+            TipoApresentacao::Draguea => write!(f, "drágueas"),
+            TipoApresentacao::Spray => write!(f, "spray"),
+            _ => todo!(),
         }
     }
 }
@@ -376,7 +488,7 @@ pub enum Via {
     Inalatoria,
 }
 impl Capitalizar for Via {
-    fn capitalizar(self, tipo: TipoCapitalizacao) -> String {
+    fn capitalizar(&self, tipo: TipoCapitalizacao) -> String {
         match tipo {
             TipoCapitalizacao::Primeira => {
                 let mut chars = format!("{}", self);
@@ -407,6 +519,7 @@ pub enum TipoCapitalizacao {
     Todas,
 }
 
+/// Improviso? Criar uma macro derive para cobrir tipos futuros? Não sei...
 pub trait Capitalizar {
-    fn capitalizar(self, tipo: TipoCapitalizacao) -> String;
+    fn capitalizar(&self, tipo: TipoCapitalizacao) -> String;
 }

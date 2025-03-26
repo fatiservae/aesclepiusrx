@@ -1,10 +1,10 @@
 //use serde::{Deserialize, Serialize};
 
 use crate::{
-    calc::calcular_dose, data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
+    /*calc::calcular_dose,*/ data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
     Instancia, Massa, Medicamento, Posologia, Via, Volume,
 };
-use egui::{Slider, TextBuffer, TextEdit, Ui};
+use egui::{FontId, Slider, TextBuffer, TextEdit, TextStyle, Ui};
 
 // fn ui_search_box(ui: &mut Ui, search: &mut impl TextBuffer, options: Vec<&str>, posologias: vec<Posologia>, apresentacoes: Vec<Apresentacoes>) {
 //     ui.add(TextEdit::singleline(search).hint_text("Buscar..."));
@@ -46,10 +46,10 @@ impl eframe::App for Instancia {
         // For inspiration and more examples, go to https://emilk.github.io/egui
 
         egui::Window::new("Paciente")
-            // .default_pos((100.0, 100.0)) // Posição inicial
+            .default_pos((80.0, 80.0))
             // .default_width(80.0)
             // .default_height(80.0)
-            .resizable(true) // Permite redimensionar
+            .resizable(true)
             .show(ctx, |ui| {
                 let mut valor_massa: f32 = self.massa.valor();
                 ui.horizontal(|ui| {
@@ -60,10 +60,7 @@ impl eframe::App for Instancia {
                             .fixed_decimals(1),
                     );
 
-                    // ui.text_edit_singleline(&mut valor_massa);
-                    // self.massa.update(valor_massa);
                     self.massa = Massa::Kg(Float(valor_massa));
-                    // ui.label(format!("{}", self.massa));
                 });
 
                 ui.horizontal(|ui| {
@@ -87,7 +84,39 @@ impl eframe::App for Instancia {
                 });
             });
 
+        egui::Window::new("Prescrição")
+            .default_pos((100.5, 100.5))
+            .default_width(200.0)
+            // .default_height(88.0)
+            .resizable(true)
+            .show(ctx, |ui| {
+                let texto = format!(
+                    "{}\n{}\n{}",
+                    self.medicamento_selecionado,
+                    self.apresentacao_selecionada,
+                    "testes" // calcular_dose(
+                             //     self.idade.clone(),
+                             //     self.massa,
+                             //     &self.posologia_selecionada,
+                             //     &self.apresentacao_selecionada,
+                             // )
+                );
+                ui.label(&texto);
+
+                if ui.button("Copiar").clicked() {
+                    ui.output_mut(|o| o.copied_text = texto.clone());
+                }
+
+                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
+                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
+                // ui.label(format!(
+                //     "\n\nVia oral\n{}{}{}",
+                //     self.medicamento_selecionado.nome, fill, "1 frasco"
+                // ));
+                // });
+            });
         egui::Window::new("Medicamento")
+            .default_pos((200.5, 100.5))
             // .default_pos((100.5, 100.5))
             // .default_width(88.0)
             // .default_height(88.0)
@@ -191,37 +220,18 @@ impl eframe::App for Instancia {
                         }
                     });
                     ui.add_space(16.0);
-                }
+                };
 
-                egui::widgets::global_theme_preference_buttons(ui);
+         ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
+
+         egui::widgets::global_theme_preference_buttons(ui);
             });
         });
 
-        egui::SidePanel::left("my_left_panel").default_width(200.0).show(ctx, |ui| {
-            ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
-        });
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.heading("Prescrição\n\n");
-            ui.label(format!(
-                "{}\n{}",
-                self.medicamento_selecionado, self.apresentacao_selecionada
-            ));
-            ui.horizontal(|ui| {
-                // ui.label(&self.nome);
-                ui.label(calcular_dose(
-                    self.idade.clone(),
-                    self.massa,
-                    &self.posologia_selecionada,
-                    &self.apresentacao_selecionada,
-                ));
-                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
-                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
-                // ui.label(format!(
-                //     "\n\nVia oral\n{}{}{}",
-                //     self.medicamento_selecionado.nome, fill, "1 frasco"
-                // ));
-            });
-        });
+        egui::SidePanel::left("my_left_panel")
+            .default_width(100.0)
+            .show(ctx, |ui| {});
+        egui::CentralPanel::default().show(ctx, |ui| {});
         // egui::CentralPanel::default().show(ctx, |ui| {
         //     // The central panel the region left after adding TopPanel's and SidePanel's
 
