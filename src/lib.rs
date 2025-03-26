@@ -143,6 +143,11 @@ impl std::fmt::Display for Medicamento {
     }
 }
 
+/// A apresentação do medicamento é o motivo de `asclepiusrx`! Descrever,
+/// com máxima segurança de tipos, as formas dos medicamentos na vida
+/// real é a parte mais essencial desta `lib`. Os cálculos, as `impl` e
+/// todas as funções devem operar com unidades padrões, definidas no
+/// manifesto.
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Apresentacao {
     DoseVolume(Massa, Volume, TipoApresentacao, NomesComerciais), // (dose, volume, unidade)
@@ -212,7 +217,6 @@ impl std::fmt::Display for Apresentacao {
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub struct NomesComerciais(&'static [&'static str]);
-
 impl std::fmt::Display for NomesComerciais {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
@@ -278,20 +282,24 @@ pub enum Volume {
     L(Float),
     Dl(Float),
 }
-
 impl Volume {
+    /// entrega o valor em `mL`
     fn valor(self) -> f32 {
         match self {
-            Volume::Ml(valor) | Volume::L(valor) | Volume::Dl(valor) => valor.0,
+            Volume::Ml(valor) =>  valor.0,
+            Volume::L(valor) | Volume::Dl(valor) => valor.0 * 1000.0,
+            Volume::DL(valor) => valor.0 * 100.0,
         }
     }
-    fn tipo(self) -> &'static str {
+    /// escreve em `&'static str` a unidade do volume
+    fn unidade(self) -> &'static str {
         match self {
             Volume::Ml(_) => "mL",
             Volume::L(_) => "L",
             Volume::Dl(_) => "dL",
         }
     }
+    /// Devolve o tipo `Volume` em `mL`, independente do seu tipo original
     pub fn normalizar(&self) -> Self {
         match self {
             Volume::Ml(valor) => Volume::Ml(Float(valor.0)),
@@ -300,7 +308,7 @@ impl Volume {
         }
     }
 }
-
+/// Permite uso idiomático do tipo
 impl std::fmt::Display for Volume {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -308,6 +316,12 @@ impl std::fmt::Display for Volume {
             Volume::L(valor) => write!(f, "{}L", valor),
             Volume::Dl(valor) => write!(f, "{}dL", valor),
         }
+    }
+}
+impl Mul for <T>{
+    type Output = Volume;
+    fn mul(self, rhs: &Volume) -> Self::Output {
+        Volume::Ml(Float(self.valor * rhs.valor))
     }
 }
 
