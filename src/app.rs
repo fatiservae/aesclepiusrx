@@ -94,12 +94,12 @@ impl eframe::App for Instancia {
                     "{}\n{}\n{}",
                     self.medicamento_selecionado,
                     self.apresentacao_selecionada,
-                    "testes" // calcular_dose(
-                             //     self.idade.clone(),
-                             //     self.massa,
-                             //     &self.posologia_selecionada,
-                             //     &self.apresentacao_selecionada,
-                             // )
+                    "DESATIVADO PARA TESTES" // calcular_dose(
+                                             //     self.idade.clone(),
+                                             //     self.massa,
+                                             //     &self.posologia_selecionada,
+                                             //     &self.apresentacao_selecionada,
+                                             // )
                 );
                 ui.label(&texto);
 
@@ -180,36 +180,9 @@ impl eframe::App for Instancia {
                             );
                         }
                     });
-                // if egui::Button::new("Prescreva!")).clicked() {
-                //     match
-                // }
             });
 
-        // let apresentacao_text: String = match apresentacao {
-        //     &Apresentacao::DoseVolume(
-        //         dose,
-        //         volume,
-        //         unidade,
-        //     ) => format!("{}{}/{}", dose, unidade, volume),
-        //     Apresentacao::DoseAplicacao(dose, aplicacao) => {
-        //         format!("{} por {:?}", dose, aplicacao)
-        //     }
-        // };
-        // if self.visible {
-        //     let _ = egui::Area::new("popup".into())
-        //         .movable(true)
-        //         .show(ctx, |ui| {
-        //             ui.heading("Popup Flutuante");
-        //             ui.label("Este é um exemplo de área flutuante.");
-        //             if ui.button("Fechar").clicked() {
-        //                 self.visible = false;
-        //             }
-        //         });
-        // };
-
         egui::TopBottomPanel::bottom("top_panel").show(ctx, |ui| {
-            // The top panel is often a good place for a menu bar:
-
             egui::menu::bar(ui, |ui| {
                 // NOTE: no File->Quit on web pages!
                 let is_web = cfg!(target_arch = "wasm32");
@@ -232,53 +205,12 @@ impl eframe::App for Instancia {
             .default_width(100.0)
             .show(ctx, |ui| {});
         egui::CentralPanel::default().show(ctx, |ui| {});
-        // egui::CentralPanel::default().show(ctx, |ui| {
-        //     // The central panel the region left after adding TopPanel's and SidePanel's
-
-        //     ui.add(egui::Slider::new(&mut self.idade, 0..=100).text("Idade"));
-        //     if ui.button("Incrementar 1 ano").clicked() {
-        //         self.idade += 1;
-        //     };
-
-        //     ui.add(egui::Slider::new(&mut self.massa, 1.0..=200.0).text("Massa"));
-
-        //     egui::ComboBox::from_label("Escolha uma apresentação")
-        //         .selected_text(&self.medicamento_selecionado)
-        //         // Adiciona as opções ao menu
-        //         .show_ui(ui, |ui: &mut egui::Ui| {
-        //             ui.selectable_value(
-        //                 &mut self.medicamento_selecionado,
-        //                 "mg/dL".to_string(),
-        //                 "mg/dL",
-        //             );
-        //             ui.selectable_value(
-        //                 &mut self.medicamento_selecionado,
-        //                 "mg/Kg".to_string(),
-        //                 "mg/Kg",
-        //             );
-        //             ui.selectable_value(&mut self.medicamento_selecionado, "mg".to_string(), "mg");
-        //         });
-
-        // for item in &self.apresentacoes {
-        //             ui.selectable_value(
-        //                 &mut self.medicamento_selecionado, // Referência mutável ao item selecionado
-        //                 item.clone(),            // Valor a ser definido se selecionado
-        //                 item,                    // Texto exibido
-        //             );
-        //         }
-
-        //         ui.separator();
-
-        //         ui.with_layout(egui::Layout::bottom_up(egui::Align::LEFT), |ui| {
-        //             powered_by_egui_and_eframe(ui);
-        //             egui::warn_if_debug_build(ui);
-        //         });
-        //     });
     }
 }
 
 fn powered_by_egui_and_eframe(ui: &mut egui::Ui) {
     ui.horizontal(|ui| {
+        ui.label("Este software não substitui o julgamento médico sobre a administração, uso, suspensão, recomendação, aplicação, medida, comparação e dispensação de quaisquer drogas ou medicamentos.");
         ui.spacing_mut().item_spacing.x = 0.0;
         ui.hyperlink_to(
             "Um projeto de Jefferson T.",

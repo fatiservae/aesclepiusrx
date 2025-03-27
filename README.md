@@ -2,7 +2,7 @@
 O prescritor padrão de [Asclepius](https://aesclepius.com.br)!
 
 ## Sobre
-O projeto AesclepiusRx oferece uma forma de prescrição de medicações segura, eliminando a necssidade de cálculos por parte do médico.
+O projeto AesclepiusRx oferece uma forma de prescrição de medicações segura, eliminando a necessidade de cálculos por parte do médico.
 
 O desenvolvimento se baseia na definição de tipos sólidos em Rust, segurança na conversão de unidades e na comparação de valores. Exemplo simples:
 ```rust

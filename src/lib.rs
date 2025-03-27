@@ -29,7 +29,6 @@ pub struct Instancia {
 impl Default for Instancia {
     fn default() -> Self {
         Self {
-            // Example stuff:
             search: String::new(),
             options: vec!["Pequi", "maça", "outra"],
             visible: true,
@@ -288,9 +287,9 @@ impl Volume {
     /// entrega o valor em `mL`
     fn valor(self) -> f32 {
         match self {
-            Volume::Ml(valor) =>  valor.0,
+            Volume::Ml(valor) => valor.0,
             Volume::L(valor) | Volume::Dl(valor) => valor.0 * 1000.0,
-            Volume::DL(valor) => valor.0 * 100.0,
+            Volume::Dl(valor) => valor.0 * 100.0,
         }
     }
     /// escreve em `&'static str` a unidade do volume
@@ -320,10 +319,92 @@ impl std::fmt::Display for Volume {
         }
     }
 }
-impl Mul for <T>{
+
+impl Mul for &Volume {
     type Output = Volume;
     fn mul(self, rhs: &Volume) -> Self::Output {
-        Volume::Ml(Float(self.valor * rhs.valor))
+        let vol1 = match self {
+            Volume::Ml(valor) => valor.0,
+            _ => todo!(),
+        };
+        let vol2 = match rhs {
+            Volume::Ml(valor) => valor.0,
+            _ => todo!(),
+        };
+        Volume::Ml(Float(vol1 * vol2))
+    }
+}
+
+impl Mul<Volume> for &Massa {
+    type Output = f32;
+    fn mul(self, rhs: Volume) -> Self::Output {
+        let volume = match rhs {
+            Volume::Ml(valor) => valor.0,
+            _ => todo!(),
+        };
+        let massa = match self {
+            Massa::Mg(valor) => valor.0,
+            _ => todo!(),
+        };
+        massa * volume
+    }
+}
+
+impl Mul<Massa> for &Volume {
+    type Output = f32;
+    fn mul(self, rhs: Massa) -> Self::Output {
+        let rhs_valor = match rhs {
+            Massa::Mg(valor) => valor.0,
+            _ => todo!(),
+        };
+        match self {
+            Volume::Ml(valor) => valor.0 * rhs_valor,
+            _ => todo!(),
+        }
+    }
+}
+
+impl Mul<f32> for &Massa {
+    type Output = f32;
+    fn mul(self, rhs: f32) -> Self::Output {
+        let massa = match self {
+            Massa::G(valor) => valor.0,
+            _ => todo!(),
+        };
+        self * massa
+    }
+}
+
+impl Mul<Massa> for f32 {
+    type Output = f32;
+    fn mul(self, rhs: Massa) -> Self::Output {
+        let massa = match rhs {
+            Massa::Mg(valor) => valor.0,
+            _ => todo!(),
+        };
+        assert!(32.0 * Massa::Mg(Float(2.0)) == 64.0);
+        self * massa
+    }
+}
+impl Mul<Volume> for f32 {
+    type Output = f32;
+    fn mul(self, rhs: Volume) -> Self::Output {
+        let volume = match rhs {
+            Volume::Ml(valor) => valor.0,
+            _ => todo!(),
+        };
+        assert!(32.0 * Volume::Ml(Float(2.0)) == 64.0);
+        self * volume
+    }
+}
+impl Mul<f32> for &Volume {
+    type Output = f32;
+    fn mul(self, rhs: f32) -> Self::Output {
+        let volume = match self {
+            Volume::Ml(valor) => valor.0,
+            _ => todo!(),
+        };
+        self * volume
     }
 }
 
@@ -380,7 +461,11 @@ impl std::fmt::Display for Massa {
     }
 }
 
-/// Tempo normalmente descrito entre doses da apresentação padrão. Ex.: Amoxicilina 50mg/Kgdia significa que o intervalo da medicação é `dia` e a dose de 50mg/Kg. Porém, este remédio pode ser administrado de 8/8h, tornando a frequência de administrações muito maior que o intervalo.
+/// Tempo normalmente descrito entre doses da apresentação padrão.
+/// Ex.: Amoxicilina 50mg/Kgdia significa que o intervalo da medicação
+/// é `dia` e a dose de `50mg/Kg`. Porém, este remédio pode ser
+/// administrado de 8/8h, tornando a frequência de administrações
+/// muito maior que o intervalo.
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Intervalo {
     Minuto,
