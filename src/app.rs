@@ -1,7 +1,7 @@
 //use serde::{Deserialize, Serialize};
 
 use crate::{
-    /*calc::calcular_dose,*/ data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
+    calc::calcular_dose, data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
     Instancia, Massa, Medicamento, Posologia, Via, Volume,
 };
 use egui::{FontId, Slider, TextBuffer, TextEdit, TextStyle, Ui};
@@ -94,12 +94,13 @@ impl eframe::App for Instancia {
                     "{}\n{}\n{}",
                     self.medicamento_selecionado,
                     self.apresentacao_selecionada,
-                    "DESATIVADO PARA TESTES" // calcular_dose(
-                                             //     self.idade.clone(),
-                                             //     self.massa,
-                                             //     &self.posologia_selecionada,
-                                             //     &self.apresentacao_selecionada,
-                                             // )
+                    // "DESATIVADO PARA TESTES"
+                    calcular_dose(
+                        self.idade.clone(),
+                        self.massa,
+                        &self.posologia_selecionada,
+                        &self.apresentacao_selecionada,
+                    )
                 );
                 ui.label(&texto);
 
