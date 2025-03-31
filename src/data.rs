@@ -12,14 +12,14 @@ pub const BULARIO: &'static [Medicamento] = &[
             NomesComerciais(&["novalgina", "dipimax"]),
         )],
         posologias: &[
-            Posologia::DoseKgIntervaloDuracao(
+            Posologia::MgKgIntervaloDuracao(
                 Via::Oral,
-                Massa::Mg(Float(25.0)),
+                Massa::Mg(Float(25.0)), // rever essa dose, esta é a MgKg... a diária é bem maior!
                 Intervalo::Dia,
                 Duracao::Dia(7),
                 Frequencia::Horas(6),
             ),
-            Posologia::DoseKg(Via::Oral, Massa::Mg(Float(25.0))),
+            Posologia::MgKg(Via::Oral, Massa::Mg(Float(25.0))),
         ],
         advertencias: None,
     },
@@ -31,7 +31,7 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Frasco,
             NomesComerciais(&["AMCLAVU BD"]),
         )],
-        posologias: &[Posologia::DoseKgIntervaloDuracao(
+        posologias: &[Posologia::MgKgIntervaloDuracao(
             Via::Oral,
             Massa::Mg(Float(50.0)),
             Intervalo::Dia,
@@ -48,7 +48,7 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Frasco,
             NomesComerciais(&["AMCLAVU BD"]),
         )],
-        posologias: &[Posologia::DoseKgIntervaloDuracao(
+        posologias: &[Posologia::MgKgIntervaloDuracao(
             Via::Oral,
             Massa::Mg(Float(50.0)),
             Intervalo::Dia,
@@ -57,36 +57,36 @@ pub const BULARIO: &'static [Medicamento] = &[
         )],
         advertencias: None,
     },
-    Medicamento {
-        nome: "Penicilina",
-        apresentacoes: &[Apresentacao::DoseVolume(
-            Massa::Mg(Float(100.0)),
-            Volume::Ml(Float(1.0)),
-            TipoApresentacao::Ampola,
-            NomesComerciais(&["Benzetacil"]),
-        )],
-        posologias: &[Posologia::DoseKgIntervaloDuracao(
-            Via::Oral,
-            Massa::Mg(Float(32.0)),
-            Intervalo::Dia,
-            Duracao::Dia(5),
-            Frequencia::Horas(6),
-        )],
-        advertencias: None,
-    },
-    Medicamento {
-        nome: "Salbutamol",
-        apresentacoes: &[Apresentacao::DoseAplicacao(
-            Aplicacao::Jato(Massa::Mcg(Float(100.0))),
-            TipoApresentacao::Spray,
-            NomesComerciais(&["Aerolin"]),
-        )],
-        posologias: &[Posologia::DoseUnica(
-            Massa::Mg(Float(800.0)),
-            Via::Inalatoria,
-        )],
-        advertencias: None,
-    },
+    // Medicamento {
+    //     nome: "Penicilina",
+    //     apresentacoes: &[Apresentacao::DoseVolume(
+    //         Massa::Mg(Float(100.0)),
+    //         Volume::Ml(Float(1.0)),
+    //         TipoApresentacao::Ampola,
+    //         NomesComerciais(&["Benzetacil"]),
+    //     )],
+    //     posologias: &[Posologia::MgKgIntervaloDuracao(
+    //         Via::Oral,
+    //         Massa::Mg(Float(32.0)),
+    //         Intervalo::Dia,
+    //         Duracao::Dia(5),
+    //         Frequencia::Horas(6),
+    //     )],
+    //     advertencias: None,
+    // },
+    // Medicamento {
+    //     nome: "Salbutamol",
+    //     apresentacoes: &[Apresentacao::DoseAplicacao(
+    //         Aplicacao::Jato(Massa::Mcg(Float(100.0))),
+    //         TipoApresentacao::Spray,
+    //         NomesComerciais(&["Aerolin"]),
+    //     )],
+    //     posologias: &[Posologia::DoseUnica(
+    //         Massa::Mg(Float(800.0)),
+    //         Via::Inalatoria,
+    //     )],
+    //     advertencias: None,
+    // },
     Medicamento {
         nome: "Azitromicina",
         apresentacoes: &[Apresentacao::DoseVolume(
@@ -96,14 +96,14 @@ pub const BULARIO: &'static [Medicamento] = &[
             NomesComerciais(&["Astro"]),
         )],
         posologias: &[
-            Posologia::DoseKgIntervaloDuracao(
+            Posologia::MgKgIntervaloDuracao(
                 Via::Oral,
                 Massa::Mg(Float(10.0)),
                 Intervalo::Dia,
                 Duracao::Dia(5),
                 Frequencia::Horas(24),
             ),
-            Posologia::DoseKgIntervaloDuracao(
+            Posologia::MgKgIntervaloDuracao(
                 Via::Oral,
                 Massa::Mg(Float(20.0)),
                 Intervalo::Dia,
@@ -135,7 +135,7 @@ pub const BULARIO: &'static [Medicamento] = &[
                 NomesComerciais(&["Dormonid"]),
             ),
         ],
-        posologias: &[Posologia::DoseKg(Via::Intramuscular, Massa::Mg(Float(0.2)))],
+        posologias: &[Posologia::MgKg(Via::Intramuscular, Massa::Mg(Float(0.2)))],
         advertencias: None,
     },
     Medicamento {
@@ -146,7 +146,7 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Ampola,
             NomesComerciais(&[]),
         )],
-        posologias: &[Posologia::DoseKg(Via::Intramuscular, Massa::Mg(Float(0.5)))],
+        posologias: &[Posologia::MgKg(Via::Intramuscular, Massa::Mg(Float(0.5)))],
         advertencias: None,
     },
     Medicamento {
@@ -156,7 +156,47 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Frasco,
             NomesComerciais(&["Alivium"]),
         )],
-        posologias: &[Posologia::DoseKg(Via::Oral, Massa::Mg(Float(5.0)))],
+        posologias: &[Posologia::MgKg(Via::Oral, Massa::Mg(Float(5.0)))],
         advertencias: None,
+    },
+    Medicamento {
+        nome: "Etomidato",
+        apresentacoes: &[Apresentacao::DoseVolume(
+            Massa::Mg(Float(2.0)),
+            Volume::Ml(Float(10.0)),
+            TipoApresentacao::Ampola,
+            NomesComerciais(&[]),
+        )],
+        posologias: &[Posologia::MgKg(Via::Intravenosa, Massa::Mg(Float(0.3)))],
+        advertencias: Some(&[
+            "Sempre diluir e bolus em velocidade estável, evitar lentamente ou muito rapidamente.",
+        ]),
+    },
+    Medicamento {
+        nome: "Cetamina",
+        apresentacoes: &[
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(50.0)),
+                Volume::Ml(Float(2.0)),
+                TipoApresentacao::Ampola,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(50.0)),
+                Volume::Ml(Float(5.0)),
+                TipoApresentacao::Ampola,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(50.0)),
+                Volume::Ml(Float(10.0)),
+                TipoApresentacao::Ampola,
+                NomesComerciais(&[]),
+            ),
+        ],
+        posologias: &[Posologia::MgKg(Via::Intravenosa, Massa::Mg(Float(1.5)))],
+        advertencias: Some(&[
+            "Devido a manutenção do tônus, usar sempre um bloqueador neuromuscular.",
+        ]),
     },
 ];

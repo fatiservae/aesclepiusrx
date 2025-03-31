@@ -86,7 +86,7 @@ pub struct Idade {
     valor: i32,
 }
 impl Idade {
-    fn normalizar(&self) -> Self {
+    fn em_meses(&self) -> Self {
         match self.tipo {
             IdadeTipo::Meses => Idade {
                 tipo: IdadeTipo::Meses,
@@ -98,10 +98,7 @@ impl Idade {
             },
         }
     }
-    fn meses(&self) -> i32 {
-        self.normalizar().valor
-    }
-    fn anos(&self) -> i32 {
+    fn em_anos(&self) -> i32 {
         match self.tipo {
             IdadeTipo::Meses => self.valor / 12,
             IdadeTipo::Anos => self.valor,
@@ -279,7 +276,18 @@ impl std::fmt::Display for TipoApresentacao {
             TipoApresentacao::Comprimido => write!(f, "comprimidos"),
             TipoApresentacao::Draguea => write!(f, "drágueas"),
             TipoApresentacao::Spray => write!(f, "spray"),
-            _ => todo!(),
+            TipoApresentacao::Capsula => write!(f, "cápsulas"),
+            TipoApresentacao::Bisnaga => write!(f, "bisnagas"),
+            TipoApresentacao::Gel => write!(f, "gel"),
+            TipoApresentacao::PoReconstituivel => write!(f, "pó reconstituível"),
+            TipoApresentacao::Pastilha => write!(f, "pastilhas"),
+            TipoApresentacao::ComprimidoSublingual => write!(f, "comprimidos sublinguais"),
+            TipoApresentacao::ComprimidoMastigavel => write!(f, "comprimidos mastigáveis"),
+            TipoApresentacao::Patch => write!(f, "patches"),
+            TipoApresentacao::Shampoo => write!(f, "shampoo"),
+            TipoApresentacao::Pomada => write!(f, "pomada"),
+            TipoApresentacao::Gas => write!(f, "gas inalável"),
+            TipoApresentacao::Solucao => write!(f, "solução"),
         }
     }
 }
@@ -309,7 +317,7 @@ impl Volume {
         }
     }
     /// Devolve o tipo `Volume` em `mL`, independente do seu tipo original
-    pub fn normalizar(&self) -> Self {
+    pub fn em_ml(&self) -> Self {
         match self {
             Volume::Ml(valor) => Volume::Ml(Float(valor.0)),
             Volume::L(valor) => Volume::Ml(Float(valor.0 * 1000.0)),
@@ -359,12 +367,22 @@ impl Massa {
         }
     }
 
-    pub fn normalizar(&self) -> Self {
+    // /// Devolve o tipo `Massa` em gramas, idependente de sua unidade original.
+    // pub fn normalizar(&self) -> Self {
+    //     match self {
+    //         Massa::Mg(valor) => Massa::G(Float(valor.0 / 1000.0)),
+    //         Massa::Mcg(valor) => Massa::G(Float(valor.0 / 1000000.0)),
+    //         Massa::Kg(valor) => Massa::G(Float(valor.0 * 1000.0)),
+    //         Massa::G(valor) => Massa::G(Float(valor.0)),
+    //     }
+    // }
+
+    pub fn em_mg(&self) -> Self {
         match self {
-            Massa::Mg(valor) => Massa::Mg(Float(valor.0)),
             Massa::Mcg(valor) => Massa::Mg(Float(valor.0 / 1000.0)),
-            Massa::Kg(valor) => Massa::Mg(Float(valor.0 * 1000000.0)),
+            Massa::Mg(valor) => Massa::Mg(Float(valor.0)),
             Massa::G(valor) => Massa::Mg(Float(valor.0 * 1000.0)),
+            Massa::Kg(valor) => Massa::Mg(Float(valor.0 * 1000000.0)),
         }
     }
 }
@@ -474,8 +492,8 @@ impl std::fmt::Display for Frequencia {
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Posologia {
-    DoseKg(Via, Massa),
-    DoseKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
+    MgKg(Via, Massa),
+    MgKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
     DoseUnica(Massa, Via),
     // TODO: InfusaoContinua,
 }
@@ -483,10 +501,10 @@ pub enum Posologia {
 impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Posologia::DoseKg(via, massa) => {
+            Posologia::MgKg(via, massa) => {
                 write!(f, "{}/Kg {}", massa, via)
             }
-            Posologia::DoseKgIntervaloDuracao(via, massa, intervalo, duracao, frequencia) => {
+            Posologia::MgKgIntervaloDuracao(via, massa, intervalo, duracao, frequencia) => {
                 write!(
                     f,
                     "{}/Kg{} por {} {} {}", // Via:: já completa "via"
@@ -544,115 +562,93 @@ impl Capitalizar for Via {
     }
 }
 
-impl Mul for Volume {
-    type Output = Volume;
-    fn mul(self, rhs: Volume) -> Self::Output {
-        let vol1 = match self {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        let vol2 = match rhs {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        Volume::Ml(Float(vol1 * vol2))
+impl Mul for Massa {
+    type Output = f32;
+    fn mul(self, rhs: Massa) -> Self::Output {
+        let massa1 = self.valor();
+        let massa2 = rhs.valor();
+        // assert!(Massa::Mg(Float(2.0)) * Massa::Mg(Float(32.0)) == 64.0);
+        massa1 * massa2
+    }
+}
+
+impl Div for Massa {
+    type Output = f32;
+    fn div(self, rhs: Self) -> Self::Output {
+        let massa1 = self.valor();
+        let massa2 = rhs.valor();
+        if massa2 < TOLERANCE {
+            0.0 // TODO: melhorar div by zero
+        } else {
+            massa1 / massa2
+        }
     }
 }
 
 impl Mul<Volume> for Massa {
     type Output = f32;
     fn mul(self, rhs: Volume) -> Self::Output {
-        let volume = match rhs {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        let massa = match self {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
+        let volume = rhs.valor();
+        let massa = self.valor();
+        // assert!(Massa::Mg(Float(32.0)) * Volume::Ml(Float(2.0)) == 64.0);
         massa * volume
+    }
+}
+
+impl Mul for Volume {
+    type Output = f32;
+    fn mul(self, rhs: Volume) -> Self::Output {
+        // assert!(Volume::Ml(Float(2.0)) * Volume::Ml(Float(32.0)) == 64.0);
+        self.valor() * rhs.valor()
     }
 }
 
 impl Mul<Massa> for Volume {
     type Output = f32;
     fn mul(self, rhs: Massa) -> Self::Output {
-        let rhs_valor = match rhs {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
-        match self {
-            Volume::Ml(valor) => valor.0 * rhs_valor,
-            _ => todo!(),
-        }
-    }
-}
-
-impl Mul<Massa> for Massa {
-    type Output = Massa;
-    fn mul(self, rhs: Massa) -> Self::Output {
-        let massa1 = self.normalizar();
-        let massa2 = rhs.normalizar();
-        Massa::Mg(Float(massa1.valor() * massa2.valor()))
+        let volume = self.valor();
+        let massa = rhs.valor();
+        // assert!(Volume::Ml(Float(2.0)) * Massa::Mg(Float(32.0)) == 64.0);
+        volume * massa
     }
 }
 
 impl Mul<f32> for Massa {
     type Output = f32;
     fn mul(self, rhs: f32) -> Self::Output {
-        let massa = match self {
-            Massa::G(valor) => valor.0,
-            _ => todo!(),
-        };
-        self * massa
+        // assert!(Massa::Mg(Float(2.0)) * 32.0 == 64.0);
+        self.valor() * rhs
     }
 }
 
 impl Mul<Massa> for f32 {
     type Output = f32;
     fn mul(self, rhs: Massa) -> Self::Output {
-        let massa = match rhs {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
-        assert!(32.0 * Massa::Mg(Float(2.0)) == 64.0);
-        self * massa
+        // assert!(32.0 * Massa::Mg(Float(2.0)) == 64.0);
+        self * rhs
     }
 }
 impl Mul<Volume> for f32 {
     type Output = f32;
     fn mul(self, rhs: Volume) -> Self::Output {
-        let volume = match rhs {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        assert!(32.0 * Volume::Ml(Float(2.0)) == 64.0);
-        self * volume
+        // assert!(32.0 * Volume::Ml(Float(2.0)) == 64.0);
+        self * rhs.valor()
     }
 }
 impl Mul<f32> for Volume {
     type Output = f32;
     fn mul(self, rhs: f32) -> Self::Output {
-        let volume = match self {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        self * volume
+        // assert!(Volume::Ml(Float(2.0)) * 32.0 == 64.0);
+        self.valor() * rhs
     }
 }
 impl Div<Volume> for Massa {
     type Output = f32;
     fn div(self, rhs: Volume) -> Self::Output {
-        let volume = match rhs {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        let massa = match self {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
+        let volume = rhs.valor();
+        let massa = self.valor();
         if volume < TOLERANCE {
-            0.0
+            0.0 // TODO: melhorar div by zero
         } else {
             massa / volume
         }
@@ -662,52 +658,31 @@ impl Div<Volume> for Massa {
 impl Div<Massa> for Volume {
     type Output = f32;
     fn div(self, rhs: Massa) -> Self::Output {
-        let volume = match self {
-            Volume::Ml(valor) => valor.0,
-            _ => todo!(),
-        };
-        let massa = match rhs {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
+        let volume = self.valor();
+        let massa = rhs.valor();
         if volume < TOLERANCE {
-            0.0
+            0.0 // TODO: melhorar div by zero
         } else {
             volume / massa
         }
     }
 }
 
-impl Div for Massa {
-    type Output = Self;
-    fn div(self, rhs: Self) -> Self::Output {
-        //TODO: checar unidade de Massa em self e rhs
-        if rhs.valor() < TOLERANCE {
-            Massa::Mg(Float(0.0))
-        } else {
-            Massa::Mg(Float(self.valor() / rhs.valor()))
-        }
-    }
-}
-
 impl Div<f32> for Massa {
-    type Output = Massa;
+    type Output = f32;
     fn div(self, rhs: f32) -> Self::Output {
-        let massa = match self {
-            Massa::Mg(valor) => valor.0,
-            _ => todo!(),
-        };
+        let massa = self.valor();
         if rhs < TOLERANCE {
-            Massa::Mg(Float(0.0))
+            0.0 // TODO: melhorar div by zero
         } else {
-            Massa::Mg(Float(massa / rhs))
+            massa / rhs
         }
     }
 }
 impl Div<Massa> for f32 {
     type Output = f32;
     fn div(self, rhs: Massa) -> Self::Output {
-        let den = rhs.normalizar().valor();
+        let den = rhs.valor();
         if den < TOLERANCE {
             0.0
         } else {

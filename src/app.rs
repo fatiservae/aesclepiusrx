@@ -84,38 +84,6 @@ impl eframe::App for Instancia {
                 });
             });
 
-        egui::Window::new("Prescrição")
-            .default_pos((100.5, 100.5))
-            .default_width(200.0)
-            // .default_height(88.0)
-            .resizable(true)
-            .show(ctx, |ui| {
-                let texto = format!(
-                    "{}\n{}\n{}",
-                    self.medicamento_selecionado,
-                    self.apresentacao_selecionada,
-                    // "DESATIVADO PARA TESTES"
-                    calcular_dose(
-                        self.idade.clone(),
-                        self.massa,
-                        &self.posologia_selecionada,
-                        &self.apresentacao_selecionada,
-                    )
-                );
-                ui.label(&texto);
-
-                if ui.button("Copiar").clicked() {
-                    ui.output_mut(|o| o.copied_text = texto.clone());
-                }
-
-                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
-                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
-                // ui.label(format!(
-                //     "\n\nVia oral\n{}{}{}",
-                //     self.medicamento_selecionado.nome, fill, "1 frasco"
-                // ));
-                // });
-            });
         egui::Window::new("Medicamento")
             .default_pos((200.5, 100.5))
             // .default_pos((100.5, 100.5))
@@ -132,6 +100,9 @@ impl eframe::App for Instancia {
                 //         .collect::<Vec<&str>>(),
                 // );
                 ui.label("Nome");
+                let med_contexto: Medicamento;
+                let apres_contexto: Apresentacao;
+                let pos_contexto: Posologia;
                 egui::ComboBox::from_id_salt("nome")
                     .selected_text(&format!("{}", self.medicamento_selecionado.nome))
                     .show_ui(ui, |ui: &mut egui::Ui| {
@@ -183,6 +154,40 @@ impl eframe::App for Instancia {
                     });
             });
 
+        egui::Window::new("Prescrição")
+            .default_pos((100.5, 100.5))
+            .default_width(200.0)
+            // .default_height(88.0)
+            .resizable(true)
+            .show(ctx, |ui| {
+                if ui.button("Prescrever!").clicked() {
+                    self.prescricao = format!(
+                        "{}\n{}\n{}",
+                        self.medicamento_selecionado,
+                        self.apresentacao_selecionada,
+                        // "DESATIVADO PARA TESTES"
+                        calcular_dose(
+                            self.idade.clone(),
+                            self.massa,
+                            &self.posologia_selecionada,
+                            &self.apresentacao_selecionada,
+                        )
+                    );
+                }
+                ui.label(&self.prescricao);
+                if ui.button("Copiar").clicked() {
+                    ui.output_mut(|o| o.copied_text = self.prescricao.clone());
+                }
+
+                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
+                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
+                // ui.label(format!(
+                //     "\n\nVia oral\n{}{}{}",
+                //     self.medicamento_selecionado.nome, fill, "1 frasco"
+                // ));
+                // });
+            });
+
         egui::TopBottomPanel::bottom("top_panel").show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
                 // NOTE: no File->Quit on web pages!
@@ -196,16 +201,20 @@ impl eframe::App for Instancia {
                     ui.add_space(16.0);
                 };
 
-         ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
+                // ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
 
-         egui::widgets::global_theme_preference_buttons(ui);
+                ui.hyperlink_to(
+                    "Um projeto de Jefferson T.",
+                    "https://jeffersontorres.com.br/",
+                );
+                egui::widgets::global_theme_preference_buttons(ui);
             });
         });
 
-        egui::SidePanel::left("my_left_panel")
-            .default_width(100.0)
-            .show(ctx, |ui| {});
-        egui::CentralPanel::default().show(ctx, |ui| {});
+        // egui::SidePanel::left("my_left_panel")
+        //     .default_width(100.0)
+        //     .show(ctx, |ui| {});
+        // egui::CentralPanel::default().show(ctx, |ui| );
     }
 }
 
