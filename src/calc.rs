@@ -133,74 +133,104 @@ pub fn calcular_dose(
                 },
             };
             format!("{} uma única vez {}.", dose, via)
-            // match via {
-            //     Via::Oral => match apresentacao {
-            //         _ => format!("Tomar {} uma única vez.", qtde),
-            //     },
-            //     Via::Intravenosa => format!("Fazer {} uma única vez.", qtde),
-            //     Via::Intramuscular => format!("Injetar {} em músculo vascularizado uma vez.", qtde),
-            //     Via::Inalatoria => match apresentacao {
-            //         // Apresentações compostas precisam ser dose-elaboradas de acordo com a principal medicação, listada como a primeira.
-            //         //     Apresentacao::DoseCompostaVolume(massas, volume, tipo, nomes_comerciais) => {
-            //         //         let vol = match volume {
-            //         //             Volume::Ml(vol) => vol.0,
-            //         //             _ => todo!(),
-            //         //         };
-            //         //         let mass = match massas[0] {
-            //         //             Massa::Mg(mass) => mass.0,
-            //         //             _ => todo!(),
-            //         //         };
-            //         //         // let dosagem = match dose {
-            //         //         //     Massa::Mg(mass) => mass.0,
-            //         //         //     _ => todo!(),
-            //         //         // };
-            //         //         let dose_final = vol * (mass * massa_paciente.valor()) / mass;
-            //         //         format!("Preparar {}{} e inalar vez.", volume.tipo(), dose_final)
-            //         //     }
-            //         //     Apresentacao::DoseVolume(massa, volume, tipo, nomes_comerciais) => match volume
-            //         //     {
-            //         //         Volume::Ml(vol) => {
-            //         //             let dose_final = vol.0 * massa_paciente.valor() / massa.valor();
-            //         //             // Massa::Mg(mass) => mass.0,
-            //         //             let dosagem = match qtde {
-            //         //                 Massa::Mg(mass) => mass.0,
-            //         //                 _ => todo!(),
-            //         //             };
-            //         //             let dose_final = vol * dosagem / massa;
-            //         //             // _ => todo!(),
-            //         //             format!(
-            //         //                 "Inalar {}{} diluído uma única vez.",
-            //         //                 dose_final,
-            //         //                 volume.tipo()
-            //         //             )
-            //         //         }
-            //         //         Apresentacao::DoseAplicacao(aplicacao, _, _) => match aplicacao {
-            //         //             _ => todo!(),
-            //         //         },
-            //         //         Aplicacao::Comprimido(quantidade) => {
-            //         //             format!("Tomar {} comprimidos uma única vez.", quantidade)
-            //         //         }
-            //         //         Aplicacao::Jato(quantidade) => {
-            //         //             let dosagem = match dose {
-            //         //                 Massa::Mg(mass) => mass.0,
-            //         //                 _ => todo!(),
-            //         //             };
-            //         //             let quant = match quantidade {
-            //         //                 Massa::Mg(quant) => quant.0,
-            //         //                 Massa::Mcg(quant) => quant.0,
-            //         //                 _ => todo!(),
-            //         //             };
-            //         //             let jatos = quant / dosagem;
+        }
+        Posologia::DoseDiaria(via, dose_diaria, no_doses) => {
+            let tempo = 24 / no_doses;
 
-            //         //             format!("Fazer {} uma única vez.", quantidade)
-            //         //         }
-            //         //         _ => todo!(),
-            //         //     },
-            //         _ => todo!(),
-            //     },
-            // _ => todo!(),
-            // Via::Retal | Via::Topica => format!("Aplicar {} uma única vez.", dose),
-            // }
+            match apresentacao {
+                Apresentacao::DoseVolume(massa_dose, volume_dose, _, _) => {
+                    let vol_dose = dose_diaria.em_mg() * volume_dose.em_ml() / massa_dose.em_mg();
+                    let dose_div = vol_dose / *no_doses as f32;
+                    if *no_doses == 1 {
+                        format!("Administrar {:.1}ml uma vez ao dia.", vol_dose)
+                    } else {
+                        format!("Adminisrtar {:.1}ml a cada {}h", dose_div, tempo)
+                    }
+                }
+                Apresentacao::DoseCompostaVolume(massas_dose, volume_dose, _, _) => {
+                    todo!()
+                }
+                Apresentacao::DoseAplicacao(aplicacao, _, _) => match aplicacao {
+                    Aplicacao::Comprimido(massa_cp) => {
+                        let comps = dose_diaria.em_mg() / massa_cp.em_mg();
+                        let comps_div = comps / *no_doses as f32;
+                        if *no_doses == 1 {
+                            format!("tomar {:.1} comprimido(s) por dia.", comps)
+                        } else {
+                            format!("tomar {:.1} comprimidos a cada {}h.", comps_div, tempo)
+                        }
+                    }
+                    _ => todo!(),
+                },
+            }
         }
     }
 }
+// match via {
+//     Via::Oral => match apresentacao {
+//         _ => format!("Tomar {} uma única vez.", qtde),
+//     },
+//     Via::Intravenosa => format!("Fazer {} uma única vez.", qtde),
+//     Via::Intramuscular => format!("Injetar {} em músculo vascularizado uma vez.", qtde),
+//     Via::Inalatoria => match apresentacao {
+//         // Apresentações compostas precisam ser dose-elaboradas de acordo com a principal medicação, listada como a primeira.
+//         //     Apresentacao::DoseCompostaVolume(massas, volume, tipo, nomes_comerciais) => {
+//         //         let vol = match volume {
+//         //             Volume::Ml(vol) => vol.0,
+//         //             _ => todo!(),
+//         //         };
+//         //         let mass = match massas[0] {
+//         //             Massa::Mg(mass) => mass.0,
+//         //             _ => todo!(),
+//         //         };
+//         //         // let dosagem = match dose {
+//         //         //     Massa::Mg(mass) => mass.0,
+//         //         //     _ => todo!(),
+//         //         // };
+//         //         let dose_final = vol * (mass * massa_paciente.valor()) / mass;
+//         //         format!("Preparar {}{} e inalar vez.", volume.tipo(), dose_final)
+//         //     }
+//         //     Apresentacao::DoseVolume(massa, volume, tipo, nomes_comerciais) => match volume
+//         //     {
+//         //         Volume::Ml(vol) => {
+//         //             let dose_final = vol.0 * massa_paciente.valor() / massa.valor();
+//         //             // Massa::Mg(mass) => mass.0,
+//         //             let dosagem = match qtde {
+//         //                 Massa::Mg(mass) => mass.0,
+//         //                 _ => todo!(),
+//         //             };
+//         //             let dose_final = vol * dosagem / massa;
+//         //             // _ => todo!(),
+//         //             format!(
+//         //                 "Inalar {}{} diluído uma única vez.",
+//         //                 dose_final,
+//         //                 volume.tipo()
+//         //             )
+//         //         }
+//         //         Apresentacao::DoseAplicacao(aplicacao, _, _) => match aplicacao {
+//         //             _ => todo!(),
+//         //         },
+//         //         Aplicacao::Comprimido(quantidade) => {
+//         //             format!("Tomar {} comprimidos uma única vez.", quantidade)
+//         //         }
+//         //         Aplicacao::Jato(quantidade) => {
+//         //             let dosagem = match dose {
+//         //                 Massa::Mg(mass) => mass.0,
+//         //                 _ => todo!(),
+//         //             };
+//         //             let quant = match quantidade {
+//         //                 Massa::Mg(quant) => quant.0,
+//         //                 Massa::Mcg(quant) => quant.0,
+//         //                 _ => todo!(),
+//         //             };
+//         //             let jatos = quant / dosagem;
+
+//         //             format!("Fazer {} uma única vez.", quantidade)
+//         //         }
+//         //         _ => todo!(),
+//         //     },
+//         _ => todo!(),
+//     },
+// _ => todo!(),
+// Via::Retal | Via::Topica => format!("Aplicar {} uma única vez.", dose),
+// }

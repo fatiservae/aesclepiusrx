@@ -214,7 +214,7 @@ impl eframe::App for Instancia {
         // egui::SidePanel::left("my_left_panel")
         //     .default_width(100.0)
         //     .show(ctx, |ui| {});
-        // egui::CentralPanel::default().show(ctx, |ui| );
+        egui::CentralPanel::default().show(ctx, |ui| {});
     }
 }
 

@@ -25,19 +25,36 @@ pub const BULARIO: &'static [Medicamento] = &[
     },
     Medicamento {
         nome: "Amoxicilina",
-        apresentacoes: &[Apresentacao::DoseVolume(
-            Massa::Mg(Float(250.0)),
-            Volume::Ml(Float(5.0)),
-            TipoApresentacao::Frasco,
-            NomesComerciais(&["AMCLAVU BD"]),
-        )],
-        posologias: &[Posologia::MgKgIntervaloDuracao(
-            Via::Oral,
-            Massa::Mg(Float(50.0)),
-            Intervalo::Dia,
-            Duracao::Dia(7),
-            Frequencia::Horas(8),
-        )],
+        apresentacoes: &[
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(250.0)),
+                Volume::Ml(Float(5.0)),
+                TipoApresentacao::PoReconstituivel,
+                NomesComerciais(&["AMCLAVU BD"]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(500.0)),
+                Volume::Ml(Float(5.0)),
+                TipoApresentacao::PoReconstituivel,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(875.0))),
+                TipoApresentacao::Comprimido,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseAplicacao(Aplicacao::Comprimido(Massa::Mg(Float(500.0))), TipoApresentacao::Comprimido, NomesComerciais(&[]))
+        ],
+        posologias: &[
+            Posologia::MgKgIntervaloDuracao(
+                Via::Oral,
+                Massa::Mg(Float(50.0)),
+                Intervalo::Dia,
+                Duracao::Dia(7),
+                Frequencia::Horas(8),
+            ),
+            Posologia::DoseDiaria(Via::Oral, Massa::Mg(Float(500.0)), 2),
+        ],
         advertencias: None,
     },
     Medicamento {

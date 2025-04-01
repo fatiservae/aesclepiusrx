@@ -279,7 +279,7 @@ impl std::fmt::Display for TipoApresentacao {
             TipoApresentacao::Capsula => write!(f, "cápsulas"),
             TipoApresentacao::Bisnaga => write!(f, "bisnagas"),
             TipoApresentacao::Gel => write!(f, "gel"),
-            TipoApresentacao::PoReconstituivel => write!(f, "pó reconstituível"),
+            TipoApresentacao::PoReconstituivel => write!(f, "frascos com pó reconstituível"),
             TipoApresentacao::Pastilha => write!(f, "pastilhas"),
             TipoApresentacao::ComprimidoSublingual => write!(f, "comprimidos sublinguais"),
             TipoApresentacao::ComprimidoMastigavel => write!(f, "comprimidos mastigáveis"),
@@ -495,7 +495,7 @@ pub enum Posologia {
     MgKg(Via, Massa),
     MgKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
     DoseUnica(Massa, Via),
-    // TODO: InfusaoContinua,
+    DoseDiaria(Via, Massa, i32), // TODO: InfusaoContinua,
 }
 
 impl std::fmt::Display for Posologia {
@@ -512,6 +512,13 @@ impl std::fmt::Display for Posologia {
                 )
             }
             Posologia::DoseUnica(dose, via) => write!(f, "{} {} uma única vez.", dose, via),
+            Posologia::DoseDiaria(via, dose, no_doses) => {
+                if *no_doses == 1 {
+                    write!(f, "{} por dia.", dose)
+                } else {
+                    write!(f, "{} por dia em {} vezes.", dose, no_doses)
+                }
+            }
         }
     }
 }
