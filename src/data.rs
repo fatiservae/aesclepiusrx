@@ -43,7 +43,11 @@ pub const BULARIO: &'static [Medicamento] = &[
                 TipoApresentacao::Comprimido,
                 NomesComerciais(&[]),
             ),
-            Apresentacao::DoseAplicacao(Aplicacao::Comprimido(Massa::Mg(Float(500.0))), TipoApresentacao::Comprimido, NomesComerciais(&[]))
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(500.0))),
+                TipoApresentacao::Comprimido,
+                NomesComerciais(&[]),
+            ),
         ],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
@@ -106,12 +110,19 @@ pub const BULARIO: &'static [Medicamento] = &[
     // },
     Medicamento {
         nome: "Azitromicina",
-        apresentacoes: &[Apresentacao::DoseVolume(
-            Massa::Mg(Float(200.0)),
-            Volume::Ml(Float(5.0)),
-            TipoApresentacao::Frasco,
-            NomesComerciais(&["Astro"]),
-        )],
+        apresentacoes: &[
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(200.0)),
+                Volume::Ml(Float(5.0)),
+                TipoApresentacao::Frasco,
+                NomesComerciais(&["Astro"]),
+            ),
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(500.0))),
+                TipoApresentacao::Comprimido,
+                NomesComerciais(&[]),
+            ),
+        ],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
                 Via::Oral,
@@ -127,8 +138,29 @@ pub const BULARIO: &'static [Medicamento] = &[
                 Duracao::Dia(3),
                 Frequencia::Horas(24),
             ),
+            Posologia::MgKg(Via::Oral, Massa::Mg(Float(20.0))),
         ],
-        advertencias: Some(&["Dose diária máxima de 500mg em crianças."]),
+        advertencias: Some(&[
+            "Dose diária máxima de 500mg em crianças.",
+            "Em dose única pediátrica, não ultrapassar 1g/paciente.",
+        ]),
+    },
+    Medicamento {
+        nome: "Claritromicina",
+        apresentacoes: &[Apresentacao::DoseVolume(
+            Massa::Mg(Float(25.0)),
+            Volume::Ml(Float(1.0)),
+            TipoApresentacao::Suspensao,
+            NomesComerciais(&[]),
+        )],
+        posologias: &[Posologia::MgKgIntervaloDuracao(
+            Via::Oral,
+            Massa::Mg(Float(15.0)),
+            Intervalo::Dia,
+            Duracao::Dia(10),
+            Frequencia::Horas(12),
+        )],
+        advertencias: None,
     },
     Medicamento {
         nome: "Midazolam",
@@ -168,12 +200,34 @@ pub const BULARIO: &'static [Medicamento] = &[
     },
     Medicamento {
         nome: "Ibuprofeno",
-        apresentacoes: &[Apresentacao::DoseAplicacao(
-            Aplicacao::Gota(Massa::Mg(Float(2.5))),
-            TipoApresentacao::Frasco,
-            NomesComerciais(&["Alivium"]),
-        )],
-        posologias: &[Posologia::MgKg(Via::Oral, Massa::Mg(Float(5.0)))],
+        apresentacoes: &[
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(600.0))),
+                TipoApresentacao::Comprimido,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Gota(Massa::Mg(Float(10.0))),
+                TipoApresentacao::Frasco,
+                NomesComerciais(&["Alivium gota concentrada (GC) 200mg/ml"]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(30.0)),
+                Volume::Ml(Float(1.0)),
+                TipoApresentacao::Frasco,
+                NomesComerciais(&["Alivium suspensão"]),
+            ),
+        ],
+        posologias: &[
+            Posologia::MgKg(Via::Oral, Massa::Mg(Float(20.0))),
+            Posologia::MgKgIntervaloDuracao(
+                Via::Oral,
+                Massa::Mg(Float(20.0)),
+                Intervalo::Dia,
+                Duracao::Dia(3),
+                Frequencia::Horas(6),
+            ),
+        ],
         advertencias: None,
     },
     Medicamento {
@@ -215,5 +269,45 @@ pub const BULARIO: &'static [Medicamento] = &[
         advertencias: Some(&[
             "Devido a manutenção do tônus, usar sempre um bloqueador neuromuscular.",
         ]),
+    },
+    Medicamento {
+        nome: "Levodropropizina",
+        apresentacoes: &[Apresentacao::DoseVolume(
+            Massa::Mg(Float(6.0)),
+            Volume::Ml(Float(1.0)),
+            TipoApresentacao::Xarope,
+            NomesComerciais(&["Percof"]),
+        )],
+        posologias: &[Posologia::MgKg(Via::Oral, Massa::Mg(Float(1.0)))],
+        advertencias: Some(&["Uso em crianças acima de 2 anos."]),
+    },
+    Medicamento {
+        nome: "Cefalexina",
+        apresentacoes: &[
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(500.0))),
+                TipoApresentacao::Comprimido,
+                NomesComerciais(&[]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(250.0)),
+                Volume::Ml(Float(5.0)),
+                TipoApresentacao::Suspensao,
+                NomesComerciais(&[]),
+            ), // Apresentacao::
+        ],
+        posologias: &[
+            Posologia::MgKg(Via::Oral, Massa::Mg(Float(100.0))),
+            Posologia::MgKg(Via::Oral, Massa::Mg(Float(25.0))),
+            Posologia::MgKgIntervaloDuracao(
+                Via::Oral,
+                Massa::Mg(Float(70.0)),
+                Intervalo::Dia,
+                Duracao::Dia(14),
+                Frequencia::Horas(6),
+            ),
+            Posologia::DoseDiaria(Via::Oral, Massa::Mg(Float(500.0)), 1),
+        ],
+        advertencias: None,
     },
 ];

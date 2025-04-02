@@ -15,7 +15,6 @@ use egui::{FontId, Slider, TextBuffer, TextEdit, TextStyle, Ui};
 //         .collect();
 //     for option in filtered {
 //         if ui.button(option).clicked() {
-
 //         };
 //     }
 // }
@@ -59,7 +58,6 @@ impl eframe::App for Instancia {
                             .speed(0.1)
                             .fixed_decimals(1),
                     );
-
                     self.massa = Massa::Kg(Float(valor_massa));
                 });
 
@@ -84,6 +82,18 @@ impl eframe::App for Instancia {
                 });
             });
 
+        egui::Window::new("Rascunho")
+            .default_pos((200.5, 100.5))
+            // .default_pos((100.5, 100.5))
+            // .default_width(88.0)
+            // .default_height(88.0)
+            .resizable(true)
+            .show(ctx, |ui| {
+                ui.text_edit_multiline(&mut self.notas);
+                if ui.button("Copiar anotações").clicked() {
+                    ui.output_mut(|o| o.copied_text = self.notas.clone());
+                };
+            });
         egui::Window::new("Medicamento")
             .default_pos((200.5, 100.5))
             // .default_pos((100.5, 100.5))
@@ -161,11 +171,13 @@ impl eframe::App for Instancia {
             .resizable(true)
             .show(ctx, |ui| {
                 if ui.button("Prescrever!").clicked() {
+                    let fill_len = 50 - self.medicamento_selecionado.nome.len();
+                    let fill = std::iter::repeat('.').take(fill_len).collect::<String>();
                     self.prescricao = format!(
-                        "{}\n{}\n{}",
+                        "{}\n{}{}\n{}",
                         self.medicamento_selecionado,
                         self.apresentacao_selecionada,
-                        // "DESATIVADO PARA TESTES"
+                        fill,
                         calcular_dose(
                             self.idade.clone(),
                             self.massa,
@@ -174,21 +186,20 @@ impl eframe::App for Instancia {
                         )
                     );
                 }
-                ui.label(&self.prescricao);
-                if ui.button("Copiar").clicked() {
+                if ui.button("Copiar prescrição").clicked() {
                     ui.output_mut(|o| o.copied_text = self.prescricao.clone());
                 }
-
-                // let fill_no = 100 - self.medicamento_selecionado.nome.len() - 8;
-                // let fill = std::iter::repeat('.').take(fill_no).collect::<String>();
-                // ui.label(format!(
-                //     "\n\nVia oral\n{}{}{}",
-                //     self.medicamento_selecionado.nome, fill, "1 frasco"
-                // ));
-                // });
+                ui.label(&self.prescricao);
             });
 
-        egui::TopBottomPanel::bottom("top_panel").show(ctx, |ui| {
+        egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
+            ui.hyperlink_to(
+                "Um projeto de Jefferson T.",
+                "https://jeffersontorres.com.br/",
+            );
+            egui::widgets::global_theme_preference_buttons(ui);
+        });
+        egui::TopBottomPanel::bottom("bottom_panel").show(ctx, |ui| {
             egui::menu::bar(ui, |ui| {
                 // NOTE: no File->Quit on web pages!
                 let is_web = cfg!(target_arch = "wasm32");
@@ -200,31 +211,11 @@ impl eframe::App for Instancia {
                     });
                     ui.add_space(16.0);
                 };
-
-                // ui.label("Use a janela de Paciente para especificar características deste.\n Use a janela de Medicamento para selecionar apresentações e posologias de cada medicamento na lista.\n Em breve:\n1 - Novas medicações; e\n2 - Lista por busca textual.\n");
-
-                ui.hyperlink_to(
-                    "Um projeto de Jefferson T.",
-                    "https://jeffersontorres.com.br/",
-                );
-                egui::widgets::global_theme_preference_buttons(ui);
+                ui.horizontal_centered(|ui| {
+                    ui.label("Esta ferramenta não substitui o julgamento médico profissional e não deve ser utilizada para prescrição real.");
+                    });
             });
         });
-
-        // egui::SidePanel::left("my_left_panel")
-        //     .default_width(100.0)
-        //     .show(ctx, |ui| {});
         egui::CentralPanel::default().show(ctx, |ui| {});
     }
-}
-
-fn powered_by_egui_and_eframe(ui: &mut egui::Ui) {
-    ui.horizontal(|ui| {
-        ui.label("Este software não substitui o julgamento médico sobre a administração, uso, suspensão, recomendação, aplicação, medida, comparação e dispensação de quaisquer drogas ou medicamentos.");
-        ui.spacing_mut().item_spacing.x = 0.0;
-        ui.hyperlink_to(
-            "Um projeto de Jefferson T.",
-            "https://jeffersontorres.com.br/",
-        );
-    });
 }

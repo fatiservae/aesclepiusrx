@@ -1,8 +1,8 @@
 // Licence at the end.
 
-// use serde::{Deserialize, Serialize};
+#![allow(unused_imports, unused_variables, dead_code)]
 #![warn(clippy::all, rust_2018_idioms)]
-
+// use serde::{Deserialize, Serialize};
 mod app;
 mod calc;
 mod data;
@@ -17,6 +17,7 @@ pub use {
 pub struct Instancia {
     // Example stuff:
     search: String,
+    notas: String,
     options: Vec<&'static str>,
     visible: bool,
     nome: String,
@@ -31,6 +32,7 @@ impl Default for Instancia {
     fn default() -> Self {
         Self {
             search: String::new(),
+            notas: String::from("Salve notas e textos aqui..."),
             options: vec!["Pequi", "maça", "outra"],
             visible: true,
             nome: "Algum medicamento".to_owned(),
@@ -196,6 +198,15 @@ impl std::fmt::Display for Apresentacao {
                         valor
                     )
                 }
+
+                Aplicacao::Capsula(valor) => {
+                    write!(
+                        f,
+                        "{} com {} a cada cápsula",
+                        tipo.capitalizar(TipoCapitalizacao::Primeira),
+                        valor
+                    )
+                }
                 Aplicacao::Jato(valor) => write!(
                     f,
                     "{} com {} a cada jato",
@@ -238,12 +249,15 @@ pub enum TipoApresentacao {
     Ampola,
     Frasco,
     Comprimido,
+    Xarope,
     Spray,
     Capsula,
     Draguea,
     Bisnaga,
     Gel,
     PoReconstituivel,
+    Suspensao,
+    Granulado,
     Pastilha,
     ComprimidoMastigavel,
     ComprimidoSublingual,
@@ -258,7 +272,7 @@ impl Capitalizar for TipoApresentacao {
     fn capitalizar(&self, tipo: TipoCapitalizacao) -> String {
         match tipo {
             TipoCapitalizacao::Primeira => {
-                let mut chars = format!("{}", self);
+                let chars = format!("{}", self);
                 match chars.chars().next() {
                     None => String::new(),
                     Some(first) => first.to_uppercase().collect::<String>() + &chars.as_str()[1..],
@@ -271,6 +285,9 @@ impl Capitalizar for TipoApresentacao {
 impl std::fmt::Display for TipoApresentacao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            TipoApresentacao::Granulado => write!(f, "frascos com granulado solúvel"),
+            TipoApresentacao::Xarope => write!(f, "frascos de xarope"),
+            TipoApresentacao::Suspensao => write!(f, "frascos com suspensão"),
             TipoApresentacao::Ampola => write!(f, "ampolas"),
             TipoApresentacao::Frasco => write!(f, "frascos"),
             TipoApresentacao::Comprimido => write!(f, "comprimidos"),
@@ -304,7 +321,7 @@ impl Volume {
     fn valor(self) -> f32 {
         match self {
             Volume::Ml(valor) => valor.0,
-            Volume::L(valor) | Volume::Dl(valor) => valor.0 * 1000.0,
+            Volume::L(valor) => valor.0 * 1000.0,
             Volume::Dl(valor) => valor.0 * 100.0,
         }
     }
@@ -423,6 +440,7 @@ impl std::fmt::Display for Intervalo {
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Aplicacao {
     Comprimido(Massa),
+    Capsula(Massa),
     Jato(Massa),
     Gota(Massa),
     Microgota(Massa),
@@ -434,6 +452,7 @@ impl std::fmt::Display for Aplicacao {
             // evitando espaço quando for unitário.
             // Ex.: por jato vs. por cada 3 jatos.
             Self::Comprimido(valor) => write!(f, "{} por comprimido", valor),
+            Self::Capsula(valor) => write!(f, "{} por cápsula", valor),
             Self::Jato(valor) => write!(f, "{} a cada jato", valor),
             Self::Gota(valor) => write!(f, "{} por gota", valor),
             Self::Microgota(valor) => write!(f, "{} por microgota", valor),
@@ -558,7 +577,7 @@ impl Capitalizar for Via {
     fn capitalizar(&self, tipo: TipoCapitalizacao) -> String {
         match tipo {
             TipoCapitalizacao::Primeira => {
-                let mut chars = format!("{}", self);
+                let chars = format!("{}", self);
                 match chars.chars().next() {
                     None => String::new(),
                     Some(first) => first.to_uppercase().collect::<String>() + &chars.as_str()[1..],
@@ -632,7 +651,7 @@ impl Mul<Massa> for f32 {
     type Output = f32;
     fn mul(self, rhs: Massa) -> Self::Output {
         // assert!(32.0 * Massa::Mg(Float(2.0)) == 64.0);
-        self * rhs
+        self * rhs.valor()
     }
 }
 impl Mul<Volume> for f32 {
@@ -697,18 +716,7 @@ impl Div<Massa> for f32 {
         }
     }
 }
-// impl Div<Massa> for Massa {
-//     type Output = Massa;
-//     fn div(self, rhs: Massa) -> Self::Output {
-//         self.normalizar();
-//         rhs.normalizar();
-//         if rhs.valor() < TOLERANCE {
-//             Massa::Mg(Float(0.0))
-//         } else {
-//             Massa::Mg(Float(self.valor() * rhs.valor()))
-//         }
-//     }
-// }
+
 // AesclepiusRx  Copyright (C) 2025  Jefferson T.
 // Under Gnu General Licence 3.0 for ever.
 // Any part of this program is and always have to be under the conditions of the LICENCE.txt

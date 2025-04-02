@@ -20,7 +20,7 @@ pub fn calcular_dose(
             dose_por_kg.em_mg();
             let via = _via.capitalizar(TipoCapitalizacao::Primeira);
             match apresentacao {
-                Apresentacao::DoseVolume(qdte_med, mut vol_med, tipo, nomes_comerciais) => {
+                Apresentacao::DoseVolume(qdte_med, vol_med, tipo, nomes_comerciais) => {
                     qdte_med.em_mg();
                     vol_med.em_ml();
                     let dose =
@@ -51,7 +51,11 @@ pub fn calcular_dose(
                     }
                     Aplicacao::Comprimido(qtde_por_cp) => {
                         let cps = massa_paciente * dose_por_kg.em_mg() / qtde_por_cp.em_mg();
-                        format!("{}: tomar {:.0} comprimidos.", via, cps)
+                        format!("{}: tomar {:.1} comprimidos.", via, cps)
+                    }
+                    Aplicacao::Capsula(qtde_por_cp) => {
+                        let cps = massa_paciente * dose_por_kg.em_mg() / qtde_por_cp.em_mg();
+                        format!("{}: tomar {:.0} cápsulas.", via, cps)
                     }
                 },
             }
@@ -68,7 +72,7 @@ pub fn calcular_dose(
                 Apresentacao::DoseCompostaVolume(massas, volume, _, _) => {
                     let dose = *qtde_dose * massa_paciente * (volume.em_ml() / massas[0].em_mg())
                         / no_doses_interv;
-                    format!("{}ml", dose)
+                    format!("{:.1}ml", dose)
                 }
                 Apresentacao::DoseVolume(qtde_por_vol, volume, _, _) => {
                     let dose =
@@ -92,6 +96,11 @@ pub fn calcular_dose(
                         massa_cp.em_mg();
                         let cps = massa_paciente / *massa_cp;
                         format!("{:.0} comprimido(s)", cps)
+                    }
+                    Aplicacao::Capsula(massa_cp) => {
+                        massa_cp.em_mg();
+                        let cps = massa_paciente / *massa_cp;
+                        format!("{:.0} cápsula(s)", cps)
                     }
                     Aplicacao::Jato(qtd_por_jato) => {
                         qtd_por_jato.em_mg();
@@ -118,7 +127,7 @@ pub fn calcular_dose(
                     format!("{}", massa_paciente * *volume / qtdes[0])
                 }
                 Apresentacao::DoseAplicacao(aplcacao, _, _) => match aplcacao {
-                    Aplicacao::Comprimido(qtde_por_cp) => {
+                    Aplicacao::Comprimido(qtde_por_cp) | Aplicacao::Capsula(qtde_por_cp) => {
                         format!("{}", massa_paciente / *qtde_por_cp)
                     }
                     Aplicacao::Jato(qtde_por_jato) => {
@@ -158,6 +167,15 @@ pub fn calcular_dose(
                             format!("tomar {:.1} comprimido(s) por dia.", comps)
                         } else {
                             format!("tomar {:.1} comprimidos a cada {}h.", comps_div, tempo)
+                        }
+                    }
+                    Aplicacao::Jato(massa_por_jato) => {
+                        let jatos = dose_diaria.em_mg() / massa_por_jato.em_mg();
+                        let jatos_div = jatos / *no_doses as f32;
+                        if *no_doses == 1 {
+                            format!("inalar {:.1} jato(s) a por dia.", jatos)
+                        } else {
+                            format!("inalar {:.1} jato(s) a cada {}h.", jatos_div, tempo)
                         }
                     }
                     _ => todo!(),
