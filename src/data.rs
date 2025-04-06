@@ -1,6 +1,6 @@
 use crate::{
     Aplicacao, Apresentacao, Duracao, Float, Frequencia, Intervalo, Massa, Medicamento,
-    NomesComerciais, Posologia, TipoApresentacao, Via, Volume,
+    NomesComerciais, Posologia, TipoApresentacao, Uso, Via, Volume,
 };
 
 pub const BULARIO: &'static [Medicamento] = &[
@@ -13,13 +13,14 @@ pub const BULARIO: &'static [Medicamento] = &[
         )],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
+                Uso{main: "para febre ou dor", alts: None},
                 Via::Oral,
                 Massa::Mg(Float(25.0)), // rever essa dose, esta é a MgKg... a diária é bem maior!
                 Intervalo::Dia,
                 Duracao::Dia(7),
                 Frequencia::Horas(6),
             ),
-            Posologia::MgKg(Via::Oral, Massa::Mg(Float(25.0))),
+            Posologia::MgKg(Uso{main: "para febre ou dor", alts: None},Via::Oral, Massa::Mg(Float(25.0))),
         ],
         advertencias: None,
     },
@@ -51,13 +52,15 @@ pub const BULARIO: &'static [Medicamento] = &[
         ],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão", alts: None},
                 Via::Oral,
                 Massa::Mg(Float(50.0)),
                 Intervalo::Dia,
                 Duracao::Dia(7),
                 Frequencia::Horas(8),
             ),
-            Posologia::DoseDiaria(Via::Oral, Massa::Mg(Float(500.0)), 2),
+            Posologia::DoseDiaria(
+                Uso{main: "dose padrão diária para tratamento de mastite na lactante", alts: None}                ,Via::Oral, Massa::Mg(Float(500.0)), 2),
         ],
         advertencias: None,
     },
@@ -70,6 +73,7 @@ pub const BULARIO: &'static [Medicamento] = &[
             NomesComerciais(&["AMCLAVU BD"]),
         )],
         posologias: &[Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão", alts: None},
             Via::Oral,
             Massa::Mg(Float(50.0)),
             Intervalo::Dia,
@@ -125,6 +129,7 @@ pub const BULARIO: &'static [Medicamento] = &[
         ],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão mínima", alts: None},
                 Via::Oral,
                 Massa::Mg(Float(10.0)),
                 Intervalo::Dia,
@@ -132,13 +137,16 @@ pub const BULARIO: &'static [Medicamento] = &[
                 Frequencia::Horas(24),
             ),
             Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão máxima", alts: None},
                 Via::Oral,
                 Massa::Mg(Float(20.0)),
                 Intervalo::Dia,
                 Duracao::Dia(3),
                 Frequencia::Horas(24),
             ),
-            Posologia::MgKg(Via::Oral, Massa::Mg(Float(20.0))),
+            Posologia::MgKg(
+                Uso{main: "dose pediátrica padrão", alts: None},
+                Via::Oral, Massa::Mg(Float(20.0))),
         ],
         advertencias: Some(&[
             "Dose diária máxima de 500mg em crianças.",
@@ -147,13 +155,27 @@ pub const BULARIO: &'static [Medicamento] = &[
     },
     Medicamento {
         nome: "Claritromicina",
-        apresentacoes: &[Apresentacao::DoseVolume(
-            Massa::Mg(Float(25.0)),
-            Volume::Ml(Float(1.0)),
-            TipoApresentacao::Suspensao,
-            NomesComerciais(&[]),
-        )],
+        apresentacoes: &[
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(25.0)),
+                Volume::Ml(Float(1.0)),
+                TipoApresentacao::Suspensao,
+                NomesComerciais(&["Klaricid"]),
+            ),
+            Apresentacao::DoseVolume(
+                Massa::Mg(Float(50.0)),
+                Volume::Ml(Float(1.0)),
+                TipoApresentacao::Suspensao,
+                NomesComerciais(&["Klaricid"]),
+            ),
+            Apresentacao::DoseAplicacao(
+                Aplicacao::Comprimido(Massa::Mg(Float(500.0))),
+                TipoApresentacao::Comprimido, // comp  de liberacao prolongada, criat tipo
+                NomesComerciais(&["Klaricid UD"]),
+            ),
+        ],
         posologias: &[Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão", alts: None},
             Via::Oral,
             Massa::Mg(Float(15.0)),
             Intervalo::Dia,
@@ -184,7 +206,10 @@ pub const BULARIO: &'static [Medicamento] = &[
                 NomesComerciais(&["Dormonid"]),
             ),
         ],
-        posologias: &[Posologia::MgKg(Via::Intramuscular, Massa::Mg(Float(0.2)))],
+        posologias: &[Posologia::MgKg(
+                Uso{main: "dose pediátrica padrão para abordagem da convulsão", alts: None},
+
+            Via::Intramuscular, Massa::Mg(Float(0.2)))],
         advertencias: None,
     },
     Medicamento {
@@ -195,7 +220,9 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Ampola,
             NomesComerciais(&[]),
         )],
-        posologias: &[Posologia::MgKg(Via::Intramuscular, Massa::Mg(Float(0.5)))],
+        posologias: &[Posologia::MgKg(
+                Uso{main: "dose pediátrica padrão para abordagem da convulsão", alts: None},
+            Via::Intramuscular, Massa::Mg(Float(0.5)))],
         advertencias: None,
     },
     Medicamento {
@@ -219,8 +246,11 @@ pub const BULARIO: &'static [Medicamento] = &[
             ),
         ],
         posologias: &[
-            Posologia::MgKg(Via::Oral, Massa::Mg(Float(20.0))),
+            Posologia::MgKg(
+                Uso{main: "dose pediátrica padrão antitérmica", alts: None},
+                Via::Oral, Massa::Mg(Float(20.0))),
             Posologia::MgKgIntervaloDuracao(
+                Uso{main: "dose pediátrica padrão antitérmica de horário", alts: None},
                 Via::Oral,
                 Massa::Mg(Float(20.0)),
                 Intervalo::Dia,
@@ -238,7 +268,9 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Ampola,
             NomesComerciais(&[]),
         )],
-        posologias: &[Posologia::MgKg(Via::Intravenosa, Massa::Mg(Float(0.3)))],
+        posologias: &[Posologia::MgKg(
+                Uso{main: "dose sedativa pediátrica padrão", alts: None},
+            Via::Intravenosa, Massa::Mg(Float(0.3)))],
         advertencias: Some(&[
             "Sempre diluir e bolus em velocidade estável, evitar lentamente ou muito rapidamente.",
         ]),
@@ -265,7 +297,9 @@ pub const BULARIO: &'static [Medicamento] = &[
                 NomesComerciais(&[]),
             ),
         ],
-        posologias: &[Posologia::MgKg(Via::Intravenosa, Massa::Mg(Float(1.5)))],
+        posologias: &[Posologia::MgKg(
+                Uso{main: "dose sedativa pediátrica padrão", alts: None},
+            Via::Intravenosa, Massa::Mg(Float(1.5)))],
         advertencias: Some(&[
             "Devido a manutenção do tônus, usar sempre um bloqueador neuromuscular.",
         ]),
@@ -278,7 +312,9 @@ pub const BULARIO: &'static [Medicamento] = &[
             TipoApresentacao::Xarope,
             NomesComerciais(&["Percof"]),
         )],
-        posologias: &[Posologia::MgKg(Via::Oral, Massa::Mg(Float(1.0)))],
+        posologias: &[Posologia::MgKg(
+                Uso{main: "dose antitussígena pediátrica", alts: None},
+            Via::Oral, Massa::Mg(Float(1.0)))],
         advertencias: Some(&["Uso em crianças acima de 2 anos."]),
     },
     Medicamento {
@@ -297,17 +333,55 @@ pub const BULARIO: &'static [Medicamento] = &[
             ), // Apresentacao::
         ],
         posologias: &[
-            Posologia::MgKg(Via::Oral, Massa::Mg(Float(100.0))),
-            Posologia::MgKg(Via::Oral, Massa::Mg(Float(25.0))),
+            Posologia::MgKg(
+                Uso{main: "dose padrão pediátrica para tratamento de infecção urinária", alts: None},
+                Via::Oral, Massa::Mg(Float(100.0))),
+            Posologia::MgKg(
+                Uso{main: "dose padrão pediátrica profilática de infecção urinária", alts: None},
+                Via::Oral, Massa::Mg(Float(25.0))),
             Posologia::MgKgIntervaloDuracao(
+                Uso {
+                    main: "Infecção urinária",
+                    alts: None
+                },
                 Via::Oral,
                 Massa::Mg(Float(70.0)),
                 Intervalo::Dia,
                 Duracao::Dia(14),
                 Frequencia::Horas(6),
             ),
-            Posologia::DoseDiaria(Via::Oral, Massa::Mg(Float(500.0)), 1),
+            Posologia::DoseDiaria(
+                Uso{main: "dose padrão de tratamento de infecções de tecido mole, inclusive em pediatria", alts: None},
+                Via::Oral, Massa::Mg(Float(500.0)), 1),
         ],
         advertencias: None,
     },
+    // SBP - ITU 2021
+    //
+    // Febril
+    // -- IV
+    // cefuroxime 150mg/kg/dia 8/8h
+    // genta 5-7,5mg/kgdia 1x ao dia pode ser IM
+    // amicacina 15mg/kgdia 1x ao dia
+    // cefotaxime 150-200mg/kg/dia 8/8h
+    // pipetazo 300mg/kgdia 6/6 ou 8/8
+    // -- VO
+    // Cefuroxime 30mg/kgdia 12/12h
+    // cefaclor 40mg/kgdia 8/8h
+    //
+    // Afebril
+    // Nitrufurantoina 5-7mg/kgdia 6/6h
+    // Cefalexina 50mg/kgdia 6 ou 8h
+    // bactrim 8-12mg tmp kg/dia 12/12h
+    //
+    //
+    // fexofenadina 6mg/ml allegra
+    // levodropropizina 6mg/ml percof
+    // zina odt levocetirizina 5mg dispersível/comp mastigável? ver tipo
+    //
+    // sucralfato Sucrafilm 200mg/ml tratar refluxos
+    // 2.5ml 6/6h menores de 6a
+    // 5ml maiores...
+    //
+    // foroato de mometasona 50mcg/jato a partir de 2 anos, dose terapeutica 200mcg
 ];

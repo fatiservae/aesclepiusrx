@@ -1,23 +1,10 @@
 //use serde::{Deserialize, Serialize};
 
 use crate::{
-    calc::calcular_dose, data::BULARIO, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
+    calc::calcular_dose, data::BULARIO, search, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
     Instancia, Massa, Medicamento, Posologia, Via, Volume,
 };
-use egui::{FontId, Slider, TextBuffer, TextEdit, TextStyle, Ui};
-
-// fn ui_search_box(ui: &mut Ui, search: &mut impl TextBuffer, options: Vec<&str>, posologias: vec<Posologia>, apresentacoes: Vec<Apresentacoes>) {
-//     ui.add(TextEdit::singleline(search).hint_text("Buscar..."));
-//     let filtered: Vec<&str> = options
-//         .iter()
-//         .filter(|&&opt| opt.to_lowercase().contains(&search.as_str().to_lowercase()))
-//         .copied()
-//         .collect();
-//     for option in filtered {
-//         if ui.button(option).clicked() {
-//         };
-//     }
-// }
+use egui::{FontId, Slider, TextStyle, Ui};
 
 ///// Called once before the first frame.
 //pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
@@ -90,9 +77,14 @@ impl eframe::App for Instancia {
             .resizable(true)
             .show(ctx, |ui| {
                 ui.text_edit_multiline(&mut self.notas);
-                if ui.button("Copiar anotações").clicked() {
-                    ui.output_mut(|o| o.copied_text = self.notas.clone());
-                };
+                ui.horizontal(|ui| {
+                    if ui.button("Copiar anotações").clicked() {
+                        ui.output_mut(|o| o.copied_text = self.notas.clone());
+                    }
+                    if ui.button("Limpar anotações").clicked() {
+                        ui.output_mut(|o| self.notas = String::new());
+                    }
+                })
             });
         egui::Window::new("Medicamento")
             .default_pos((200.5, 100.5))
@@ -101,14 +93,17 @@ impl eframe::App for Instancia {
             // .default_height(88.0)
             .resizable(true)
             .show(ctx, |ui| {
-                // ui_search_box(
-                //     ui,
-                //     &mut self.search,
-                //     BULARIO
-                //         .iter()
-                //         .map(|medicamento| medicamento.nome)
-                //         .collect::<Vec<&str>>(),
-                // );
+                let mut apresentacoes: Vec<Apresentacao> = vec![];
+                let mut posologias: Vec<Posologia> = vec![];
+
+                let medicamentos_filtrados = search(
+                    ui,
+                    &mut self.search,
+                    Vec::from(BULARIO),
+                    self.medicamento_selecionado, // &mut apresentacoes,
+                                                  // &mut posologias,
+                );
+
                 ui.label("Nome");
                 let med_contexto: Medicamento;
                 let apres_contexto: Apresentacao;
@@ -117,7 +112,7 @@ impl eframe::App for Instancia {
                     .selected_text(&format!("{}", self.medicamento_selecionado.nome))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         //for (i, medicamento) in BULARIO {
-                        for medicamento in BULARIO {
+                        for medicamento in medicamentos_filtrados {
                             ui.selectable_value(
                                 &mut self.medicamento_selecionado,
                                 medicamento.clone(), //ok?
@@ -127,13 +122,11 @@ impl eframe::App for Instancia {
                         }
                     });
 
-                let mut apresentacoes: Vec<&Apresentacao> = vec![];
-                let mut posologias: Vec<&Posologia> = vec![];
                 for apresentacao in self.medicamento_selecionado.apresentacoes {
-                    apresentacoes.push(apresentacao);
+                    apresentacoes.push(apresentacao.clone());
                 }
                 for posologia in self.medicamento_selecionado.posologias {
-                    posologias.push(posologia);
+                    posologias.push(posologia.clone());
                 }
 
                 ui.label("Apresentação");
@@ -141,10 +134,10 @@ impl eframe::App for Instancia {
                     .selected_text(&format!("{}", self.apresentacao_selecionada))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         for apresentacao in apresentacoes {
+                            // for apresentacao in selecao.0 {
                             ui.selectable_value(
                                 &mut self.apresentacao_selecionada,
                                 apresentacao.clone(), //ok?
-                                //format!("{:?}", apresentacao),
                                 format!("{}", apresentacao),
                             );
                         }
@@ -154,10 +147,10 @@ impl eframe::App for Instancia {
                     .selected_text(&format!("{}", self.posologia_selecionada))
                     .show_ui(ui, |ui: &mut egui::Ui| {
                         for posologia in posologias {
+                            // for posologia in selecao.1 {
                             ui.selectable_value(
                                 &mut self.posologia_selecionada,
                                 posologia.clone(), //ok?
-                                //format!("{:?}", apresentacao),
                                 format!("{}", posologia),
                             );
                         }
@@ -186,9 +179,17 @@ impl eframe::App for Instancia {
                         )
                     );
                 }
-                if ui.button("Copiar prescrição").clicked() {
-                    ui.output_mut(|o| o.copied_text = self.prescricao.clone());
-                }
+
+                ui.horizontal(|ui| {
+                    if ui.button("Copiar prescrição").clicked() {
+                        ui.output_mut(|o| o.copied_text = self.prescricao.clone());
+                    }
+                    if ui.button("Incluir em rascunho").clicked() {
+                        ui.output_mut(|o| {
+                            self.notas = self.notas.clone() + self.prescricao.as_str() + "\n\n";
+                        });
+                    }
+                });
                 ui.label(&self.prescricao);
             });
 

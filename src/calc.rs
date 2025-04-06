@@ -16,7 +16,7 @@ pub fn calcular_dose(
     idade.em_meses();
 
     match posologia {
-        Posologia::MgKg(_via, dose_por_kg) => {
+        Posologia::MgKg(_, _via, dose_por_kg) => {
             dose_por_kg.em_mg();
             let via = _via.capitalizar(TipoCapitalizacao::Primeira);
             match apresentacao {
@@ -61,7 +61,7 @@ pub fn calcular_dose(
             }
         }
 
-        Posologia::MgKgIntervaloDuracao(via, qtde_dose, intervalo, duracao, frequencia) => {
+        Posologia::MgKgIntervaloDuracao(_, via, qtde_dose, intervalo, duracao, frequencia) => {
             qtde_dose.em_mg();
             // TODO: e se o intervalo não é dia?
             let freq_dia = frequencia.valor() as f32;
@@ -117,7 +117,7 @@ pub fn calcular_dose(
                 duracao
             )
         }
-        Posologia::DoseUnica(qtde, via) => {
+        Posologia::DoseUnica(_, qtde, via) => {
             qtde.em_mg();
             let dose = match apresentacao {
                 Apresentacao::DoseVolume(massa_por_vol, volume, _, _) => {
@@ -143,7 +143,7 @@ pub fn calcular_dose(
             };
             format!("{} uma única vez {}.", dose, via)
         }
-        Posologia::DoseDiaria(via, dose_diaria, no_doses) => {
+        Posologia::DoseDiaria(_, via, dose_diaria, no_doses) => {
             let tempo = 24 / no_doses;
 
             match apresentacao {

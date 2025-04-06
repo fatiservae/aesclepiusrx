@@ -9,8 +9,29 @@ mod data;
 use std::process::Output;
 pub use {
     data::BULARIO,
+    egui::{FontId, Slider, TextBuffer, TextEdit, TextStyle, Ui},
     std::ops::{Add, Div, Mul, Sub},
 };
+
+pub fn search(
+    ui: &mut Ui,
+    search: &mut impl TextBuffer,
+    medicamentos: Vec<Medicamento>,
+    med_selecionado: Medicamento, // apresentacoes: &Vec<Apresentacao>,
+                                  // posologias: &Vec<Posologia>,
+) -> Vec<Medicamento> {
+    ui.add(TextEdit::singleline(search).hint_text("Buscar..."));
+    medicamentos
+        .clone()
+        .into_iter()
+        .filter(|&medicamento| {
+            medicamento
+                .nome
+                .to_lowercase()
+                .contains(&search.as_str().to_lowercase())
+        })
+        .collect::<Vec<Medicamento>>()
+}
 
 /// A entidade base de `egui::Ui` para AesclepiusRx.
 //#[derive(Serialize, Deserialize)]
@@ -18,7 +39,6 @@ pub struct Instancia {
     // Example stuff:
     search: String,
     notas: String,
-    options: Vec<&'static str>,
     visible: bool,
     nome: String,
     massa: Massa,
@@ -32,8 +52,7 @@ impl Default for Instancia {
     fn default() -> Self {
         Self {
             search: String::new(),
-            notas: String::from("Salve notas e textos aqui..."),
-            options: vec!["Pequi", "maça", "outra"],
+            notas: String::new(),
             visible: true,
             nome: "Algum medicamento".to_owned(),
             massa: Massa::Kg(Float(0.0)),
@@ -55,10 +74,24 @@ impl Default for Instancia {
                     TipoApresentacao::Ampola,
                     NomesComerciais(&["Marca do medicamento"]),
                 )],
-                posologias: &[Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral)],
+                posologias: &[Posologia::DoseUnica(
+                    Uso {
+                        main: "uso principal",
+                        alts: None,
+                    },
+                    Massa::Mg(Float(0.0)),
+                    Via::Oral,
+                )],
                 advertencias: None,
             },
-            posologia_selecionada: Posologia::DoseUnica(Massa::Mg(Float(0.0)), Via::Oral),
+            posologia_selecionada: Posologia::DoseUnica(
+                Uso {
+                    main: "uso principal",
+                    alts: None,
+                },
+                Massa::Mg(Float(0.0)),
+                Via::Oral,
+            ),
             prescricao: "Medicamento X a 0g/ml ..... 0ml".to_string(),
         }
     }
@@ -136,7 +169,7 @@ impl std::cmp::PartialEq for Float {
 // Implementação de Eq (vazia, pois depende de PartialEq)
 impl std::cmp::Eq for Float {}
 
-#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone, Copy)]
 pub struct Medicamento {
     pub nome: &'static str,
     pub apresentacoes: &'static [Apresentacao],
@@ -510,32 +543,54 @@ impl std::fmt::Display for Frequencia {
 }
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
+pub struct Uso {
+    main: &'static str,
+    alts: Option<&'static [&'static str]>,
+}
+impl std::fmt::Display for Uso {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self.alts {
+            Some(alts) => {
+                let mut alternativos = String::new();
+                for alt in alts {
+                    alternativos = alternativos.to_owned() + ";" + alt;
+                }
+                write!(f, "{}. Usos alternativos: {}", self.main, alternativos)
+            }
+            None => {
+                write!(f, "{}", self.main)
+            }
+        }
+    }
+}
+
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Posologia {
-    MgKg(Via, Massa),
-    MgKgIntervaloDuracao(Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
-    DoseUnica(Massa, Via),
-    DoseDiaria(Via, Massa, i32), // TODO: InfusaoContinua,
+    MgKg(Uso, Via, Massa),
+    MgKgIntervaloDuracao(Uso, Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
+    DoseUnica(Uso, Massa, Via),
+    DoseDiaria(Uso, Via, Massa, i32), // TODO: InfusaoContinua,
 }
 
 impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Posologia::MgKg(via, massa) => {
-                write!(f, "{}/Kg {}", massa, via)
+            Posologia::MgKg(uso, via, massa) => {
+                write!(f, "{}/Kg {}, {} ", massa, via, uso)
             }
-            Posologia::MgKgIntervaloDuracao(via, massa, intervalo, duracao, frequencia) => {
+            Posologia::MgKgIntervaloDuracao(uso, via, massa, intervalo, duracao, frequencia) => {
                 write!(
                     f,
-                    "{}/Kg{} por {} {} {}", // Via:: já completa "via"
-                    massa, intervalo, duracao, frequencia, via
+                    "{}/Kg{} por {} {} {}, {}", // Via:: já completa "via"
+                    massa, intervalo, duracao, frequencia, via, uso
                 )
             }
-            Posologia::DoseUnica(dose, via) => write!(f, "{} {} uma única vez.", dose, via),
-            Posologia::DoseDiaria(via, dose, no_doses) => {
+            Posologia::DoseUnica(uso, dose, via) => write!(f, "{} {} uma única vez.", dose, via),
+            Posologia::DoseDiaria(uso, via, dose, no_doses) => {
                 if *no_doses == 1 {
-                    write!(f, "{} por dia.", dose)
+                    write!(f, "{} por dia, {}.", dose, uso)
                 } else {
-                    write!(f, "{} por dia em {} vezes.", dose, no_doses)
+                    write!(f, "{} por dia em {} vezes, {}.", dose, no_doses, uso)
                 }
             }
         }
