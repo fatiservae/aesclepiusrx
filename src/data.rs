@@ -1,6 +1,6 @@
 use crate::{
-    Aplicacao, Apresentacao, Duracao, Float, Frequencia, Intervalo, Massa, Medicamento,
-    NomesComerciais, Posologia, TipoApresentacao, Uso, Via, Volume,
+    Aplicacao, Apresentacao, Dose, Duracao, Float, Frequencia, Intervalo, Massa, Medicamento,
+    NomesComerciais, Posologia, TipoApresentacao, Uso, Via, Volume, UI,
 };
 
 pub const BULARIO: &'static [Medicamento] = &[
@@ -9,8 +9,8 @@ pub const BULARIO: &'static [Medicamento] = &[
         apresentacoes: &[Apresentacao::DoseAplicacao(
             Aplicacao::Gota(Massa::Mg(Float(25.0))),
             TipoApresentacao::Ampola,
-            NomesComerciais(&["novalgina", "dipimax"]),
-        )],
+            NomesComerciais(&["Novalgina", "dipimax"]),
+        ), Apresentacao::DoseVolume(Massa::Mg(Float(500.0)), Volume::Ml(Float(1.0)), TipoApresentacao::Gotejador, NomesComerciais(&["Novalgina"]))],
         posologias: &[
             Posologia::MgKgIntervaloDuracao(
                 Uso{main: "para febre ou dor", alts: None},
@@ -355,7 +355,16 @@ pub const BULARIO: &'static [Medicamento] = &[
                 Via::Oral, Massa::Mg(Float(500.0)), 1),
         ],
         advertencias: None,
-    },
+    }, Medicamento {
+        nome: "Penicilina benzatina",
+        apresentacoes: &[Apresentacao::DoseUI(UI(600000), TipoApresentacao::Ampola, NomesComerciais(&["Benzetacil"]))],
+        posologias: &[Posologia::DoseUnica(
+            Uso {
+                main: "Faringoamigdalite em pacientes menores de 45kg.",
+                alts: None
+            }, Dose::UI(UI(600000)), Via::Intramuscular)],
+        advertencias: None
+    }
     // SBP - ITU 2021
     //
     // Febril
@@ -385,3 +394,11 @@ pub const BULARIO: &'static [Medicamento] = &[
     //
     // foroato de mometasona 50mcg/jato a partir de 2 anos, dose terapeutica 200mcg
 ];
+
+// AesclepiusRx  Copyright (C) 2025  Jefferson T.
+// Under Gnu General Licence 3.0 for ever.
+// Any part of this program is and always have to be under the conditions of the LICENCE.txt
+// file under the same repository.
+// This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+// This is free software, and you are welcome to redistribute it
+// under certain conditions; type `show c' for details.

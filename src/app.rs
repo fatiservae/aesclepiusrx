@@ -1,5 +1,6 @@
-//use serde::{Deserialize, Serialize};
+// Licence at the end.
 
+//use serde::{Deserialize, Serialize};
 use crate::{
     calc::calcular_dose, data::BULARIO, search, Aplicacao, Apresentacao, Float, Idade, IdadeTipo,
     Instancia, Massa, Medicamento, Posologia, Via, Volume,
@@ -69,7 +70,7 @@ impl eframe::App for Instancia {
                 });
             });
 
-        egui::Window::new("Rascunho")
+        egui::Window::new("Prescrição")
             .default_pos((200.5, 100.5))
             // .default_pos((100.5, 100.5))
             // .default_width(88.0)
@@ -78,10 +79,10 @@ impl eframe::App for Instancia {
             .show(ctx, |ui| {
                 ui.text_edit_multiline(&mut self.notas);
                 ui.horizontal(|ui| {
-                    if ui.button("Copiar anotações").clicked() {
+                    if ui.button("Copiar").clicked() {
                         ui.output_mut(|o| o.copied_text = self.notas.clone());
                     }
-                    if ui.button("Limpar anotações").clicked() {
+                    if ui.button("Limpar").clicked() {
                         ui.output_mut(|o| self.notas = String::new());
                     }
                 })
@@ -155,31 +156,25 @@ impl eframe::App for Instancia {
                             );
                         }
                     });
-            });
+                ui.add_space(50.0);
 
-        egui::Window::new("Prescrição")
-            .default_pos((100.5, 100.5))
-            .default_width(200.0)
-            // .default_height(88.0)
-            .resizable(true)
-            .show(ctx, |ui| {
                 if ui.button("Prescrever!").clicked() {
-                    let fill_len = 50 - self.medicamento_selecionado.nome.len();
+                    let fill_len = 30 - self.medicamento_selecionado.nome.len();
                     let fill = std::iter::repeat('.').take(fill_len).collect::<String>();
                     self.prescricao = format!(
                         "{}\n{}{}\n{}",
                         self.medicamento_selecionado,
                         self.apresentacao_selecionada,
                         fill,
-                        calcular_dose(
-                            self.idade.clone(),
-                            self.massa,
-                            &self.posologia_selecionada,
-                            &self.apresentacao_selecionada,
-                        )
+                        "teste" // calcular_dose(
+                                //     self.idade.clone(),
+                                //     self.massa,
+                                //     &self.posologia_selecionada,
+                                //     &self.apresentacao_selecionada,
+                                // )
                     );
                 }
-
+                ui.label(&self.prescricao);
                 ui.horizontal(|ui| {
                     if ui.button("Copiar prescrição").clicked() {
                         ui.output_mut(|o| o.copied_text = self.prescricao.clone());
@@ -190,7 +185,6 @@ impl eframe::App for Instancia {
                         });
                     }
                 });
-                ui.label(&self.prescricao);
             });
 
         egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
@@ -213,10 +207,18 @@ impl eframe::App for Instancia {
                     ui.add_space(16.0);
                 };
                 ui.horizontal_centered(|ui| {
-                    ui.label("Esta ferramenta não substitui o julgamento médico profissional e não deve ser utilizada para prescrição real.");
+                    ui.label("Esta ferramenta se encontra em fase de desenvolvimento e não deve ser utilizada para prescrição real.");
                     });
             });
         });
         egui::CentralPanel::default().show(ctx, |ui| {});
     }
 }
+
+// AesclepiusRx  Copyright (C) 2025  Jefferson T.
+// Under Gnu General Licence 3.0 for ever.
+// Any part of this program is and always have to be under the conditions of the LICENCE.txt
+// file under the same repository.
+// This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+// This is free software, and you are welcome to redistribute it
+// under certain conditions; type `show c' for details.

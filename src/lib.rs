@@ -13,6 +13,22 @@ pub use {
     std::ops::{Add, Div, Mul, Sub},
 };
 
+/// Tipo wraper em tordo da miríade de unidades de dose.
+#[derive(Clone, PartialEq, Eq, Debug)]
+pub enum Dose {
+    Massa(Massa),
+    UI(UI),
+}
+
+impl std::fmt::Display for Dose {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::Massa(massa) => write!(f, "{}", massa),
+            Self::UI(ui) => write!(f, "{}", ui),
+        }
+    }
+}
+
 pub fn search(
     ui: &mut Ui,
     search: &mut impl TextBuffer,
@@ -20,7 +36,7 @@ pub fn search(
     med_selecionado: Medicamento, // apresentacoes: &Vec<Apresentacao>,
                                   // posologias: &Vec<Posologia>,
 ) -> Vec<Medicamento> {
-    ui.add(TextEdit::singleline(search).hint_text("Buscar..."));
+    ui.add(TextEdit::singleline(search).hint_text("busque para refinar a lista"));
     medicamentos
         .clone()
         .into_iter()
@@ -79,7 +95,7 @@ impl Default for Instancia {
                         main: "uso principal",
                         alts: None,
                     },
-                    Massa::Mg(Float(0.0)),
+                    Dose::Massa(Massa::Mg(Float(0.0))),
                     Via::Oral,
                 )],
                 advertencias: None,
@@ -89,7 +105,7 @@ impl Default for Instancia {
                     main: "uso principal",
                     alts: None,
                 },
-                Massa::Mg(Float(0.0)),
+                Dose::Massa(Massa::Mg(Float(0.0))),
                 Via::Oral,
             ),
             prescricao: "Medicamento X a 0g/ml ..... 0ml".to_string(),
@@ -182,6 +198,15 @@ impl std::fmt::Display for Medicamento {
     }
 }
 
+/// Unidades internacionais
+#[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone, Copy)]
+pub struct UI(i32);
+
+impl std::fmt::Display for UI {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}UI", self.0)
+    }
+}
 /// A apresentação do medicamento é o motivo de `asclepiusrx`! Descrever,
 /// com máxima segurança de tipos, as formas dos medicamentos na vida
 /// real é a parte mais essencial desta `lib`. Os cálculos, as `impl` e
@@ -189,6 +214,7 @@ impl std::fmt::Display for Medicamento {
 /// manifesto.
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Apresentacao {
+    DoseUI(UI, TipoApresentacao, NomesComerciais),
     DoseVolume(Massa, Volume, TipoApresentacao, NomesComerciais), // (dose, volume, unidade)
     DoseCompostaVolume(&'static [Massa], Volume, TipoApresentacao, NomesComerciais),
     DoseAplicacao(Aplicacao, TipoApresentacao, NomesComerciais),
@@ -196,6 +222,9 @@ pub enum Apresentacao {
 impl std::fmt::Display for Apresentacao {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Apresentacao::DoseUI(qte, tipo_apres, _) => {
+                write!(f, "{} por {}", qte, tipo_apres)
+            }
             Apresentacao::DoseVolume(massa, volume, tipo, nomes_comerciais) => {
                 write!(
                     f,
@@ -283,6 +312,7 @@ pub enum TipoApresentacao {
     Frasco,
     Comprimido,
     Xarope,
+    Gotejador,
     Spray,
     Capsula,
     Draguea,
@@ -322,6 +352,7 @@ impl std::fmt::Display for TipoApresentacao {
             TipoApresentacao::Xarope => write!(f, "frascos de xarope"),
             TipoApresentacao::Suspensao => write!(f, "frascos com suspensão"),
             TipoApresentacao::Ampola => write!(f, "ampolas"),
+            TipoApresentacao::Gotejador => write!(f, "gotejador ou conta-gotas"),
             TipoApresentacao::Frasco => write!(f, "frascos"),
             TipoApresentacao::Comprimido => write!(f, "comprimidos"),
             TipoApresentacao::Draguea => write!(f, "drágueas"),
@@ -566,15 +597,21 @@ impl std::fmt::Display for Uso {
 
 #[derive(/*Serialize, Deserialize,*/ Debug, PartialEq, Eq, Clone)]
 pub enum Posologia {
+    DoseUIKg(Uso, UI, TipoApresentacao, NomesComerciais),
     MgKg(Uso, Via, Massa),
     MgKgIntervaloDuracao(Uso, Via, Massa, Intervalo, Duracao, Frequencia), // ex. 25mg/kg*dia por 5 dias via oral a cada 8h
-    DoseUnica(Uso, Massa, Via),
-    DoseDiaria(Uso, Via, Massa, i32), // TODO: InfusaoContinua,
+    DoseUnica(Uso, Dose, Via),
+    DoseDiaria(Uso, Via, Massa, i32), // consertar Massa p/ Dose
+
+                                      // TODO: InfusaoContinua,
 }
 
 impl std::fmt::Display for Posologia {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Posologia::DoseUIKg(uso, qtde, tipo_apres, _) => {
+                write!(f, "{} por {}, {}", qtde, tipo_apres, uso)
+            }
             Posologia::MgKg(uso, via, massa) => {
                 write!(f, "{}/Kg {}, {} ", massa, via, uso)
             }
@@ -585,7 +622,9 @@ impl std::fmt::Display for Posologia {
                     massa, intervalo, duracao, frequencia, via, uso
                 )
             }
-            Posologia::DoseUnica(uso, dose, via) => write!(f, "{} {} uma única vez.", dose, via),
+            Posologia::DoseUnica(uso, dose, via) => {
+                write!(f, "{} {} uma única vez, {}.", dose, via, uso)
+            }
             Posologia::DoseDiaria(uso, via, dose, no_doses) => {
                 if *no_doses == 1 {
                     write!(f, "{} por dia, {}.", dose, uso)
@@ -769,6 +808,31 @@ impl Div<Massa> for f32 {
         } else {
             self / den
         }
+    }
+}
+impl Div<Massa> for UI {
+    type Output = f32;
+    fn div(self, rhs: Massa) -> Self::Output {
+        let den = rhs.valor();
+        if den < TOLERANCE {
+            0.0
+        } else {
+            (self.0 as f32) / den
+        }
+    }
+}
+impl Mul<Volume> for UI {
+    type Output = f32;
+    fn mul(self, rhs: Volume) -> Self::Output {
+        let lhs = self.0 as f32;
+        lhs * rhs.valor()
+    }
+}
+impl Mul<UI> for Massa {
+    type Output = f32;
+    fn mul(self, rhs: UI) -> Self::Output {
+        let rhsf = rhs.0 as f32;
+        rhsf * self.valor()
     }
 }
 
