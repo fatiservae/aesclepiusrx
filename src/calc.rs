@@ -18,8 +18,7 @@ pub fn calcular_dose(
 
     match posologia {
         Posologia::DoseUIKg(_, qte, _, _) => {
-            // format!("{}UI", massa_paciente.em_mg() * *qte)
-            format!("teste")
+            format!("{}UI", massa_paciente * *qte)
         }
         Posologia::MgKg(_, _via, dose_por_kg) => {
             dose_por_kg.em_mg();
@@ -31,8 +30,8 @@ pub fn calcular_dose(
                 Apresentacao::DoseVolume(qdte_med, vol_med, tipo_apres, nomes_comerciais) => {
                     qdte_med.em_mg();
                     vol_med.em_ml();
-                    let mut dose = dose_por_kg.em_mg() * massa_paciente.em_mg() * vol_med.em_ml()
-                        / qdte_med.em_mg();
+                    let mut dose =
+                        dose_por_kg.em_mg() * massa_paciente * vol_med.em_ml() / qdte_med.em_mg();
                     // TODO:correto devolver ml? Tentar devolver na unidade de vol_med
 
                     match tipo_apres {
@@ -54,18 +53,15 @@ pub fn calcular_dose(
                 }
                 Apresentacao::DoseAplicacao(aplicacao, _, _) => match aplicacao {
                     Aplicacao::Gota(massa_por_gota) => {
-                        let gotas =
-                            dose_por_kg.em_mg() * massa_paciente.em_mg() / massa_por_gota.em_mg();
+                        let gotas = dose_por_kg.em_mg() * massa_paciente / massa_por_gota.em_mg();
                         format!("{}: tomar {:.0} gotas diluídas", via, gotas)
                     }
                     Aplicacao::Microgota(qtde_por_ugota) => {
-                        let ugotas =
-                            qtde_por_ugota.em_mg() * massa_paciente.em_mg() / dose_por_kg.em_mg();
+                        let ugotas = qtde_por_ugota.em_mg() * massa_paciente / dose_por_kg.em_mg();
                         format!("{}: tomar {:.0} microgotas diluídas", via, ugotas)
                     }
                     Aplicacao::Jato(massa_por_jato) => {
-                        let jatos =
-                            dose_por_kg.em_mg() * massa_paciente.em_mg() / massa_por_jato.em_mg();
+                        let jatos = dose_por_kg.em_mg() * massa_paciente / massa_por_jato.em_mg();
                         format!("{}: inalar {:.0} jatos.", via, jatos)
                     }
                     Aplicacao::Comprimido(qtde_por_cp) => {
@@ -116,10 +112,10 @@ pub fn calcular_dose(
                             let ugotas = massa_paciente / *massa_ugota;
                             format!("{:.0} microgota(s)", ugotas)
                         }
-                        Aplicacao::Comprimido(massa_cp) => {
-                            massa_cp.em_mg();
-                            let cps = massa_paciente / *massa_cp;
-                            format!("{:.0} comprimido(s)", cps)
+                        Aplicacao::Comprimido(qtde_por_cp) => {
+                            let cps = (massa_paciente * qtde_dose.em_mg() / qtde_por_cp.em_mg())
+                                / no_doses_interv;
+                            format!("{:.1} comprimidos.", cps)
                         }
                         Aplicacao::Capsula(massa_cp) => {
                             massa_cp.em_mg();
@@ -146,39 +142,39 @@ pub fn calcular_dose(
             Dose::UI(ui) => {
                 format!("{}", ui)
             }
-            _ => format!("teste"), // Dose::Massa(qte) => {
-                                   //     //ERROR: será que tá certo fazer cálculos aqui?! a dose é unica!
-                                   //     qte.em_mg();
-                                   //     let dose = match apresentacao {
-                                   //         Apresentacao::DoseUI(ui, _, _) => {
-                                   //             format!("Posologia em miligramas não se aplica apresentação em Unidades Internacionais")
-                                   //         }
-                                   //         Apresentacao::DoseVolume(massa_por_vol, volume, _, _) => {
-                                   //             format!("{}", *qte * volume.em_ml() / massa_por_vol.em_mg())
-                                   //         }
-                                   //         Apresentacao::DoseCompostaVolume(qtdes, volume, _, _) => {
-                                   //             format!("{}", *qte * volume.em_ml() / qtdes[0].em_mg())
-                                   //         }
-                                   //         Apresentacao::DoseAplicacao(aplcacao, _, _) => match aplcacao {
-                                   //             Aplicacao::Comprimido(qtde_por_cap) => {
-                                   //                 format!("{} comprimidos", *qte / qtde_por_cap.em_mg())
-                                   //             }
-                                   //             Aplicacao::Capsula(qtde_por_cp) => {
-                                   //                 format!("{} cápsulas", *qte / qtde_por_cp.em_mg())
-                                   //             }
-                                   //             Aplicacao::Jato(qtde_por_jato) => {
-                                   //                 format!("{} jatos", *qte / qtde_por_jato.em_mg())
-                                   //             }
-                                   //             Aplicacao::Gota(qtde_por_gota) => {
-                                   //                 format!("{} gotas", *qte / qtde_por_gota.em_mg())
-                                   //             }
-                                   //             Aplicacao::Microgota(qtde_por_ugota) => {
-                                   //                 format!("{} microgotas", *qte / qtde_por_ugota.em_mg())
-                                   //             }
-                                   //         },
-                                   //     };
-                                   //     format!("{} uma única vez {}.", dose, via)
-                                   // }
+            Dose::Massa(qte) => {
+                //ERROR: será que tá certo fazer cálculos aqui?! a dose é unica!
+                qte.em_mg();
+                let dose = match apresentacao {
+                    Apresentacao::DoseUI(ui, _, _) => {
+                        format!("Posologia em miligramas não se aplica apresentação em Unidades Internacionais")
+                    }
+                    Apresentacao::DoseVolume(massa_por_vol, volume, _, _) => {
+                        format!("{}", *qte * volume.em_ml() / massa_por_vol.em_mg())
+                    }
+                    Apresentacao::DoseCompostaVolume(qtdes, volume, _, _) => {
+                        format!("{}", *qte * volume.em_ml() / qtdes[0].em_mg())
+                    }
+                    Apresentacao::DoseAplicacao(aplcacao, _, _) => match aplcacao {
+                        Aplicacao::Comprimido(qtde_por_cap) => {
+                            format!("{} comprimidos", *qte / qtde_por_cap.em_mg())
+                        }
+                        Aplicacao::Capsula(qtde_por_cp) => {
+                            format!("{} cápsulas", *qte / qtde_por_cp.em_mg())
+                        }
+                        Aplicacao::Jato(qtde_por_jato) => {
+                            format!("{} jatos", *qte / qtde_por_jato.em_mg())
+                        }
+                        Aplicacao::Gota(qtde_por_gota) => {
+                            format!("{} gotas", *qte / qtde_por_gota.em_mg())
+                        }
+                        Aplicacao::Microgota(qtde_por_ugota) => {
+                            format!("{} microgotas", *qte / qtde_por_ugota.em_mg())
+                        }
+                    },
+                };
+                format!("{} uma única vez {}.", dose, via)
+            }
         },
         Posologia::DoseDiaria(_, via, dose_diaria, no_doses) => {
             let tempo = 24 / no_doses;

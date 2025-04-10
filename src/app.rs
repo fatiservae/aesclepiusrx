@@ -34,7 +34,7 @@ impl eframe::App for Instancia {
 
         egui::Window::new("Paciente")
             .default_pos((80.0, 80.0))
-            // .default_width(80.0)
+            .default_width(70.0)
             // .default_height(80.0)
             .resizable(true)
             .show(ctx, |ui| {
@@ -68,13 +68,15 @@ impl eframe::App for Instancia {
                             )
                         });
                 });
+                    ui.label("\nOBS: A função de alertas e ajustes de doses por idade ainda não está funcionando.\n");
             });
 
-        egui::Window::new("Prescrição")
-            .default_pos((200.5, 100.5))
+        egui::Window::new("Rascunho de receita")
             // .default_pos((100.5, 100.5))
             // .default_width(88.0)
-            // .default_height(88.0)
+            // .default_height(88.)
+            .default_pos((200.5, 100.5))
+            .max_width(1000.0)
             .resizable(true)
             .show(ctx, |ui| {
                 ui.text_edit_multiline(&mut self.notas);
@@ -159,19 +161,19 @@ impl eframe::App for Instancia {
                 ui.add_space(50.0);
 
                 if ui.button("Prescrever!").clicked() {
-                    let fill_len = 30 - self.medicamento_selecionado.nome.len();
-                    let fill = std::iter::repeat('.').take(fill_len).collect::<String>();
+                    // let fill_len = 30 - self.medicamento_selecionado.nome.len();
+                    // let fill = std::iter::repeat('.').take(fill_len).collect::<String>();
                     self.prescricao = format!(
-                        "{}\n{}{}\n{}",
+                        "{}\n{}\n{}",
                         self.medicamento_selecionado,
                         self.apresentacao_selecionada,
-                        fill,
-                        "teste" // calcular_dose(
-                                //     self.idade.clone(),
-                                //     self.massa,
-                                //     &self.posologia_selecionada,
-                                //     &self.apresentacao_selecionada,
-                                // )
+                        // fill,
+                        calcular_dose(
+                            self.idade.clone(),
+                            self.massa,
+                            &self.posologia_selecionada,
+                            &self.apresentacao_selecionada,
+                        )
                     );
                 }
                 ui.label(&self.prescricao);

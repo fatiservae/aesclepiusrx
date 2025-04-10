@@ -364,6 +364,17 @@ pub const BULARIO: &'static [Medicamento] = &[
                 alts: None
             }, Dose::UI(UI(600000)), Via::Intramuscular)],
         advertencias: None
+    },
+    Medicamento {
+        nome: "Desloratadina",
+        apresentacoes: &[Apresentacao::DoseVolume(Massa::Mg(Float(0.5)), Volume::Ml(Float(1.0)), TipoApresentacao::Xarope, NomesComerciais(&["Desalex"]))],
+        posologias: &[
+            Posologia::DoseDiaria(Uso{main:"para rinite alérgica em crianças de 6 a 11 meses", alts: None}, Via::Oral, Massa::Mg(Float(1.0)), 1),
+            Posologia::DoseDiaria(Uso{main:"para rinite alérgica em crianças de 1 a 5 anos", alts: None}, Via::Oral, Massa::Mg(Float(1.25)), 1),
+            Posologia::DoseDiaria(Uso{main:"para rinite alérgica em crianças de 6 a 11 anos", alts: None}, Via::Oral, Massa::Mg(Float(2.5)), 1),
+            Posologia::DoseDiaria(Uso{main:"para rinite alérgica em maiores de 11 anos", alts: None}, Via::Oral, Massa::Mg(Float(5.0)), 1)
+        ],
+        advertencias: None
     }
     // SBP - ITU 2021
     //

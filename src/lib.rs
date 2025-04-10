@@ -73,7 +73,7 @@ impl Default for Instancia {
             nome: "Algum medicamento".to_owned(),
             massa: Massa::Kg(Float(0.0)),
             idade: Idade {
-                tipo: IdadeTipo::Meses,
+                tipo: IdadeTipo::Anos,
                 valor: 2,
             },
             apresentacao_selecionada: Apresentacao::DoseVolume(
